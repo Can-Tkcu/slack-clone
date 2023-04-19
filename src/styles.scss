@@ -3,8 +3,8 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 :root {
-    --primary: #1A1D21;
-    --secondary: #212121;
-    --light-grey:  #353330;
-    --mint: #5DB09D;
+    --primary: #1A1D21; // background content (right side)
+    --secondary: #212121; // background sidebar
+    --light-grey:  #353330; // background navbar
+    --mint: #5DB09D; 
 }
