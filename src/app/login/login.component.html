@@ -1,14 +1,65 @@
 <mat-toolbar>
-  <button mat-icon-button class="example-icon" >
-    <mat-icon>menu</mat-icon>
-  </button>
-  <span>My App</span>
-  <span class="example-spacer"></span>
-  <button mat-icon-button class="example-icon favorite-icon">
-    <mat-icon>favorite</mat-icon>
-  </button>
+  <div class="mat-container">
+    <!--Insert Slack logo  -->
+    <div>
+      <span>Slack clone</span>
+    </div>
+  </div>
   <button mat-icon-button class="example-icon">
     <mat-icon>share</mat-icon>
   </button>
 </mat-toolbar>
 
+<div class="card-container">
+  <mat-card class="login-card">
+    <mat-card-header>
+      <mat-card-title>Log In</mat-card-title>
+      <p>Log in to your account or create a new one!</p>
+      <mat-divider></mat-divider>
+    </mat-card-header>
+
+    <mat-card-actions>
+      <div class="input-container">
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your email</mat-label>
+          <input
+            matInput
+            placeholder="user@example.com"
+            [formControl]="email"
+            required
+          />
+          <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+          <mat-label>Enter your password</mat-label>
+          <input
+            matInput
+            [type]="hide ? 'password' : 'text'"
+            [formControl]="password"
+          />
+          <button
+            mat-icon-button
+            matSuffix
+            (click)="hide = !hide"
+            [attr.aria-label]="'Hide password'"
+            [attr.aria-pressed]="hide"
+          >
+            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+          </button>
+          <mat-error *ngIf="password.invalid">{{ getErrorMessagePwd() }}</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="button-container">
+        <button mat-raised-button color="primary">Log In</button>
+      </div>
+    </mat-card-actions>
+
+    <mat-progress-bar
+      *ngIf="loading"
+      mode="indeterminate"
+      class="progress-bar"
+    ></mat-progress-bar>
+  </mat-card>
+</div>
