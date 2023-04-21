@@ -1,0 +1,33 @@
+<mat-drawer-container class="drawer-container">
+    <mat-drawer class="sidebar" mode="side" opened>
+        <!-- threads -->
+
+        <div class="channel-sidebar-container">
+            <div class="channel-sidebar-name">
+                <mat-icon>chat</mat-icon>
+                <span>Threads</span>
+            </div>
+            <div class="channel-sidebar-name">
+                <mat-icon>alternate_email</mat-icon>
+                <span>Erwähnungen & Reaktionen</span>
+            </div>
+            <div class="channel-sidebar-name">
+                <mat-icon>send</mat-icon>
+                <span>Entwürfe & Gesendet</span>
+            </div>
+            <div class="channel-sidebar-name">
+                <mat-icon>apartment</mat-icon>
+                <span>Slack Connect</span>
+            </div>
+        </div>
+
+        <!-- channels -->
+
+        <app-channels></app-channels>
+
+        <!-- direct messages -->
+
+        <app-direct-messages></app-direct-messages>
+    </mat-drawer>
+    <mat-drawer-content>Main content</mat-drawer-content>
+</mat-drawer-container>

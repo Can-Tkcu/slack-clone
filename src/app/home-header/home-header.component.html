@@ -1,4 +1,8 @@
 <mat-toolbar class="header">
+    <div class="searchbar">
+        <input type="text" placeholder="Workspace durchsuchen">
+        <mat-icon>search</mat-icon>
+    </div>
     <mat-icon class="acc" mat-button [matMenuTriggerFor]="menu">account_circle</mat-icon>
     <mat-menu #menu="matMenu">
         <button mat-menu-item>Profil</button>

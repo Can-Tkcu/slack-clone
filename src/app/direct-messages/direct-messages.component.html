@@ -1,0 +1,38 @@
+<div class="channel-sidebar-container">
+    <div class="channels-dropdown-header">
+        <div class="dropdown-btn">
+            <mat-icon (click)="toggleDropdown()" [ngClass]="collapsed ? 'rotate90' : ''"
+                style="transition: all 125ms ease-in-out">arrow_drop_down</mat-icon>
+        </div>
+        <span mat-button [matMenuTriggerFor]="messages">
+            Direktnachrichten
+            <mat-icon>keyboard_arrow_down</mat-icon>
+        </span>
+        <mat-menu #messages="matMenu">
+            <button mat-menu-item (click)="btnMessage()">Direktnachricht starten</button>
+        </mat-menu>
+    </div>
+
+    <div *ngIf="!collapsed">
+        <div class="channel-sidebar-name">
+            <mat-icon>account_circle</mat-icon>
+            <span>Max Mustermann</span>
+        </div>
+        <div class="channel-sidebar-name">
+            <mat-icon>account_circle</mat-icon>
+            <span>Sarah Musterfrau</span>
+        </div>
+        <div class="channel-sidebar-name">
+            <mat-icon>account_circle</mat-icon>
+            <span>Felix Mustermann</span>
+        </div>
+        <div class="channel-sidebar-name">
+            <mat-icon>account_circle</mat-icon>
+            <span>Lisa Musterfrau</span>
+        </div>
+        <div class="channel-sidebar-name no-hover">
+            <mat-icon>add_box</mat-icon>
+            <span>Kolleg:innen hinzufügen</span>
+        </div>
+    </div>
+</div>
