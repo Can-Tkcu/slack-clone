@@ -46,3 +46,7 @@ Thumbs.db
 
 #batchfile
 /up.bat
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json

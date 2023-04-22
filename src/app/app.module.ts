@@ -22,6 +22,11 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { ChannelsComponent } from './channels/channels.component';
 import { DirectMessagesComponent } from './direct-messages/direct-messages.component';
+import { RegisterComponent } from './register/register.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 
 @NgModule({
@@ -33,6 +38,7 @@ import { DirectMessagesComponent } from './direct-messages/direct-messages.compo
     MainComponent,
     ChannelsComponent,
     DirectMessagesComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +55,10 @@ import { DirectMessagesComponent } from './direct-messages/direct-messages.compo
     ReactiveFormsModule,
     MatInputModule,
     MatSidenavModule,
-    MatExpansionModule
+    MatExpansionModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent],
