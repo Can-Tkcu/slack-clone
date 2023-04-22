@@ -29,6 +29,9 @@ import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
+import { MatDialogModule } from '@angular/material/dialog';
+import { DialogCreateChannelComponent } from './dialog-create-channel/dialog-create-channel.component';
+import { DialogCreateDirectMessageComponent } from './dialog-create-direct-message/dialog-create-direct-message.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +43,8 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     ChannelsComponent,
     DirectMessagesComponent,
     RegisterComponent,
+    DialogCreateChannelComponent,
+    DialogCreateDirectMessageComponent
   ],
   imports: [
     BrowserModule,
@@ -59,7 +64,8 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
     MatExpansionModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    MatDialogModule
   ],
   providers: [ { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent],

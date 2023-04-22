@@ -9,7 +9,7 @@
             <mat-icon>keyboard_arrow_down</mat-icon>
         </span>
         <mat-menu #messages="matMenu">
-            <button mat-menu-item (click)="btnMessage()">Direktnachricht starten</button>
+            <button mat-menu-item (click)="openDialog()">Direktnachricht starten</button>
         </mat-menu>
     </div>
 
@@ -30,7 +30,7 @@
             <mat-icon>account_circle</mat-icon>
             <span>Lisa Musterfrau</span>
         </div>
-        <div class="channel-sidebar-name no-hover">
+        <div class="channel-sidebar-name no-hover" (click)="openDialog()">
             <mat-icon>add_box</mat-icon>
             <span>Kolleg:innen hinzufügen</span>
         </div>

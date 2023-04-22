@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogCreateDirectMessageComponent } from '../dialog-create-direct-message/dialog-create-direct-message.component';
 
 @Component({
   selector: 'app-direct-messages',
@@ -7,6 +9,12 @@ import { Component } from '@angular/core';
 })
 export class DirectMessagesComponent {
   collapsed = false;
+
+  constructor(public dialog: MatDialog) {     this.dialog.open(DialogCreateDirectMessageComponent);  }
+
+  openDialog() {
+    this.dialog.open(DialogCreateDirectMessageComponent);
+  }
 
   toggleDropdown() {
     this.collapsed = !this.collapsed;

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogCreateChannelComponent } from '../dialog-create-channel/dialog-create-channel.component';
 
 @Component({
   selector: 'app-channels',
@@ -8,12 +10,14 @@ import { Component } from '@angular/core';
 export class ChannelsComponent {
   collapsed = false;
 
-  toggleDropdown() {
-    this.collapsed = !this.collapsed;
+  constructor(public dialog: MatDialog) { }
+
+  openDialog() {
+    this.dialog.open(DialogCreateChannelComponent);
   }
 
-  public btnChannel() {
-    console.log('Creating new Channel');
+  toggleDropdown() {
+    this.collapsed = !this.collapsed;
   }
 
 }
