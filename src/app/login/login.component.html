@@ -5,61 +5,92 @@
       <span>Slack clone</span>
     </div>
   </div>
-  <button mat-icon-button class="example-icon">
+  <button mat-icon-button routerLink="/register" class="example-icon">
     <mat-icon>share</mat-icon>
   </button>
 </mat-toolbar>
 
 <div class="card-container">
   <mat-card class="login-card">
-    <mat-card-header>
-      <mat-card-title>Log In</mat-card-title>
-      <p>Log in to your account or create a new one!</p>
-      <mat-divider></mat-divider>
-    </mat-card-header>
+    <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+      <mat-card-header>
+        <mat-card-title>Log In</mat-card-title>
+        <p>Log in to your account or create a new one!</p>
+        <mat-divider></mat-divider>
+      </mat-card-header>
 
-    <mat-card-actions>
-      <div class="input-container">
-        <mat-form-field appearance="fill">
-          <mat-label>Enter your email</mat-label>
-          <input
-            matInput
-            placeholder="user@example.com"
-            [formControl]="email"
-            required
-          />
-          <mat-error *ngIf="email.invalid">{{ getErrorMessage() }}</mat-error>
-        </mat-form-field>
+      <mat-card-actions>
+        <div class="input-container">
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your email</mat-label>
+            <input
+              formControlName="email"
+              type="email"
+              matInput
+              placeholder="user@example.com"
+              required
+            />
+            <mat-error>
+              <ng-container *ngIf="loginForm.controls['email'] as email">
+                <ng-container *ngIf="email.dirty || email.touched">
+                  <ng-container *ngIf="email.errors as errors">
+                    <p class="error" *ngIf="errors['required']">
+                      Your Email is required.
+                    </p>
+                    <p class="error" *ngIf="errors['email']">
+                      Please enter a valid Email.
+                    </p>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </mat-error>
+          </mat-form-field>
 
-        <mat-form-field appearance="fill">
-          <mat-label>Enter your password</mat-label>
-          <input
-            matInput
-            [type]="hide ? 'password' : 'text'"
-            [formControl]="password"
-          />
-          <button
-            mat-icon-button
-            matSuffix
-            (click)="hide = !hide"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide"
-          >
-            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
-          </button>
-          <mat-error *ngIf="password.invalid">{{ getErrorMessagePwd() }}</mat-error>
-        </mat-form-field>
-      </div>
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input
+              matInput
+              formControlName="password"
+              type="password"
+              [type]="hide ? 'password' : 'text'"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
 
-      <div class="button-container">
-        <button mat-raised-button color="primary">Log In</button>
-      </div>
-    </mat-card-actions>
+            <mat-error>
+              <ng-container *ngIf="loginForm.controls['password'] as password">
+                <ng-container *ngIf="password.dirty || password.touched">
+                  <ng-container *ngIf="password.errors as errors">
+                    <p class="error" *ngIf="errors['required']">
+                      Your Password is required.
+                    </p>
+                    <!-- <p class="error" *ngIf="errors['email']">
+                      Please enter a valid Email.
+                    </p> -->
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </mat-error>
+          </mat-form-field>
+        </div>
 
-    <mat-progress-bar
-      *ngIf="loading"
-      mode="indeterminate"
-      class="progress-bar"
-    ></mat-progress-bar>
+        <div class="button-container">
+          <button mat-raised-button color="primary">Log In</button>
+        </div>
+      </mat-card-actions>
+
+      <mat-progress-bar
+        *ngIf="loading"
+        mode="indeterminate"
+        class="progress-bar"
+      ></mat-progress-bar>
+    </form>
   </mat-card>
 </div>

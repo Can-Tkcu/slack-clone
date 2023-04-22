@@ -6,6 +6,6 @@
     <mat-icon class="acc" mat-button [matMenuTriggerFor]="menu">account_circle</mat-icon>
     <mat-menu #menu="matMenu">
         <button mat-menu-item>Profil</button>
-        <button mat-menu-item>Logout</button>
+        <button mat-menu-item (click)="logout()">Logout</button>
     </mat-menu>
 </mat-toolbar>
