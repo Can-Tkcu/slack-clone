@@ -71,18 +71,31 @@
                     <p class="error" *ngIf="errors['required']">
                       Your Password is required.
                     </p>
-                    <!-- <p class="error" *ngIf="errors['email']">
-                      Please enter a valid Email.
-                    </p> -->
+                    <p class="error" *ngIf="errors['minlength']">
+                      Password requires at least 6 characters!
+                    </p>
                   </ng-container>
                 </ng-container>
               </ng-container>
             </mat-error>
           </mat-form-field>
         </div>
-
+        {{ firebaseErrorMessage }}
         <div class="button-container">
-          <button mat-raised-button color="primary">Log In</button>
+          <button
+            mat-raised-button
+            color="primary"
+            [ngClass]="{
+              'secondary-button-white': loginForm.valid,
+              'secondary-button-white-grey': !loginForm.valid
+            }"
+            type="submit"
+            [disabled]="
+              !(loginForm.valid && (loginForm.dirty || loginForm.touched))
+            "
+          >
+            Log In
+          </button>
         </div>
       </mat-card-actions>
 
