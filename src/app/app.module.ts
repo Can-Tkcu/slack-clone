@@ -36,6 +36,10 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { TextboxComponent } from './textbox/textbox.component';
+import { ChannelContentComponent } from './channel-content/channel-content.component';
+import { ThreadContentComponent } from './thread-content/thread-content.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +53,9 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
     RegisterComponent,
     DialogCreateChannelComponent,
     DialogCreateDirectMessageComponent,
+    TextboxComponent,
+    ChannelContentComponent,
+    ThreadContentComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +82,7 @@ import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     MatDialogModule,
+    MatAutocompleteModule
   ],
   providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent],

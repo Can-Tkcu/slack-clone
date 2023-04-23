@@ -1,0 +1,22 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    overflow: overlay;
+}
+
+.answers {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  
+    span {
+        font-size: 13px;
+        color: #1d9bd1;
+        font-weight: 700;
+  
+        &:nth-of-type(2) {
+            color: grey;
+            font-weight: 400;
+        }
+    }
+  }
