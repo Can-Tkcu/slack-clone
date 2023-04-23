@@ -1,0 +1,63 @@
+:host {
+    display: flex;
+    background-color: var(--primary);
+    margin-top: auto;
+    // width: 100%;
+    // position: absolute;
+    // bottom: 0;
+    // right: 0;
+    // left: 0;
+}
+
+.text-box {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 20px;
+    background-color: #222529;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+
+    mat-icon {
+        color: grey;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: all 125ms ease-in-out;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            transition: all 125ms ease-in-out;
+        }
+    }
+}
+
+.formating {
+    display: flex;
+    padding: 8px;
+
+}
+
+.text-message {
+    padding: 8px 12px;
+
+    input {
+        box-sizing: border-box;
+        background-color: transparent;
+        border: none;
+        width: 100%;
+        font-size: 15px;
+        color: grey;
+
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
+.text-box-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+
+}

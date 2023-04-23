@@ -6,11 +6,28 @@
 </div>
 
 <h4>An:</h4>
-<div class="create-channel-input">
+<!-- <div class="create-channel-input"> -->
     <!-- <mat-icon>numbers</mat-icon> -->
-    <input type="text" placeholder="">
-</div>
-<p>In Channels werden Unterhaltungen rund um ein Thema geführt. Verwende einen Namen, der einfach zu finden und zu verstehen ist.</p>
+    <!-- <input type="text" placeholder=""> -->
+    <form class="create-channel-input create-direct-message">
+        <mat-form-field class="form-field-direct-message" appearance="fill">
+          <mat-label>Name</mat-label>
+          <input type="text"
+                 placeholder="Pick one"
+                 aria-label="Name"
+                 matInput
+                 [formControl]="myControl"
+                 [matAutocomplete]="auto">
+          <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+      
+<!-- </div> -->
+<p class="dialog-description">In Channels werden Unterhaltungen rund um ein Thema geführt. Verwende einen Namen, der einfach zu finden und zu verstehen ist.</p>
 <div mat-dialog-actions class="btn-container">
     <button mat-button class="btn" disabled="true">Senden</button>
 </div>

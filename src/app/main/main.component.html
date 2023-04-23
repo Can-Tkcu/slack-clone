@@ -1,5 +1,16 @@
 <mat-drawer-container class="drawer-container">
-    <mat-drawer class="sidebar" mode="side" opened>
+    <mat-drawer #drawer class="sidebar" mode="side" opened>
+
+        <!-- sidebar header -->
+
+        <div class="channel-sidebar-container">
+            <div class="channel-sidebar-name channel-sidebar-header no-hover">
+                <!-- <mat-icon>chat</mat-icon> -->
+                <span>Slack clone</span>
+            </div>
+        </div>
+
+
         <!-- threads -->
 
         <div class="channel-sidebar-container">
@@ -29,9 +40,20 @@
 
         <app-direct-messages></app-direct-messages>
     </mat-drawer>
-    <mat-drawer-content>
-        <!-- content -->
+    <mat-drawer-content class="content">
 
-        
+        <!-- content -->
+        <div class="channel-content">
+            <app-channel-content></app-channel-content>
+            <app-textbox></app-textbox>
+        </div>
+
+        <!-- thread -->
+
+        <div class="channel-content thread-content">
+            <app-thread-content></app-thread-content>
+            <app-textbox></app-textbox>
+        </div>
+
     </mat-drawer-content>
 </mat-drawer-container>

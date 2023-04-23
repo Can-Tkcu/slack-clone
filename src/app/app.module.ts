@@ -23,15 +23,19 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { ChannelsComponent } from './channels/channels.component';
 import { DirectMessagesComponent } from './direct-messages/direct-messages.component';
 import { RegisterComponent } from './register/register.component';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogCreateChannelComponent } from './dialog-create-channel/dialog-create-channel.component';
 import { DialogCreateDirectMessageComponent } from './dialog-create-direct-message/dialog-create-direct-message.component';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { TextboxComponent } from './textbox/textbox.component';
+import { ChannelContentComponent } from './channel-content/channel-content.component';
+import { ThreadContentComponent } from './thread-content/thread-content.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +48,10 @@ import { DialogCreateDirectMessageComponent } from './dialog-create-direct-messa
     DirectMessagesComponent,
     RegisterComponent,
     DialogCreateChannelComponent,
-    DialogCreateDirectMessageComponent
+    DialogCreateDirectMessageComponent,
+    TextboxComponent,
+    ChannelContentComponent,
+    ThreadContentComponent
   ],
   imports: [
     BrowserModule,
@@ -65,9 +72,10 @@ import { DialogCreateDirectMessageComponent } from './dialog-create-direct-messa
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
-    MatDialogModule
+    MatDialogModule,
+    MatAutocompleteModule
   ],
-  providers: [ { provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
+  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent],
 })
 export class AppModule { }

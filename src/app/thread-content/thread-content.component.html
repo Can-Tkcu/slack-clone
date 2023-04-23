@@ -1,0 +1,31 @@
+<div class="content-header thread-header">
+    <div class="channel-elements thread">
+        <span>Thread</span>
+        <mat-icon>numbers</mat-icon>
+        <span>allgemein</span>
+    </div>
+    <mat-icon>close</mat-icon>
+</div>
+
+<div class="content-container">
+    <div class="message-container" *ngFor="let test of [1, 2, 3, 4, 5, 6]">
+        <div>
+            <mat-icon>account_circle</mat-icon>
+        </div>
+        <div class="message-container-right">
+            <div class="user-and-time">
+                <span>Max Mustermann</span>
+                <span>19:11 Uhr</span>
+            </div>
+            <p class="message-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quidem
+                voluptas reiciendis magni, alias
+                magnam nobis, voluptatibus qui praesentium ipsa ad animi consequatur adipisci doloremque
+                commodi? Aliquam porro totam officia corrupti!</p>
+            <!-- <div class="answers">
+                <mat-icon>account_circle</mat-icon>
+                <span>4 Antworten</span>
+                <span>Letzte Antwort vor 1 Tag</span>
+            </div> -->
+        </div>
+    </div>
+</div>

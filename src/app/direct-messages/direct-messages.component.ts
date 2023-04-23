@@ -10,7 +10,7 @@ import { DialogCreateDirectMessageComponent } from '../dialog-create-direct-mess
 export class DirectMessagesComponent {
   collapsed = false;
 
-  constructor(public dialog: MatDialog) {     this.dialog.open(DialogCreateDirectMessageComponent);  }
+  constructor(public dialog: MatDialog) { }
 
   openDialog() {
     this.dialog.open(DialogCreateDirectMessageComponent);
