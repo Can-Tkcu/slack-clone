@@ -2,6 +2,7 @@
     display: flex;
     flex-direction: column;
     overflow: overlay;
+    width: 400px;
 }
 
 .thread-header {
@@ -42,3 +43,22 @@
     }
 }
 
+.answers-divider {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+
+    span {
+        font-size: 13px;
+        width: fit-content !important;
+        color: grey;
+    }
+}
+
+.divider-line {
+    display: flex;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    width: 75%;
+    margin-left: auto;
+}

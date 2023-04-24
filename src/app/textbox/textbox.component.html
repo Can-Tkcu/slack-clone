@@ -1,21 +1,31 @@
-<!-- <div class="text-box-container"> -->
-    <div class="text-box">
-        <div class="formating">
+<div class="text-box" #chatBox [ngClass]="{'active': focusTextbox}">
+    <div class="formating">
+        <button [disabled]="!focusTextbox" (click)="bold()">
             <mat-icon>format_bold</mat-icon>
+        </button>
+        <button [disabled]="!focusTextbox" (click)="italic()">
             <mat-icon>format_italic</mat-icon>
+        </button>
+        <button [disabled]="!focusTextbox" (click)="strikeThrough()">
             <mat-icon>strikethrough_s</mat-icon>
+        </button>
+        <button [disabled]="!focusTextbox" (click)="listNumbered()">
             <mat-icon>format_list_numbered</mat-icon>
+        </button>
+        <button [disabled]="!focusTextbox" (click)="listDot()">
             <mat-icon>list</mat-icon>
-        </div>
-        <div class="text-message">
-            <input type="text" placeholder="Nachricht an allgemein">
-        </div>
-        <div class="text-box-footer">
-            <div class="left-side">
-                <mat-icon>add</mat-icon>
-                <mat-icon>sentiment_satisfied_alt</mat-icon>
-            </div>
-            <mat-icon>send</mat-icon>
-        </div>
+        </button>
     </div>
-<!-- </div> -->
+    <div class="text-message">
+        <input [(ngModel)]="chatInput2" #chatInput type="text" placeholder="Nachricht an allgemein">
+    </div>
+    <div class="text-box-footer">
+        <div class="left-side">
+            <mat-icon>add</mat-icon>
+            <mat-icon>sentiment_satisfied_alt</mat-icon>
+        </div>
+        <button class="send-btn" [disabled]="!chatInput2">
+            <mat-icon>send</mat-icon>
+        </button>
+    </div>
+</div>

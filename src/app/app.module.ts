@@ -40,6 +40,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TextboxComponent } from './textbox/textbox.component';
 import { ChannelContentComponent } from './channel-content/channel-content.component';
 import { ThreadContentComponent } from './thread-content/thread-content.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { ThreadContentComponent } from './thread-content/thread-content.componen
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
     MatDialogModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    FormsModule
   ],
   providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
   bootstrap: [AppComponent],
