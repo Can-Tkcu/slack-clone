@@ -61,6 +61,7 @@ mat-card-header {
   height: calc(100% - 64px);
   display: flex;
   justify-content: center;
+  flex-direction: column;
   width: 100%;
   align-items: center;
   background: var(--primary);
@@ -93,3 +94,15 @@ mat-card-header {
     color: var(--mint);
 }
 
+.return-link {
+  display: flex;
+  
+  margin-top: 20px;
+  span {
+    color: white;
+  }
+  p {
+    color: #1d9bd1;
+    cursor: pointer;
+  }
+}

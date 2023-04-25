@@ -37,7 +37,6 @@ export class LoginComponent {
     this.authService
       .loginUser(this.loginForm.value.email, this.loginForm.value.password)
       .then((result) => {
-        
         if (result == null) {
           // null is success, false means there was an error
           console.log('logging in...');

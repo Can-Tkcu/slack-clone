@@ -1,31 +1,142 @@
-<button mat-raised-button color="primary" routerLink="/home">
-    Home
-</button>
+<mat-toolbar>
+  <div class="mat-container">
+    <!--Insert Slack logo  -->
+    <div>
+      <span>Slack clone</span>
+    </div>
+  </div>
+  <button mat-icon-button routerLink="/register" class="example-icon">
+    <mat-icon>share</mat-icon>
+  </button>
+</mat-toolbar>
 
-<mat-card>
+<div class="card-container">
+  <mat-card class="login-card">
     <form [formGroup]="registerForm" (ngSubmit)="signUp()">
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>Full Name</mat-label>
-                <input autocomplete="off" formControlName="displayName" type="text" matInput placeholder="Display Name">
-            </mat-form-field>
-        </p>
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>Email</mat-label>
-                <input formControlName="email" type="email" matInput placeholder="Email">
-            </mat-form-field>
-        </p>
-        <p>
-            <mat-form-field appearance="outline">
-                <mat-label>Password</mat-label>
-                <input autocomplete="off" formControlName="password" type="password" matInput placeholder="Password">
-            </mat-form-field>
-        </p>
-        <div *ngIf="firebaseErrorMessage != ''" class="error-style">
-            <span>{{ firebaseErrorMessage }}</span>
-        </div>
+      <mat-card-header>
+        <mat-card-title>Sign up</mat-card-title>
+        <p>Create a new account for free.</p>
+        <mat-divider></mat-divider>
+      </mat-card-header>
 
-        <button mat-raised-button color="primary">Signup</button>
+      <mat-card-actions>
+        <div class="input-container">
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your name</mat-label>
+            <input
+              formControlName="displayName"
+              type="name"
+              matInput
+              placeholder="Power User"
+              required
+            />
+            <mat-error>
+              <ng-container
+                *ngIf="registerForm.controls['displayName'] as name">
+                <ng-container *ngIf="name.dirty || name.touched">
+                  <ng-container *ngIf="name.errors as errors">
+                    <p class="error" *ngIf="errors['required']">
+                      Your Name is required.
+                    </p>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your email</mat-label>
+            <input
+              formControlName="email"
+              type="email"
+              matInput
+              placeholder="user@example.com"
+              required
+            />
+            <mat-error>
+              <ng-container *ngIf="registerForm.controls['email'] as email">
+                <ng-container *ngIf="email.dirty || email.touched">
+                  <ng-container *ngIf="email.errors as errors">
+                    <p class="error" *ngIf="errors['required']">
+                      Your Email is required.
+                    </p>
+                    <p class="error" *ngIf="errors['email']">
+                      Please enter a valid Email.
+                    </p>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill">
+            <mat-label>Enter your password</mat-label>
+            <input
+              matInput
+              formControlName="password"
+              type="password"
+              [type]="hide ? 'password' : 'text'"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+
+            <mat-error>
+              <ng-container
+                *ngIf="registerForm.controls['password'] as password"
+              >
+                <ng-container *ngIf="password.dirty || password.touched">
+                  <ng-container *ngIf="password.errors as errors">
+                    <p class="error" *ngIf="errors['required']">
+                      Your Password is required.
+                    </p>
+                    <p class="error" *ngIf="errors['minlength']">
+                      Password requires at least 6 characters!
+                    </p>
+                  </ng-container>
+                </ng-container>
+              </ng-container>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        {{ firebaseErrorMessage }}
+        <div class="button-container">
+          <button
+            mat-raised-button
+            color="primary"
+            [ngClass]="{
+              'secondary-button-white': registerForm.valid,
+              'secondary-button-white-grey': !registerForm.valid
+            }"
+            type="submit"
+            [disabled]="
+              !(
+                registerForm.valid &&
+                (registerForm.dirty || registerForm.touched)
+              )
+            "
+          >
+            Sign up
+          </button>
+        </div>
+      </mat-card-actions>
+
+      <mat-progress-bar
+        *ngIf="loading"
+        mode="indeterminate"
+        class="progress-bar"
+      ></mat-progress-bar>
     </form>
-</mat-card>
+  </mat-card>
+
+  <div class="return-link">
+    <span>Already have an account? </span>&nbsp;
+    <p routerLink="/login">click here.</p>
+  </div>
+</div>

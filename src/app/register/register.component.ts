@@ -11,12 +11,15 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class RegisterComponent implements OnInit {
   registerForm!: FormGroup;
   firebaseErrorMessage: string;
-
+  loading: boolean = false;
+  hide = true;
+  
   constructor(
     private authService: AuthService,
     private router: Router,
   ) {    this.firebaseErrorMessage = '';
   }
+
 
   ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -26,9 +29,9 @@ export class RegisterComponent implements OnInit {
     });
   }
 
+
   signUp() {
     if (this.registerForm.invalid) return;
-
     this.authService
       .signupUser(this.registerForm.value)
       .then((result) => {
@@ -38,8 +41,8 @@ export class RegisterComponent implements OnInit {
         else if (result.isValid == false)
           this.firebaseErrorMessage = result.message;
       })
-      .catch(() => {
-        //some handler
+      .catch((err) => {
+        console.log(err)
       });
   }
 }
