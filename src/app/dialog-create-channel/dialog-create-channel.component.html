@@ -8,9 +8,9 @@
 <h4>Name</h4>
 <div class="create-channel-input">
     <mat-icon>numbers</mat-icon>
-    <input class="channel-input" type="text" placeholder="z. B. community">
+    <input [(ngModel)]="channelName" class="channel-input" type="text" placeholder="z. B. community">
 </div>
 <p class="dialog-description">In Channels werden Unterhaltungen rund um ein Thema geführt. Verwende einen Namen, der einfach zu finden und zu verstehen ist.</p>
 <div mat-dialog-actions class="btn-container">
-    <button mat-button class="btn" disabled="true">Weiter</button>
+    <button mat-button class="btn" [disabled]="!channelName" (click)="addChannel()">Weiter</button>
 </div>

@@ -14,21 +14,9 @@
     </div>
 
     <div *ngIf="!collapsed">
-        <div class="channel-sidebar-name">
+        <div class="channel-sidebar-name" *ngFor="let channel of allChannel" [routerLink]="['/home/channel/' + channel.channelId]" routerLinkActive="active">
             <mat-icon>numbers</mat-icon>
-            <span>allgemein</span>
-        </div>
-        <div class="channel-sidebar-name">
-            <mat-icon>numbers</mat-icon>
-            <span>angular</span>
-        </div>
-        <div class="channel-sidebar-name">
-            <mat-icon>numbers</mat-icon>
-            <span>html-css</span>
-        </div>
-        <div class="channel-sidebar-name">
-            <mat-icon>numbers</mat-icon>
-            <span>javascript</span>
+            <span>{{ channel.name }}</span>
         </div>
         <div class="channel-sidebar-name no-hover" (click)="openDialog()">
             <mat-icon>add_box</mat-icon>
