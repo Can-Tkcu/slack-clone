@@ -5,11 +5,11 @@
       <span>Slack clone</span>
     </div>
   </div>
-  <button mat-icon-button routerLink="/register" class="example-icon">
-    <mat-icon>share</mat-icon>
-  </button>
+  <mat-icon [matMenuTriggerFor]="menu">settings </mat-icon>
+  <mat-menu class="top20" #menu="matMenu">
+    <button mat-menu-item routerLink="/register">register</button>
+  </mat-menu>
 </mat-toolbar>
-
 <div class="card-container">
   <mat-card class="login-card">
     <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
@@ -80,7 +80,6 @@
             </mat-error>
           </mat-form-field>
         </div>
-        {{ firebaseErrorMessage }}
         <div class="button-container">
           <button
             mat-raised-button

@@ -41,6 +41,7 @@ import { TextboxComponent } from './textbox/textbox.component';
 import { ChannelContentComponent } from './channel-content/channel-content.component';
 import { ThreadContentComponent } from './thread-content/thread-content.component';
 import { FormsModule } from '@angular/forms';
+import { DirectMessagesContentComponent } from './direct-messages-content/direct-messages-content.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { FormsModule } from '@angular/forms';
     DialogCreateDirectMessageComponent,
     TextboxComponent,
     ChannelContentComponent,
-    ThreadContentComponent
+    ThreadContentComponent,
+    DirectMessagesContentComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,9 +86,11 @@ import { FormsModule } from '@angular/forms';
     provideFirestore(() => getFirestore()),
     MatDialogModule,
     MatAutocompleteModule,
-    FormsModule
+    FormsModule,
   ],
-  providers: [{ provide: FIREBASE_OPTIONS, useValue: environment.firebase }],
+  providers: [
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

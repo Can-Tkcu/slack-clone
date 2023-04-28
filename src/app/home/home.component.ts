@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-home',
@@ -7,20 +8,17 @@ import { getAuth, onAuthStateChanged } from 'firebase/auth';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  currentUserData: any;
-
+  /**
+   *
+   */
+  constructor(public usersService: UsersService) {
+    
+  }
   ngOnInit(): void {
-   this.getCurrentUser() 
+    this.usersService.getAllUsers()
+    this.usersService.getCurrentUser()
   }
   
-  getCurrentUser() {
-    const auth = getAuth();
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        this.currentUserData = user;
-        console.log(this.currentUserData)
-      }
-    });
-  }
+  
 
 }

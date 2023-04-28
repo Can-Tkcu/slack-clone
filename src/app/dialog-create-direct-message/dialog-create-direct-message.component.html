@@ -9,18 +9,18 @@
 <!-- <div class="create-channel-input"> -->
     <!-- <mat-icon>numbers</mat-icon> -->
     <!-- <input type="text" placeholder=""> -->
-    <form class="create-channel-input create-direct-message">
+    <form (ngSubmit)="createDmChannel()" [formGroup]="dmForm" id="dm-form" class="create-channel-input create-direct-message">
         <mat-form-field class="form-field-direct-message" appearance="fill">
           <mat-label>Name</mat-label>
           <input type="text"
                  placeholder="Pick one"
                  aria-label="Name"
                  matInput
-                 [formControl]="myControl"
+                 formControlName="displayName"
                  [matAutocomplete]="auto">
           <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-              {{option}}
+            <mat-option (click)="selectUserId(user)" *ngFor="let user of usersService.users" [value]="user.displayName">
+              {{user.displayName}}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>
@@ -29,5 +29,5 @@
 <!-- </div> -->
 <p class="dialog-description">In Channels werden Unterhaltungen rund um ein Thema geführt. Verwende einen Namen, der einfach zu finden und zu verstehen ist.</p>
 <div mat-dialog-actions class="btn-container">
-    <button mat-button class="btn" disabled="true">Senden</button>
+    <button form="dm-form" ng mat-button class="btn" disabled="false">Senden</button>
 </div>

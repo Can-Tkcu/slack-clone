@@ -1,0 +1,30 @@
+<div class="content-header">
+    <div class="channel-elements">
+        <mat-icon>numbers</mat-icon>
+        <span>{{ dmService.currentChannel.users.recipientName }}</span>
+    </div>
+</div>
+
+<!-- 
+<div class="content-container">
+    <div class="message-container" *ngFor="let thread of dmService.dmChannels">
+        <div>
+            <mat-icon>{{ thread.authorPic }}</mat-icon>
+        </div>
+        <div class="message-container-right">
+            <div class="user-and-time">
+                <span>{{ thread.author }}</span>
+                <span>{{ thread.timestamp | date:'HH:mm' }} Uhr</span>
+            </div>
+            <p class="message-text">{{ thread.message }}</p>
+            <div class="answers">
+                <mat-icon>account_circle</mat-icon>
+                <span>{{ thread.replies.length }} Antworten</span>
+                <div class="reply-bar-description">
+                    <span>Letzte Antwort vor 1 Tag</span>
+                    <span>Thread ansehen</span>
+                </div>
+                <mat-icon class="thread-icon">navigate_next</mat-icon>
+            </div>
+        </div>
+    </div> -->
