@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { UsersService } from '../services/users.service';
+import { DirectMessagesService } from '../services/direct-messages.service';
 
 @Component({
   selector: 'app-home',
@@ -11,14 +12,12 @@ export class HomeComponent implements OnInit {
   /**
    *
    */
-  constructor(public usersService: UsersService) {
+  constructor(public usersService: UsersService, public dmService: DirectMessagesService) {
     
   }
   ngOnInit(): void {
     this.usersService.getAllUsers()
     this.usersService.getCurrentUser()
+    this.dmService.ngOnInit()
   }
-  
-  
-
 }

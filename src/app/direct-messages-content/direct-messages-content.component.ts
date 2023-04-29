@@ -6,15 +6,18 @@ import { DirectMessagesService } from '../services/direct-messages.service';
   templateUrl: './direct-messages-content.component.html',
   styleUrls: ['./direct-messages-content.component.scss'],
 })
-export class DirectMessagesContentComponent {
-
-
+export class DirectMessagesContentComponent implements OnInit {
   /**
    *
    */
-  constructor(public dmService: DirectMessagesService) {}
-
-  getCurrentChannelData() {
+  constructor(public dmService: DirectMessagesService) {
+  }
+  ngOnInit(): void {
+    let channel = localStorage.getItem('currentChannel')
+    this.dmService.currentChannel = []
+    this.dmService.currentChannel.push(JSON.parse(channel))
+    console.log(this.dmService.currentChannel)
   }
 
+  getCurrentChannelData() {}
 }

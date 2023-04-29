@@ -25,8 +25,8 @@ export class DirectMessagesComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.dmService.getDirectMessages();
-    this.dmService.getChatsFromDb()
+    // this.dmService.getDirectMessages();
+    // this.dmService.getChatsFromDb()
     setTimeout(() => {
      this.users = this.usersService.users 
     }, 1000);
