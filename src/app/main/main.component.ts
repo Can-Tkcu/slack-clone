@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ChannelService } from '../services/channel.service';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-main',
@@ -8,5 +9,13 @@ import { ChannelService } from '../services/channel.service';
 })
 export class MainComponent {
 
-  constructor(public channelService: ChannelService) {}
+constructor(public usersService: UsersService, public channelService: ChannelService) {
+    
+  }
+
+
+ngOnInit(): void {
+    this.usersService.getAllUsers()
+    this.usersService.getCurrentUser()
+  }
 }

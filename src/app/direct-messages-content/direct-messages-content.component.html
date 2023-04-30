@@ -1,0 +1,33 @@
+<div class="content-header">
+    <div class="channel-elements">
+        <mat-icon>numbers</mat-icon>
+        <span>{{ dmService.currentChannel[0].users.recipientName }}</span>
+    </div>
+</div>
+<!-- add data representation and core other CRUD operations  -->
+
+<div class="content-container">
+    <div class="message-container" *ngFor="let thread of dmService.currentChannel">
+        <div>
+            <mat-icon>account_circle</mat-icon>
+        </div>
+        <div class="message-container-right">
+            <div class="user-and-time">
+                <span>{{ dmService.currentChannel[0].payload.messages }}</span>
+                <span>{{ dmService.currentChannel[0].payload.messages }}Uhr</span>
+            </div>
+            <p class="message-text">{{ dmService.currentChannel[0].payload.messages }}</p>
+            <!-- <div class="answers">
+                <mat-icon>account_circle</mat-icon>
+                <span>{{ dmService.currentChannel[0].payload.messages }}Antworten</span>
+                <div class="reply-bar-description">
+                    <span>Letzte Antwort vor 1 Tag</span>
+                    <span>Thread ansehen</span>
+                </div>
+                <mat-icon class="thread-icon">navigate_next</mat-icon>
+            </div> -->
+        </div>
+    </div>
+
+
+    <app-textbox class="pin-bottom"></app-textbox>
