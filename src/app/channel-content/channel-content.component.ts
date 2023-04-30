@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { ChannelService } from '../services/channel.service';
 
 @Component({
   selector: 'app-channel-content',
@@ -8,27 +9,21 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./channel-content.component.scss']
 })
 export class ChannelContentComponent implements OnInit {
-  channelId = '';
-  channel: any = [];
+  // channelId = '';
+  // public channel: any = [];
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private firestore: AngularFirestore, 
+    public channelService: ChannelService) { }
 
   ngOnInit(): void {
     this.route.paramMap.subscribe( paramMap => {
-      this.channelId = paramMap.get('id');
+      this.channelService.channelId = paramMap.get('id');
       // console.log('Got ID', this.channelId);
-      this.getChannelDetails();
+      this.channelService.getChannelDetails();
     });
   }
 
-  getChannelDetails() {
-    this.firestore
-    .collection('channels')
-    .doc(this.channelId)
-    .valueChanges()
-    .subscribe((channel: any) => {
-      this.channel = channel;
-      // console.log(this.channel);
-    });
-  }
+  
 }

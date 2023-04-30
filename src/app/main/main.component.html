@@ -52,7 +52,7 @@
 
         <!-- thread -->
 
-        <div class="channel-content thread-content">
+        <div *ngIf="channelService.threadOpen" class="channel-content thread-content">
             <app-thread-content></app-thread-content>
             <app-textbox></app-textbox>
         </div>

@@ -14,7 +14,7 @@
     </div>
 
     <div *ngIf="!collapsed">
-        <div class="channel-sidebar-name" *ngFor="let channel of allChannel" [routerLink]="['/home/channel/' + channel.channelId]" routerLinkActive="active">
+        <div class="channel-sidebar-name" *ngFor="let channel of allChannel" [routerLink]="['/home/channel/' + channel.channelId]" routerLinkActive="active" (click)="channelService.threadOpen = false">
             <mat-icon>numbers</mat-icon>
             <span>{{ channel.name }}</span>
         </div>

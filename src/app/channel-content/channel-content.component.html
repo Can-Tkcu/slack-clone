@@ -1,13 +1,13 @@
 <div class="content-header">
     <div class="channel-elements">
         <mat-icon>numbers</mat-icon>
-        <span>{{ channel.name }}</span>
+        <span>{{ channelService.channel.name }}</span>
     </div>
 </div>
 
 
 <div class="content-container">
-    <div class="message-container" *ngFor="let thread of channel.thread">
+    <div class="message-container" *ngFor="let thread of channelService.channel.thread; let i = index">
         <div>
             <mat-icon>{{ thread.authorPic }}</mat-icon>
         </div>
@@ -17,7 +17,7 @@
                 <span>{{ thread.timestamp | date:'HH:mm' }} Uhr</span>
             </div>
             <p class="message-text">{{ thread.message }}</p>
-            <div class="answers">
+            <div class="answers" (click)="channelService.openThread(i)">
                 <mat-icon>account_circle</mat-icon>
                 <span>{{ thread.replies.length }} Antworten</span>
                 <div class="reply-bar-description">

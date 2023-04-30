@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogCreateChannelComponent } from '../dialog-create-channel/dialog-create-channel.component';
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ChannelService } from '../services/channel.service';
 
 @Component({
   selector: 'app-channels',
@@ -14,7 +15,10 @@ export class ChannelsComponent implements OnInit {
   channels$: Observable<any>;
   allChannel: Array<any>;
 
-  constructor(public dialog: MatDialog, private firestore: AngularFirestore) { }
+  constructor(
+    public dialog: MatDialog, 
+    private firestore: AngularFirestore,
+    public channelService: ChannelService) { }
 
   ngOnInit(): void {
     this.firestore
