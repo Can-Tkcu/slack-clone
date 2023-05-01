@@ -22,11 +22,11 @@
     </div>
 
     <div class="answers-divider">
-        <span>{{ channelService.threadContent.replies.length }} Antworten</span>
+        <span>{{ channelService.channel.thread[this.channelService.threadContentIndex].replies.length }} Antworten</span>
         <div class="divider-line"></div>
     </div>
 
-    <div class="message-container" *ngFor="let replies of channelService.threadContent.replies">
+    <div class="message-container" *ngFor="let replies of channelService.channel.thread[this.channelService.threadContentIndex].replies">
         <div>
             <mat-icon>{{ replies.authorPic }}</mat-icon>
         </div>
