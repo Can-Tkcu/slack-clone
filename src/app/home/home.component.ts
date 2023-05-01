@@ -18,6 +18,5 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.usersService.getAllUsers()
     this.usersService.getCurrentUser()
-    this.dmService.ngOnInit()
   }
 }

@@ -4,11 +4,10 @@
     <span>{{ dmService.currentChannelRecipient }}</span>
   </div>
 </div>
-<!-- add data representation and core other CRUD operations  -->
 
 <div
   class="content-container"
-  *ngFor="let message of dmService.currentChannelMessages; let i = index"
+  *ngFor="let message of dmService.currentChannelMessages let i = index"
 >
   <div class="message-container">
     <div>

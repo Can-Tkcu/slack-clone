@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DirectMessagesService } from '../services/direct-messages.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-direct-messages-content',
@@ -9,25 +10,15 @@ import { DirectMessagesService } from '../services/direct-messages.service';
 export class DirectMessagesContentComponent implements OnInit {
   currMessages: any;
 
-  constructor(public dmService: DirectMessagesService) {}
+  constructor(
+    public dmService: DirectMessagesService,
+    private route: ActivatedRoute
+  ) {}
 
   async ngOnInit(): Promise<void> {
-    // setInterval(() => {
-    //   this.currMessages = this.dmService.currentChannel
-    //   console.log(this.currMessages)
-      
-    // }, 500)
-    // let channel = localStorage.getItem('currentChannel');
-    // this.dmService.currentChannel = [];
-    // this.dmService.currentChannel.push(JSON.parse(channel));
-    // this.getCurrentChannelData();
-    // console.log(this.currMessages);
+    this.route.paramMap.subscribe((paramMap) => {
+      this.dmService.channelID = paramMap.get('id');
+      this.dmService.getChatsFromDb();
+    });
   }
-
-  // getCurrentChannelData() {
-  // setInterval(() => {
-  // console.log(this.dmService.currentChannel$);
-  // }, 1000);
-  // this.dmService.currentChannel$.subscribe(() => {});
-  // }
 }

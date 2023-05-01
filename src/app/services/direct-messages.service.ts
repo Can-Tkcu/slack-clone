@@ -1,4 +1,5 @@
 import { Injectable, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 import {
   CollectionReference,
   DocumentData,
@@ -8,67 +9,41 @@ import {
   collectionData,
   doc,
   docData,
+  updateDoc,
 } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class DirectMessagesService implements OnInit {
+export class DirectMessagesService {
   directMessageChannelID: string = '';
-  dmChannels = [];
+  channelID: string;
+  dmChannels: Array<any> = [];
   currentChannelMessages: any;
   dmCollection: CollectionReference;
   currentChannelRecipient: any;
-  
+  currentChannelData: any;
 
-  constructor(private afs: Firestore, private route: Router) {
-    this.dmCollection = collection(this.afs, 'direct-messages');
-  }
-
-
-  async ngOnInit(): Promise<void> {
-   const url = this.route.url
-   const id = url.split('/').pop();
-   this.selectCurrentChannel(id)
-   await this.getChatsFromDb();
-      
-    
-    // console.log(this.currentChannel.length);
-  }
-
+  constructor(private afs: AngularFirestore, private route: Router) {}
 
   /**
    * Retrieves all chats from the data base
    */
   async getChatsFromDb() {
-    const dmChannel = collectionData(this.dmCollection, {
-      idField: 'dmChannelId',
-    });
+    this.afs
+      .collection('direct-messages')
+      .doc(this.channelID)
+      .valueChanges()
+      .subscribe((channel: any) => {
+        this.dmChannels = channel;
+        this.currentChannelMessages = channel.payload.messages;
+        this.currentChannelRecipient = channel.users.recipientName;
+      });
 
-    dmChannel.subscribe((chatsData) => {
-      this.dmChannels = chatsData;
-      console.log(this.dmChannels);
-    });
-    
+    // updateGame(data, id) {
+    //   const gameDocumentReference = doc(this.afs, 'direct-messages', id);
+    //   return updateDoc(gameDocumentReference, data);
+    // }
   }
-
-  // setCurrentChannel() {
-  //   if (this.currentChannel.length == 1)
-  //     localStorage.setItem(
-  //       'currentChannel',
-  //       JSON.stringify(this.currentChannel)
-  //     );
-  // }
-
-  async selectCurrentChannel(channelID) {
-    const dmDocRef = doc(this.dmCollection, channelID);
-  
-    docData(dmDocRef).subscribe((channelData: any) => {
-      this.currentChannelMessages = channelData.payload.messages
-      this.currentChannelRecipient = channelData.users.recipientName
-    });
-  }
-
-  
 }

@@ -15,18 +15,31 @@ import { collectionData } from '@angular/fire/firestore';
 export class DirectMessagesComponent implements OnInit {
   collapsed = false;
   users = [];
-  
+  allDmChannels: Array<any>
   constructor(
     public dialog: MatDialog,
     public dmService: DirectMessagesService,
     public usersService: UsersService,
-    public afs: Firestore
+    public afs: AngularFirestore
   ) {}
 
 
   ngOnInit(): void {
-    // this.dmService.getDirectMessages();
-    // this.dmService.getChatsFromDb()
+    this.afs
+      .collection('direct-messages')
+      .valueChanges({idField: 'dmChannelId'})
+      .subscribe((changes: any) => {
+        this.allDmChannels = changes;
+        this.allDmChannels.sort((a, b) => {
+          if (a.users.recipientName.toLowerCase() < b.users.recipientName.toLowerCase()) {
+            return -1;
+          } else if (a.users.recipientName.toLowerCase() > b.users.recipientName.toLowerCase()) {
+            return 1;
+          } else {
+            return 0;
+          }
+        });
+      })
     setTimeout(() => {
      this.users = this.usersService.users 
     }, 1000);
