@@ -1,27 +1,38 @@
 <div class="channel-sidebar-container">
-    <div class="channels-dropdown-header">
-        <div class="dropdown-btn">
-            <mat-icon (click)="toggleDropdown()" [ngClass]="collapsed ? 'rotate90' : ''"
-                style="transition: all 125ms ease-in-out">arrow_drop_down</mat-icon>
-        </div>
-        <span mat-button [matMenuTriggerFor]="messages">
-            Direktnachrichten
-            <mat-icon>keyboard_arrow_down</mat-icon>
-        </span>
-        <mat-menu #messages="matMenu">
-            <button mat-menu-item (click)="openDialog()">Direktnachricht starten</button>
-        </mat-menu>
+  <div class="channels-dropdown-header">
+    <div class="dropdown-btn">
+      <mat-icon
+        (click)="toggleDropdown()"
+        [ngClass]="collapsed ? 'rotate90' : ''"
+        style="transition: all 125ms ease-in-out"
+        >arrow_drop_down</mat-icon
+      >
+    </div>
+    <span mat-button [matMenuTriggerFor]="messages">
+      Direktnachrichten
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </span>
+    <mat-menu #messages="matMenu">
+      <button mat-menu-item (click)="openDialog()">
+        Direktnachricht starten
+      </button>
+    </mat-menu>
+  </div>
+
+  <div *ngIf="!collapsed">
+    <div
+      *ngFor="let channel of allDmChannels; let i = index"
+      class="channel-sidebar-name"
+      [routerLink]="['/home/direct-messages/' + channel.dmChannelId]"
+      (click)="usersService.userSendsDm = true"
+    >
+      <mat-icon>account_circle</mat-icon>
+      <span>{{ channel.users.recipientName }}</span>
     </div>
 
-    <div *ngIf="!collapsed" >
-        <div *ngFor="let channel of allDmChannels, let i = index" class="channel-sidebar-name" [routerLink]="['/home/direct-messages/' + channel.dmChannelId]">
-            <mat-icon>account_circle</mat-icon>
-            <span>{{channel.users.recipientName}}</span>
-        </div>
-       
-        <div class="channel-sidebar-name no-hover" (click)="openDialog()">
-            <mat-icon>add_box</mat-icon>
-            <span>Kolleg:innen hinzufügen</span>
-        </div>
+    <div class="channel-sidebar-name no-hover" (click)="openDialog()">
+      <mat-icon>add_box</mat-icon>
+      <span>Kolleg:innen hinzufügen</span>
     </div>
+  </div>
 </div>

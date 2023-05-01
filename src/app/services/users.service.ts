@@ -16,6 +16,7 @@ import { AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 export class UsersService {
   public usersCollListener = new BehaviorSubject<any>({ users: [] });
   currentUserData: User;
+  userSendsDm: boolean = false; 
   users: any = [];
 
   constructor(private afs: Firestore) {}

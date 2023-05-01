@@ -23,6 +23,8 @@ export class DirectMessagesService {
   currentChannelMessages: any;
   dmCollection: CollectionReference;
   currentChannelRecipient: any;
+  currentChannelUsers: any; 
+  currentChannelPayload: any;
   currentChannelData: any;
 
   constructor(private afs: AngularFirestore, private route: Router) {}
@@ -39,6 +41,9 @@ export class DirectMessagesService {
         this.dmChannels = channel;
         this.currentChannelMessages = channel.payload.messages;
         this.currentChannelRecipient = channel.users.recipientName;
+        this.currentChannelPayload = channel.payload.messages;
+        this.currentChannelUsers = channel.users
+        this.currentChannelData = channel
       });
 
     // updateGame(data, id) {
