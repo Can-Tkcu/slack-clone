@@ -17,14 +17,14 @@
         </button>
     </div>
     <div class="text-message">
-        <input [(ngModel)]="chatInput2" #chatInput type="text" placeholder="Nachricht an allgemein">
+        <input [(ngModel)]="chatInput" #textMessage type="text" placeholder="Nachricht an allgemein">
     </div>
     <div class="text-box-footer">
         <div class="left-side">
             <mat-icon>add</mat-icon>
             <mat-icon>sentiment_satisfied_alt</mat-icon>
         </div>
-        <button class="send-btn" [disabled]="!chatInput2">
+        <button class="send-btn" [disabled]="!chatInput" (click)="sendMessage()">
             <mat-icon>send</mat-icon>
         </button>
     </div>

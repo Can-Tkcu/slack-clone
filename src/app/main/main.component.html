@@ -44,17 +44,15 @@
 
         <!-- content -->
         <div class="channel-content">
-            <!-- <app-channel-content> -->
-                <router-outlet></router-outlet>
-            <!-- </app-channel-content> -->
-            <!-- <app-textbox></app-textbox> -->
+            <router-outlet></router-outlet>
+            <app-textbox id="text-content"></app-textbox>
         </div>
 
         <!-- thread -->
 
         <div *ngIf="channelService.threadOpen" class="channel-content thread-content">
             <app-thread-content></app-thread-content>
-            <app-textbox></app-textbox>
+            <app-textbox id="text-thread"></app-textbox>
         </div>
 
     </mat-drawer-content>

@@ -1,7 +1,4 @@
 import { Component } from '@angular/core';
-import { FirebaseApp } from '@angular/fire/app';
-import { Firestore, collection } from '@angular/fire/firestore';
-import { doc, setDoc } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AngularFirestore } from '@angular/fire/compat/firestore';

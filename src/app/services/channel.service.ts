@@ -10,6 +10,7 @@ export class ChannelService {
   channelId = '';
   channel: any = [];
   threadContent: any = [];
+  threadContentIndex: number;
   public threadOpen: boolean = false;
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore) { }
@@ -28,5 +29,8 @@ export class ChannelService {
   openThread(index) {
     this.threadOpen = true;
     this.threadContent = this.channel.thread[index];
+    this.threadContentIndex = index;
+    // console.log(this.threadContent)
+    // console.log(this.threadContentIndex)
   }
 }

@@ -1,4 +1,7 @@
 import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
+import { UsersService } from '../services/users.service';
+import { ChannelService } from '../services/channel.service';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
 
 @Component({
   selector: 'app-textbox',
@@ -7,9 +10,16 @@ import { Component, ElementRef, HostListener, ViewChild } from '@angular/core';
 })
 export class TextboxComponent {
   public focusTextbox: boolean = false;
-  public chatInput2: any;
-  @ViewChild('chatInput') chatInput!: ElementRef;
+  public chatInput: any;
+  @ViewChild('textMessage') textMessage!: ElementRef;
   @ViewChild('chatBox') chatBox!: ElementRef;
+  allThreads: any = [];
+
+  constructor(
+    private usersService: UsersService,
+    private channelService: ChannelService,
+    private firestore: AngularFirestore
+  ) { }
 
 
   /**
@@ -21,37 +31,91 @@ export class TextboxComponent {
     // debugger;
     if (this.chatBox.nativeElement.contains(event.target)) {
       this.focusTextbox = true;
-      // console.log("inside");
     } else {
       this.focusTextbox = false;
-      // console.log("outside");
     }
     if (this.focusTextbox) {
-      this.chatInput.nativeElement.focus();
+      this.textMessage.nativeElement.focus();
     }
   }
 
   bold() {
-    this.chatInput.nativeElement.style.fontWeight = 'bold';
-    console.log(this.chatInput.nativeElement.style);
+    this.textMessage.nativeElement.style.fontWeight = 'bold';
+    console.log(this.textMessage.nativeElement.style);
   }
 
   italic() {
-    this.chatInput.nativeElement.style.fontStyle = 'italic';
-    // console.log(this.chatInput.nativeElement.style);
+    this.textMessage.nativeElement.style.fontStyle = 'italic';
+    // console.log(this.textMessage.nativeElement.style);
   }
 
   strikeThrough() {
-    this.chatInput.nativeElement.style.textDecoration = 'line-through';
+    this.textMessage.nativeElement.style.textDecoration = 'line-through';
   }
 
   listNumbered() {
-    // this.chatInput.nativeElement.style.listStyle = 'decimal';
-    // this.chatInput.nativeElement.innerHTML = '<ul><li></li></ul>'
-    // console.log(this.chatInput.nativeElement.style.listStyle);
+    // this.textMessage.nativeElement.style.listStyle = 'decimal';
+    // this.textMessage.nativeElement.innerHTML = '<ul><li></li></ul>'
+    // console.log(this.textMessage.nativeElement.style.listStyle);
   }
 
   listDot() {
 
+  }
+
+  sendMessage() {
+    this.renderChannelContent();
+    this.chatInput = '';
+  }
+
+  updateChannelContent() {
+    if (this.channelService.channel.thread) {
+      this.allThreads = this.channelService.channel.thread;
+    } else {
+      this.allThreads = [];
+    }
+    if (this.chatBox.nativeElement.parentElement.id == 'text-content') {
+      this.allThreads.push({
+        author: this.usersService.currentUserData.displayName,
+        authorPic: 'account_circle',
+        timestamp: new Date().getTime(),
+        message: this.chatInput,
+        replies: []
+      })
+    } 
+  }
+
+  updateReplies() {
+    if (this.channelService.threadContent != 0) {
+      this.allThreads[this.channelService.threadContentIndex].replies = this.channelService.threadContent.replies;
+    } else {
+      this.allThreads[this.channelService.threadContentIndex].replies = [];
+    }
+    if (this.chatBox.nativeElement.parentElement.id == 'text-thread') {
+      this.channelService.threadContent.replies.push({
+        author: this.usersService.currentUserData.displayName,
+        authorPic: 'account_circle',
+        timestamp: new Date().getTime(),
+        message: this.chatInput,
+      })
+    }
+  }
+
+  renderChannelContent() {
+    this.updateChannelContent();
+    this.updateReplies();
+
+    this.firestore
+      .collection('channels')
+      .doc(this.channelService.channelId)
+      .update({
+        name: this.channelService.channel.name,
+        thread: this.allThreads
+      })
+      .then((result: any) => {
+        console.log(result);
+        console.log(this.firestore.collection(this.channelService.channelId));
+        console.log(this.allThreads);
+      })
   }
 }
