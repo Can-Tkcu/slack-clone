@@ -7,17 +7,27 @@ import { DirectMessagesService } from '../services/direct-messages.service';
   styleUrls: ['./direct-messages-content.component.scss'],
 })
 export class DirectMessagesContentComponent implements OnInit {
-  /**
-   *
-   */
-  constructor(public dmService: DirectMessagesService) {
-  }
-  ngOnInit(): void {
-    let channel = localStorage.getItem('currentChannel')
-    this.dmService.currentChannel = []
-    this.dmService.currentChannel.push(JSON.parse(channel))
-    console.log(this.dmService.currentChannel)
+  currMessages: any;
+
+  constructor(public dmService: DirectMessagesService) {}
+
+  async ngOnInit(): Promise<void> {
+    // setInterval(() => {
+    //   this.currMessages = this.dmService.currentChannel
+    //   console.log(this.currMessages)
+      
+    // }, 500)
+    // let channel = localStorage.getItem('currentChannel');
+    // this.dmService.currentChannel = [];
+    // this.dmService.currentChannel.push(JSON.parse(channel));
+    // this.getCurrentChannelData();
+    // console.log(this.currMessages);
   }
 
-  getCurrentChannelData() {}
+  // getCurrentChannelData() {
+  // setInterval(() => {
+  // console.log(this.dmService.currentChannel$);
+  // }, 1000);
+  // this.dmService.currentChannel$.subscribe(() => {});
+  // }
 }

@@ -14,7 +14,7 @@
     </div>
 
     <div *ngIf="!collapsed">
-        <div (click)="dmService.selectCurrentChannel(channel)" *ngFor="let channel of dmService.dmChannels" class="channel-sidebar-name" [routerLink]="['/home/direct-messages/' + channel.dmChannelId]">
+        <div (click)="dmService.selectCurrentChannel(channel.dmChannelId)" *ngFor="let channel of dmService.dmChannels, let i = index" class="channel-sidebar-name" [routerLink]="['/home/direct-messages/' + channel.dmChannelId]">
             <mat-icon>account_circle</mat-icon>
             <span>{{channel.users.recipientName}}</span>
         </div>

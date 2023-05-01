@@ -1,51 +1,74 @@
 import { Injectable, OnInit } from '@angular/core';
-import { Firestore, collection, collectionData } from '@angular/fire/firestore';
+import {
+  CollectionReference,
+  DocumentData,
+  DocumentReference,
+  Firestore,
+  collection,
+  collectionData,
+  doc,
+  docData,
+} from '@angular/fire/firestore';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class DirectMessagesService implements OnInit {
   directMessageChannelID: string = '';
   dmChannels = [];
-  public currentChannel = [];
-  constructor(private afs: Firestore) {}
+  currentChannelMessages: any;
+  dmCollection: CollectionReference;
+  currentChannelRecipient: any;
+  
+
+  constructor(private afs: Firestore, private route: Router) {
+    this.dmCollection = collection(this.afs, 'direct-messages');
+  }
+
 
   async ngOnInit(): Promise<void> {
-    await this.getChatsFromDb();
-    this.setCurrentChannel();
+   const url = this.route.url
+   const id = url.split('/').pop();
+   this.selectCurrentChannel(id)
+   await this.getChatsFromDb();
+      
+    
     // console.log(this.currentChannel.length);
   }
+
 
   /**
    * Retrieves all chats from the data base
    */
   async getChatsFromDb() {
-    const dmCollection = collection(this.afs, 'direct-messages');
-    const dmChannel = collectionData(dmCollection, { idField: 'dmChannelId' });
+    const dmChannel = collectionData(this.dmCollection, {
+      idField: 'dmChannelId',
+    });
+
     dmChannel.subscribe((chatsData) => {
       this.dmChannels = chatsData;
-      this.currentChannel = [];
-      this.currentChannel.push(this.dmChannels[0]);
-      // console.log(this.currentChannel);
-      // console.log(this.dmChannels);
+      console.log(this.dmChannels);
+    });
+    
+  }
+
+  // setCurrentChannel() {
+  //   if (this.currentChannel.length == 1)
+  //     localStorage.setItem(
+  //       'currentChannel',
+  //       JSON.stringify(this.currentChannel)
+  //     );
+  // }
+
+  async selectCurrentChannel(channelID) {
+    const dmDocRef = doc(this.dmCollection, channelID);
+  
+    docData(dmDocRef).subscribe((channelData: any) => {
+      this.currentChannelMessages = channelData.payload.messages
+      this.currentChannelRecipient = channelData.users.recipientName
     });
   }
 
-
-  setCurrentChannel() {
-    if (this.currentChannel.length == 1)
-      localStorage.setItem(
-        'currentChannel',
-        JSON.stringify(this.currentChannel[0])
-      );
-  }
-
-
-  selectCurrentChannel(channel) {
-    this.currentChannel = [];
-    this.currentChannel.push(channel);
-    // console.log(this.currentChannel);
-  }
-
-
-  getDirectMessages() {}
+  
 }
