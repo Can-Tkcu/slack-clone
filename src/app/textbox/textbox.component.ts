@@ -121,7 +121,7 @@ export class TextboxComponent {
     //  )
 
     this.dmService.currentChannelPayload.push({
-      author: this.dmService.currentChannelUsers.senderName,
+      author: this.dmService.currentChannelUsers.uid,
       content: this.textToUpload ?? '',
       timestamp: Date.now(),
     });
@@ -136,7 +136,7 @@ export class TextboxComponent {
   updateChannelContent() {
     if (this.chatBox.nativeElement.parentElement.id == 'text-content') {
       this.channelService.currentChannelThread.push({
-        author: this.usersService.currentUserData.displayName,
+        author: this.usersService.currentUserData.uid,
         authorPic: 'account_circle',
         timestamp: new Date().getTime(),
         message: this.textToUpload ?? '',
@@ -144,7 +144,7 @@ export class TextboxComponent {
       });
     } else if (this.chatBox.nativeElement.parentElement.id == 'text-thread') {
       this.channelService.currentChannelThread[this.channelService.threadContentIndex].replies.push({
-        author: this.usersService.currentUserData.displayName,
+        author: this.usersService.currentUserData.uid,
         authorPic: 'account_circle',
         timestamp: new Date().getTime(),
         message: this.textToUpload ?? ''
@@ -158,7 +158,7 @@ export class TextboxComponent {
     this.firestore
       .collection('channels')
       .doc(this.channelService.channelId)
-      .update(this.channelService.currentChannel)
+      .update(this.channelService.channel)
       .then((result: any) => {
         // console.log(result);
       });

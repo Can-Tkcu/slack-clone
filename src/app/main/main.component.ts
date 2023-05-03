@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ChannelService } from '../services/channel.service';
 import { UsersService } from '../services/users.service';
 
@@ -7,7 +7,7 @@ import { UsersService } from '../services/users.service';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent {
+export class MainComponent implements OnInit {
 
 constructor(public usersService: UsersService, public channelService: ChannelService) {
     

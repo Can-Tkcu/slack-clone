@@ -17,10 +17,10 @@ export class UsersService {
   public usersCollListener = new BehaviorSubject<any>({ users: [] });
   currentUserData: User;
   currentUserDataID: any
-  userSendsDm: boolean = false; 
+  userSendsDm: boolean = false;
   users: any = [];
 
-  constructor(private afs: Firestore, private firestore: AngularFirestore) {}
+  constructor(private afs: Firestore, private firestore: AngularFirestore) { }
 
   getCurrentUser() {
     const auth = getAuth();
@@ -28,27 +28,31 @@ export class UsersService {
       if (user) {
         // console.log(user.uid)
         this.currentUserDataID = user.uid;
+        // console.log(this.currentUserDataID);
       }
-    });
 
-    this.firestore
-    .collection('users')
-    .doc(this.currentUserDataID)
-    .valueChanges()
-    .subscribe((changes: any) => {
-      this.currentUserData = changes;
-    //   this.allDmChannels.sort((a, b) => {
-    //     if (a.users.recipientName.toLowerCase() < b.users.recipientName.toLowerCase()) {
-    //       return -1;
-    //     } else if (a.users.recipientName.toLowerCase() > b.users.recipientName.toLowerCase()) {
-    //       return 1;
-    //     } else {
-    //       return 0;
-    //     }
-    //   });
-    })
+      this.firestore
+        .collection('users')
+        .doc(this.currentUserDataID)
+        .valueChanges()
+        .subscribe((changes: any) => {
+          this.currentUserData = changes;
+          // console.log(changes)
+          // console.log(this.currentUserDataID);
+          // console.log(this.currentUserData);
+          //   this.allDmChannels.sort((a, b) => {
+          //     if (a.users.recipientName.toLowerCase() < b.users.recipientName.toLowerCase()) {
+          //       return -1;
+          //     } else if (a.users.recipientName.toLowerCase() > b.users.recipientName.toLowerCase()) {
+          //       return 1;
+          //     } else {
+          //       return 0;
+          //     }
+          //   });
+        });
+    });
   }
-  
+
   getAllUsers(): any {
     const usersCollection = collection(this.afs, 'users');
     const users$ = collectionData(usersCollection, { idField: 'uid' });

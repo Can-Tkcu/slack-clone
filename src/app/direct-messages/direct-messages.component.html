@@ -25,6 +25,7 @@
       class="channel-sidebar-name"
       [routerLink]="['/home/direct-messages/' + channel.dmChannelId]"
       (click)="usersService.userSendsDm = true"
+      routerLinkActive="active"
     >
       <mat-icon>account_circle</mat-icon>
       <span>{{ channel.users.recipientName }}</span>

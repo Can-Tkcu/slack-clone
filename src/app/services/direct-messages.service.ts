@@ -13,6 +13,7 @@ import {
 } from '@angular/fire/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, Subscription } from 'rxjs';
+import { UsersService } from './users.service';
 @Injectable({
   providedIn: 'root',
 })
@@ -26,8 +27,9 @@ export class DirectMessagesService {
   currentChannelUsers: any; 
   currentChannelPayload: any;
   currentChannelData: any;
+  currentChannelSender: any;
 
-  constructor(private afs: AngularFirestore, private route: Router) {}
+  constructor(private afs: AngularFirestore, private route: Router) { }
 
   /**
    * Retrieves all chats from the data base
@@ -41,9 +43,10 @@ export class DirectMessagesService {
         this.dmChannels = channel;
         this.currentChannelMessages = channel.payload.messages;
         this.currentChannelRecipient = channel.users.recipientName;
+        this.currentChannelSender = channel.users.senderName;
         this.currentChannelPayload = channel.payload.messages;
-        this.currentChannelUsers = channel.users
-        this.currentChannelData = channel
+        this.currentChannelUsers = channel.users;
+        this.currentChannelData = channel;
       });
 
     // updateGame(data, id) {

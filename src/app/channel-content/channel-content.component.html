@@ -13,10 +13,9 @@
         </div>
         <div class="message-container-right">
             <div class="user-and-time">
-                <span>{{ thread.author }}</span>
+                <span>{{ (thread.author | getUserNameById | async)?.displayName }}</span>
                 <span>{{ thread.timestamp | date:'HH:mm' }} Uhr</span>
             </div>
-            <!-- <p class="message-text">{{ thread.message }}</p> -->
             <quill-view class="message-text" [content]="thread.message" format="html" theme="snow"></quill-view>
             <div class="answers" (click)="channelService.openThread(i)">
                 <mat-icon>account_circle</mat-icon>

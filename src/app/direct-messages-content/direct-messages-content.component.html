@@ -5,25 +5,17 @@
   </div>
 </div>
 
-<div
-  class="content-container"
-  *ngFor="let message of dmService.currentChannelMessages let i = index"
->
-  <div class="message-container">
+<div class="content-container">
+  <div class="message-container" *ngFor="let message of dmService.currentChannelMessages let i = index">
     <div>
       <mat-icon>account_circle</mat-icon>
     </div>
     <div class="message-container-right">
       <div class="user-and-time">
-        <span>{{ message.author }}</span>
-        <span
-          >{{ message.timestamp | date : "HH:mm" }} Uhr</span
-        >
+        <span>{{ (message.author | getUserNameById | async)?.displayName  }}</span>
+        <span>{{ message.timestamp | date : "HH:mm" }} Uhr</span>
       </div>
-      <!-- <p class="message-text">{{ message.content }}</p> -->
       <quill-view class="message-text" [content]="message.content" format="html" theme="snow"></quill-view>
     </div>
   </div>
-
-  <!-- <app-textbox class="pin-bottom"></app-textbox> -->
 </div>

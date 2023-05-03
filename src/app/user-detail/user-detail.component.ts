@@ -5,6 +5,11 @@ import { updateProfile } from '@angular/fire/auth';
 import { User } from '../models/user';
 import { DirectMessagesService } from '../services/direct-messages.service';
 import { MatIcon } from '@angular/material/icon';
+import { ChannelService } from '../services/channel.service';
+import { Firestore } from '@angular/fire/firestore';
+import { getFirestore, doc, updateDoc } from "firebase/firestore";
+import { MatDialog } from '@angular/material/dialog';
+
 @Component({
   selector: 'app-user-detail',
   templateUrl: './user-detail.component.html',
@@ -20,8 +25,9 @@ export class UserDetailComponent {
   constructor(
     private usersService: UsersService,
     private afs: AngularFirestore,
-    private userService: UsersService,
-    private dmService: DirectMessagesService
+    private dmService: DirectMessagesService,
+    private firestore: Firestore,
+    public dialog: MatDialog
   ) {
     this.userName = this.usersService.currentUserData.displayName;
     this.userUid = this.usersService.currentUserData.uid;
@@ -40,7 +46,10 @@ export class UserDetailComponent {
     //     });
     this.afs
       .collection('users')
-      .doc(this.userService.currentUserData.uid)
+      .doc(this.usersService.currentUserData.uid)
       .update(UserData)
+      .then((result: any) => {
+        this.dialog.closeAll();
+      });
   }
 }

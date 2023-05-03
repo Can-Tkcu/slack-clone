@@ -45,6 +45,8 @@ import { DirectMessagesContentComponent } from './direct-messages-content/direct
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { QuillModule } from 'ngx-quill'
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { UsersService } from './services/users.service';
+import { GetUserNameByIdPipe } from './get-user-name-by-id.pipe';
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ChannelContentComponent,
     ThreadContentComponent,
     DirectMessagesContentComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    GetUserNameByIdPipe
   ],
   imports: [
     BrowserModule,

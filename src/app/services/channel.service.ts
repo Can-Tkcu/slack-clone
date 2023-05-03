@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { UsersService } from './users.service';
 
 
 @Injectable({
@@ -12,10 +13,15 @@ export class ChannelService {
   threadContent: any = [];
   threadContentIndex: number;
   currentChannelThread: any;
-  currentChannel: any = [];
+  // currentChannel: any = [];
   public threadOpen: boolean = false;
+  currentUserName: any;
 
-  constructor(private route: ActivatedRoute, private firestore: AngularFirestore) { }
+  constructor(
+    private route: ActivatedRoute, 
+    private firestore: AngularFirestore,
+    private usersService: UsersService
+    ) { }
 
   getChannelDetails() {
     this.firestore
@@ -25,7 +31,7 @@ export class ChannelService {
     .subscribe((channel: any) => {
       this.channel = channel;
       this.currentChannelThread = channel.thread;
-      this.currentChannel = channel;
+      // console.log(channel)
     });
   }
 

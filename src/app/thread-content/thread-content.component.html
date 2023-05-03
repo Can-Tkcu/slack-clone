@@ -14,7 +14,7 @@
         </div>
         <div class="message-container-right">
             <div class="user-and-time">
-                <span>{{ channelService.threadContent.author }}</span>
+                <span>{{  (channelService.threadContent.author | getUserNameById | async)?.displayName  }}</span>
                 <span>{{ channelService.threadContent.timestamp | date:'HH:mm' }}</span>
             </div>
             <!-- <p class="message-text">{{ channelService.threadContent.message }}</p> -->
@@ -33,7 +33,7 @@
         </div>
         <div class="message-container-right">
             <div class="user-and-time">
-                <span>{{ replies.author }}</span>
+                <span>{{  (replies.author | getUserNameById | async)?.displayName }}</span>
                 <span>{{ replies.timestamp | date:'HH:mm' }} Uhr</span>
             </div>
             <!-- <p class="message-text">{{ replies.message }}</p> -->
