@@ -122,7 +122,7 @@ export class TextboxComponent {
 
     this.dmService.currentChannelPayload.push({
       author: this.dmService.currentChannelUsers.senderName,
-      content: this.chatInput,
+      content: this.textToUpload ?? '',
       timestamp: Date.now(),
     });
     console.log(this.dmService.currentChannelData);
@@ -131,9 +131,6 @@ export class TextboxComponent {
       .collection('direct-messages')
       .doc(this.dmService.channelID)
       .update(this.dmService.currentChannelData)
-      .then((result: any) => {
-        console.log(result);
-      });
   }
 
   updateChannelContent() {

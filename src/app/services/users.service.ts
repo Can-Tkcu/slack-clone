@@ -8,7 +8,7 @@ import {
   collectionData,
 } from '@angular/fire/firestore';
 import { BehaviorSubject } from 'rxjs';
-import { AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -16,18 +16,37 @@ import { AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 export class UsersService {
   public usersCollListener = new BehaviorSubject<any>({ users: [] });
   currentUserData: User;
+  currentUserDataID: any
   userSendsDm: boolean = false; 
   users: any = [];
 
-  constructor(private afs: Firestore) {}
+  constructor(private afs: Firestore, private firestore: AngularFirestore) {}
 
   getCurrentUser() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        this.currentUserData = user;
+        // console.log(user.uid)
+        this.currentUserDataID = user.uid;
       }
     });
+
+    this.firestore
+    .collection('users')
+    .doc(this.currentUserDataID)
+    .valueChanges()
+    .subscribe((changes: any) => {
+      this.currentUserData = changes;
+    //   this.allDmChannels.sort((a, b) => {
+    //     if (a.users.recipientName.toLowerCase() < b.users.recipientName.toLowerCase()) {
+    //       return -1;
+    //     } else if (a.users.recipientName.toLowerCase() > b.users.recipientName.toLowerCase()) {
+    //       return 1;
+    //     } else {
+    //       return 0;
+    //     }
+    //   });
+    })
   }
   
   getAllUsers(): any {
