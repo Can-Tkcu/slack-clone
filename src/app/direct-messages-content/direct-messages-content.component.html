@@ -20,9 +20,10 @@
           >{{ message.timestamp | date : "HH:mm" }} Uhr</span
         >
       </div>
-      <p class="message-text">{{ message.content }}</p>
+      <!-- <p class="message-text">{{ message.content }}</p> -->
+      <quill-view class="message-text" [content]="message.content" format="html" theme="snow"></quill-view>
     </div>
   </div>
 
-  <app-textbox class="pin-bottom"></app-textbox>
+  <!-- <app-textbox class="pin-bottom"></app-textbox> -->
 </div>

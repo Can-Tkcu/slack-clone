@@ -19,7 +19,10 @@ export class DialogCreateChannelComponent {
   addChannel() {
     this.firestore
       .collection('channels')
-      .add({ name: this.channelName })
+      .add({ 
+        name: this.channelName,
+        thread: []
+      })
       .then((result: any) => {
         console.log('Added new Channel', result)
         this.dialog.closeAll();

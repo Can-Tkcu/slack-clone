@@ -32,6 +32,10 @@ $slack-clone-theme: mat.define-dark-theme((color: (primary: $slack-clone-primary
 // that you are using.
 @include mat.all-component-themes($slack-clone-theme);
 
+@import '~quill/dist/quill.core.css';
+// @import '~quill/dist/quill.bubble.css'; 
+@import '~quill/dist/quill.snow.css';
+@import "quill-emoji/dist/quill-emoji.css";
 
 html,
 body {
@@ -448,5 +452,9 @@ h2 {
 
 .message-text {
   margin: 2px 0 !important;
+
+  .ql-editor {
+    padding: 0 !important;
+  }
 }
 

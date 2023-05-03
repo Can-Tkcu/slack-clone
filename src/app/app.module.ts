@@ -43,6 +43,9 @@ import { ThreadContentComponent } from './thread-content/thread-content.componen
 import { FormsModule } from '@angular/forms';
 import { DirectMessagesContentComponent } from './direct-messages-content/direct-messages-content.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import { QuillModule } from 'ngx-quill'
+import { MatTooltipModule } from '@angular/material/tooltip';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -88,6 +91,8 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     MatDialogModule,
     MatAutocompleteModule,
     FormsModule,
+    QuillModule,
+    MatTooltipModule
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }

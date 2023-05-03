@@ -11,6 +11,8 @@ export class ChannelService {
   channel: any = [];
   threadContent: any = [];
   threadContentIndex: number;
+  currentChannelThread: any;
+  currentChannel: any = [];
   public threadOpen: boolean = false;
 
   constructor(private route: ActivatedRoute, private firestore: AngularFirestore) { }
@@ -22,7 +24,8 @@ export class ChannelService {
     .valueChanges()
     .subscribe((channel: any) => {
       this.channel = channel;
-      // console.log(this.channel);
+      this.currentChannelThread = channel.thread;
+      this.currentChannel = channel;
     });
   }
 

@@ -17,7 +17,8 @@
                 <span>{{ channelService.threadContent.author }}</span>
                 <span>{{ channelService.threadContent.timestamp | date:'HH:mm' }}</span>
             </div>
-            <p class="message-text">{{ channelService.threadContent.message }}</p>
+            <!-- <p class="message-text">{{ channelService.threadContent.message }}</p> -->
+            <quill-view class="message-text" [content]="channelService.threadContent.message" format="html" theme="snow"></quill-view>
         </div>
     </div>
 
@@ -35,7 +36,8 @@
                 <span>{{ replies.author }}</span>
                 <span>{{ replies.timestamp | date:'HH:mm' }} Uhr</span>
             </div>
-            <p class="message-text">{{ replies.message }}</p>
+            <!-- <p class="message-text">{{ replies.message }}</p> -->
+            <quill-view class="message-text" [content]="replies.message" format="html" theme="snow"></quill-view>
         </div>
     </div>
 </div>
