@@ -30,15 +30,15 @@ export class DirectMessagesComponent implements OnInit {
       .valueChanges({idField: 'dmChannelId'})
       .subscribe((changes: any) => {
         this.allDmChannels = changes;
-        this.allDmChannels.sort((a, b) => {
-          if (a.users.recipientName.toLowerCase() < b.users.recipientName.toLowerCase()) {
-            return -1;
-          } else if (a.users.recipientName.toLowerCase() > b.users.recipientName.toLowerCase()) {
-            return 1;
-          } else {
-            return 0;
-          }
-        });
+      //   this.allDmChannels.sort((a, b) => {
+      //     if (a.users.recipientName.toLowerCase() < b.users.recipientName.toLowerCase()) {
+      //       return -1;
+      //     } else if (a.users.recipientName.toLowerCase() > b.users.recipientName.toLowerCase()) {
+      //       return 1;
+      //     } else {
+      //       return 0;
+      //     }
+      //   });
       })
     setTimeout(() => {
      this.users = this.usersService.users 

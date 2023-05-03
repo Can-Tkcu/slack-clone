@@ -42,7 +42,7 @@ import { ChannelContentComponent } from './channel-content/channel-content.compo
 import { ThreadContentComponent } from './thread-content/thread-content.component';
 import { FormsModule } from '@angular/forms';
 import { DirectMessagesContentComponent } from './direct-messages-content/direct-messages-content.component';
-
+import { UserDetailComponent } from './user-detail/user-detail.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +59,7 @@ import { DirectMessagesContentComponent } from './direct-messages-content/direct
     ChannelContentComponent,
     ThreadContentComponent,
     DirectMessagesContentComponent,
+    UserDetailComponent
   ],
   imports: [
     BrowserModule,
