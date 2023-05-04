@@ -1,7 +1,7 @@
 <div class="content-header">
   <div class="channel-elements">
     <mat-icon>numbers</mat-icon>
-    <span>{{ dmService.currentChannelRecipient }}</span>
+    <span>{{ (dmService.currentChannelRecipient | getUserNameById | async)?.displayName }}</span>
   </div>
 </div>
 

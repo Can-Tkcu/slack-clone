@@ -1,13 +1,25 @@
-import { Component, ElementRef, HostListener, Input, ViewChild, ViewContainerRef } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  HostListener,
+  Input,
+  OnInit,
+  ViewChild,
+  ViewContainerRef,
+} from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { ChannelService } from '../services/channel.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { DirectMessagesService } from '../services/direct-messages.service';
-import { EditorChangeContent, EditorChangeSelection } from 'ngx-quill/public-api';
+import {
+  EditorChangeContent,
+  EditorChangeSelection,
+} from 'ngx-quill/public-api';
 import 'quill-emoji/dist/quill-emoji.js';
-// import '~quill/dist/quill.bubble.css'; 
+import { ActivatedRoute } from '@angular/router';
+import { DirectMessagesContentComponent } from '../direct-messages-content/direct-messages-content.component';
+// import '~quill/dist/quill.bubble.css';
 // import '~quill/dist/quill.snow.css';
-
 
 @Component({
   selector: 'app-textbox',
@@ -29,7 +41,7 @@ export class TextboxComponent {
       ['code-block'],
       [{ list: 'ordered' }, { list: 'bullet' }],
       ['emoji'],
-      ['link']
+      ['link'],
     ],
     'emoji-toolbar': true,
     'emoji-textarea': false,
@@ -47,13 +59,13 @@ export class TextboxComponent {
     },
   };
 
-
   constructor(
     private usersService: UsersService,
     public channelService: ChannelService,
     private dmService: DirectMessagesService,
-    private firestore: AngularFirestore
-  ) { }
+    private firestore: AngularFirestore,
+    private route: ActivatedRoute
+  ) {}
 
   /**
    * Checks if user clicked into the chatbox and focuses the input + highlights the box
@@ -74,12 +86,11 @@ export class TextboxComponent {
       // this.textMessage.nativeElement.focus();
       // document.querySelectorAll('.text-box #editor .ql-editor').forEach(box => {
       // document.querySelectorAll('.text-box').forEach(box => {
-
       //   // if(box.)
       //   console.log(box.parentElement.id);
       //   if (box.parentElement.id === 'text-content') {
       //     (box?.firstElementChild?.lastElementChild?.firstElementChild as HTMLElement)?.focus();
-      //   } 
+      //   }
       //   // else if (box.parentElement.id === 'text-thread') {
       //   //   (box?.firstElementChild?.lastElementChild?.firstElementChild as HTMLElement)?.focus();
       //   // }
@@ -93,21 +104,21 @@ export class TextboxComponent {
   }
 
   /**
- * function to get text and emojis of the editor
- * @param event - changes when content of editor changes
- */
+   * function to get text and emojis of the editor
+   * @param event - changes when content of editor changes
+   */
   async getContent(event: EditorChangeContent | EditorChangeSelection) {
     if (event.event === 'text-change') {
       this.textToUpload = event.html;
     }
   }
 
-
   sendMessage() {
-    if (this.usersService.userSendsDm) this.sendDirectMessage();
+    if (this.route.firstChild.component == DirectMessagesContentComponent)
+      this.sendDirectMessage();
     else this.renderChannelContent();
 
-    document.querySelectorAll('.text-box').forEach(box => {
+    document.querySelectorAll('.text-box').forEach((box) => {
       if (box.classList.contains('active')) {
         box.firstElementChild.lastElementChild.firstElementChild.innerHTML = '';
       }
@@ -115,13 +126,8 @@ export class TextboxComponent {
   }
 
   sendDirectMessage() {
-    // console.log(
-    //  "payload:",this.dmService.currentChannelPayload,
-    //  "users:", this.dmService.currentChannelUsers
-    //  )
-
     this.dmService.currentChannelPayload.push({
-      author: this.dmService.currentChannelUsers.uid,
+      author: this.usersService.currentUserData.uid,
       content: this.textToUpload ?? '',
       timestamp: Date.now(),
     });
@@ -130,7 +136,7 @@ export class TextboxComponent {
     this.firestore
       .collection('direct-messages')
       .doc(this.dmService.channelID)
-      .update(this.dmService.currentChannelData)
+      .update(this.dmService.currentChannelData);
   }
 
   updateChannelContent() {
@@ -143,11 +149,13 @@ export class TextboxComponent {
         replies: [],
       });
     } else if (this.chatBox.nativeElement.parentElement.id == 'text-thread') {
-      this.channelService.currentChannelThread[this.channelService.threadContentIndex].replies.push({
+      this.channelService.currentChannelThread[
+        this.channelService.threadContentIndex
+      ].replies.push({
         author: this.usersService.currentUserData.uid,
         authorPic: 'account_circle',
         timestamp: new Date().getTime(),
-        message: this.textToUpload ?? ''
+        message: this.textToUpload ?? '',
       });
     }
   }
@@ -158,9 +166,6 @@ export class TextboxComponent {
     this.firestore
       .collection('channels')
       .doc(this.channelService.channelId)
-      .update(this.channelService.channel)
-      .then((result: any) => {
-        // console.log(result);
-      });
+      .update(this.channelService.channel);
   }
 }

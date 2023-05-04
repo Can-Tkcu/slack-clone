@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, Auth, authState } from '@angular/fire/auth';
 import { User } from '../models/user';
 import {
   DocumentData,
@@ -17,18 +17,17 @@ export class UsersService {
   public usersCollListener = new BehaviorSubject<any>({ users: [] });
   currentUserData: User;
   currentUserDataID: any
-  userSendsDm: boolean = false;
   users: any = [];
+  currentUser$ = authState(this.auth)
 
-  constructor(private afs: Firestore, private firestore: AngularFirestore) { }
+  constructor(private afs: Firestore, private firestore: AngularFirestore, private auth: Auth) { }
 
+  
   getCurrentUser() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        // console.log(user.uid)
         this.currentUserDataID = user.uid;
-        // console.log(this.currentUserDataID);
       }
 
       this.firestore
@@ -37,21 +36,10 @@ export class UsersService {
         .valueChanges()
         .subscribe((changes: any) => {
           this.currentUserData = changes;
-          // console.log(changes)
-          // console.log(this.currentUserDataID);
-          // console.log(this.currentUserData);
-          //   this.allDmChannels.sort((a, b) => {
-          //     if (a.users.recipientName.toLowerCase() < b.users.recipientName.toLowerCase()) {
-          //       return -1;
-          //     } else if (a.users.recipientName.toLowerCase() > b.users.recipientName.toLowerCase()) {
-          //       return 1;
-          //     } else {
-          //       return 0;
-          //     }
-          //   });
         });
     });
   }
+
 
   getAllUsers(): any {
     const usersCollection = collection(this.afs, 'users');

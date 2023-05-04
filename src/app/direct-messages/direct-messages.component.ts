@@ -6,6 +6,7 @@ import { UsersService } from '../services/users.service';
 import { Firestore, collection } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collectionData } from '@angular/fire/firestore';
+import { ChannelService } from '../services/channel.service';
 
 @Component({
   selector: 'app-direct-messages',
@@ -15,12 +16,13 @@ import { collectionData } from '@angular/fire/firestore';
 export class DirectMessagesComponent implements OnInit {
   collapsed = false;
   users = [];
-  allDmChannels: Array<any>
+  allDmChannels: Array<any> = []
   constructor(
     public dialog: MatDialog,
     public dmService: DirectMessagesService,
     public usersService: UsersService,
-    public afs: AngularFirestore
+    public afs: AngularFirestore,
+    public channelService: ChannelService
   ) {}
 
 
@@ -28,17 +30,21 @@ export class DirectMessagesComponent implements OnInit {
     this.afs
       .collection('direct-messages')
       .valueChanges({idField: 'dmChannelId'})
-      .subscribe((changes: any) => {
-        this.allDmChannels = changes;
-      //   this.allDmChannels.sort((a, b) => {
-      //     if (a.users.recipientName.toLowerCase() < b.users.recipientName.toLowerCase()) {
-      //       return -1;
-      //     } else if (a.users.recipientName.toLowerCase() > b.users.recipientName.toLowerCase()) {
-      //       return 1;
-      //     } else {
-      //       return 0;
-      //     }
-      //   });
+      .subscribe((channels: any) => {
+        this.allDmChannels = []
+        channels.forEach(channel => {
+          if(channel.users.senderID == this.usersService.currentUserDataID)
+          this.allDmChannels.push(channel);
+          this.allDmChannels.sort((a, b) => {
+            if (a.users.recipientName.toLowerCase() < b.users.recipientName.toLowerCase()) {
+              return -1;
+            } else if (a.users.recipientName.toLowerCase() > b.users.recipientName.toLowerCase()) {
+              return 1;
+            } else {
+              return 0;
+            }
+          });
+        });
       })
     setTimeout(() => {
      this.users = this.usersService.users 

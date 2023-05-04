@@ -21,14 +21,15 @@
 
   <div *ngIf="!collapsed">
     <div
+      
       *ngFor="let channel of allDmChannels; let i = index"
       class="channel-sidebar-name"
       [routerLink]="['/home/direct-messages/' + channel.dmChannelId]"
-      (click)="usersService.userSendsDm = true"
+      (click)="channelService.threadOpen = false"
       routerLinkActive="active"
     >
       <mat-icon>account_circle</mat-icon>
-      <span>{{ channel.users.recipientName }}</span>
+      <span>{{ (channel.users.recipientID | getUserNameById | async)?.displayName }}</span>
     </div>
 
     <div class="channel-sidebar-name no-hover" (click)="openDialog()">

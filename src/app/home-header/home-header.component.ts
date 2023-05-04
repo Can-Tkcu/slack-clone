@@ -3,13 +3,14 @@ import { Auth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
+import { UsersService } from '../services/users.service';
 @Component({
   selector: 'app-home-header',
   templateUrl: './home-header.component.html',
   styleUrls: ['./home-header.component.scss'],
 })
 export class HomeHeaderComponent {
-  constructor(public afAuth: Auth, private afs: AngularFirestore, private dialog: MatDialog) {}
+  constructor(public afAuth: Auth, private afs: AngularFirestore, private dialog: MatDialog, private usersService: UsersService) {}
 
 
   openDialog() {
@@ -17,6 +18,8 @@ export class HomeHeaderComponent {
   }
 
   logout(): void {
-    this.afAuth.signOut();
+    this.afAuth.signOut().then(() => {
+        this.afs.collection('users').doc(this.usersService.currentUserDataID).update({status: false})
+    });
   }
 }

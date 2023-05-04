@@ -22,6 +22,7 @@ export class AuthService {
     this.userLoggedIn = false;
     this.afAuth.onAuthStateChanged((user) => {
       if (user) {
+        // console.log(user)
         this.userLoggedIn = true;
       } else {
         this.userLoggedIn = false;
@@ -34,6 +35,7 @@ export class AuthService {
     return await this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
+        this.afs.collection('users').doc( result.user?.uid).update({status: true})
         console.log('Auth Service: loginUser: success', result.user?.uid);
         this.router.navigate(['/home']);
       })
@@ -54,6 +56,7 @@ export class AuthService {
         });
         this.SetUserData(result.user); // sending user json and uid
         result.user!.sendEmailVerification(); // immediately send the user a verification email
+        this.afs.collection('users').doc( result.user?.uid).update({status: true})
       })
       .catch((error) => {
         console.log('Auth Service: signup error', error);
@@ -72,6 +75,7 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
+      status: false
     };
     return userRef.set(userData, {
       merge: true,

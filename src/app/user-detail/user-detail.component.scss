@@ -32,3 +32,24 @@
     border-bottom-color: transparent !important;
 }
 
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 300px; 
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.profile-pic-container {
+    width: 100%; 
+    display: flex;
+    justify-content: center;
+}
+
+.profile-pic-container img {
+    border-radius: 15px;
+    object-fit: cover;
+    object-position: center;
+}

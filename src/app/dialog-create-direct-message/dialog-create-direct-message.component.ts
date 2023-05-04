@@ -48,18 +48,7 @@ export class DialogCreateDirectMessageComponent {
         recipientName: this.dmForm.value.displayName
       },
       payload: {
-        messages: [
-          {
-            author: "I wrote this",
-            content: "I write this for you",
-            timestamp: Date.now()
-          },
-          {
-            author: "I wrote this",
-            content: "I write this for you",
-            timestamp: Date.now()
-          },
-        ]
+        messages: []
       }
     };
     const createdChannel = channelRef.add(channelData)

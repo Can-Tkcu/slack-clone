@@ -36,6 +36,7 @@ export class RegisterComponent implements OnInit {
       .signupUser(this.registerForm.value)
       .then((result) => {
         if (result == null) {    // null is success
+          
           this.router.navigate(['/home']);
         } 
         else if (result.isValid == false)

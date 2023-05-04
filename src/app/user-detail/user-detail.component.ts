@@ -9,6 +9,7 @@ import { ChannelService } from '../services/channel.service';
 import { Firestore } from '@angular/fire/firestore';
 import { getFirestore, doc, updateDoc } from "firebase/firestore";
 import { MatDialog } from '@angular/material/dialog';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -19,26 +20,30 @@ export class UserDetailComponent {
   userName: string;
   userUid: string;
   userEmail: string;
+  userStatus: boolean;
+
+
+  user$ = this.usersService.currentUser$
   /**
    *
    */
   constructor(
     private usersService: UsersService,
     private afs: AngularFirestore,
-    private dmService: DirectMessagesService,
-    private firestore: Firestore,
-    public dialog: MatDialog
+    public dialog: MatDialog,
   ) {
     this.userName = this.usersService.currentUserData.displayName;
     this.userUid = this.usersService.currentUserData.uid;
     this.userEmail = this.usersService.currentUserData.email;
+    this.userStatus = this.usersService.currentUserData.status
   }
 
   async updateUserCredentials() {
     const UserData: User = {
       displayName: this.userName,
       uid: this.userUid,
-      email: this.userEmail
+      email: this.userEmail,
+      status: this.userStatus
     }
 
     // await updateProfile(, {
