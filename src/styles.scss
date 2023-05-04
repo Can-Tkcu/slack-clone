@@ -400,6 +400,7 @@ h2 {
   span {
       font-size: 18px;
       font-weight: 500;
+      color: #D1D2D3;
   }
 
   mat-icon {
@@ -407,6 +408,7 @@ h2 {
       height: 18px;
       width: 18px;
       margin-right: 4px;
+      color: #D1D2D3;
   }
 }
 
@@ -441,6 +443,7 @@ h2 {
           font-size: 15px;
           font-weight: 500;
           margin-right: 8px;
+          color: #D1D2D3;
       }
 
       &:last-child {
@@ -455,8 +458,13 @@ h2 {
 
   .ql-editor {
     padding: 0 !important;
+    color: #D1D2D3;
   }
 }
+
+// ::ng-deep .mat-drawer-container {
+//   color: #D1D2D3 !important;
+// }
 
 // .active {
 //   background-color: var(--mint);
