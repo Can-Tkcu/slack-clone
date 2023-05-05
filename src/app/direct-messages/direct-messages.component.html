@@ -21,15 +21,33 @@
 
   <div *ngIf="!collapsed">
     <div
-      
       *ngFor="let channel of allDmChannels; let i = index"
       class="channel-sidebar-name"
       [routerLink]="['/home/direct-messages/' + channel.dmChannelId]"
       (click)="channelService.threadOpen = false"
       routerLinkActive="active"
     >
-      <mat-icon>account_circle</mat-icon>
-      <span>{{ (channel.users.recipientID | getUserNameById | async)?.displayName }}</span>
+      <img
+        
+        class="profile-picture"
+        mat-button
+        height="30"
+        width="30"
+        [src]="(channel.users.recipientID | getUserNameById | async)?.photoURL"
+      />
+      <div
+        [ngClass]="{
+          'logged-in':
+            (channel.users.recipientID | getUserNameById | async)?.status ==
+            true
+              ? 'logged-out'
+              : (channel.users.recipientID | getUserNameById | async)?.status ==
+                false
+        }"
+      ></div>
+      <span>{{
+        (channel.users.recipientID | getUserNameById | async)?.displayName
+      }}</span>
     </div>
 
     <div class="channel-sidebar-name no-hover" (click)="openDialog()">

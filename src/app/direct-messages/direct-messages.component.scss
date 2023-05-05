@@ -4,4 +4,33 @@
 
 .channel-sidebar-name {
     z-index: 10;
+    position: relative;
+    gap: 10px;
+}
+
+
+.logged-in {
+    height: 10px;
+    width: 10px;
+    border-radius: 100%;
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    background-color: green;
+}
+
+.logged-out {
+    height: 10px;
+    width: 10px;
+    border-radius: 100%;
+    position: absolute;
+    top: 20px;
+    right: 40px;
+    background-color: red;
+}
+
+.profile-picture {
+    border-radius: 5px;
+    object-fit: cover;
+    object-position: center;
 }

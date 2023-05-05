@@ -7,9 +7,17 @@
 
 <div class="container">
   <div class="profile-pic-container" *ngIf="user$ | async as user">
+    <div class="profile-pic">
       <img
-        [src]="user.photoURL ?? 'assets/img/image-placeholder.png'"
-      />
+        width="120"
+        height="120"
+        [src]="usersService.currentUserData.photoURL ?? 'assets/img/image-placeholder.png'"
+      />#
+      <button class="fab-button" mat-mini-fab (click)="inputField.click()">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
+    <input type="file" hidden #inputField (change)="uploadFile($event, user)">
   </div>
   <div class="create-channel-input">
     <mat-icon>numbers</mat-icon>

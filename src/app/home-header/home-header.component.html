@@ -1,11 +1,25 @@
 <mat-toolbar class="header">
-    <div class="searchbar">
-        <input type="text" placeholder="Workspace durchsuchen">
-        <mat-icon>search</mat-icon>
-    </div>
-    <mat-icon class="acc" mat-button [matMenuTriggerFor]="menu">account_circle</mat-icon>
-    <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="openDialog()">Profil</button>
-        <button mat-menu-item (click)="logout()">Logout</button>
-    </mat-menu>
+  <div class="searchbar">
+    <input type="text" placeholder="Workspace durchsuchen" />
+    <mat-icon>search</mat-icon>
+  </div>
+        <img
+          *ngIf="userLoaded"
+          class="acc"
+          mat-button
+          [matMenuTriggerFor]="menu"
+          height="40"
+          width="40"
+          [src]="
+            usersService.currentUserData.photoURL ??
+            'assets/img/image-placeholder.png'
+          "
+      />
+      <div [ngClass]="{'logged-in': userIsLoggedIn == true ? 'logged-out': userIsLoggedIn == false}"></div>
+
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="openDialog()">Profil</button>
+    <button mat-menu-item (click)="logout()">Logout</button>
+  </mat-menu>
 </mat-toolbar>

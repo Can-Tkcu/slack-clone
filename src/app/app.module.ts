@@ -45,8 +45,10 @@ import { DirectMessagesContentComponent } from './direct-messages-content/direct
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { QuillModule } from 'ngx-quill'
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { UsersService } from './services/users.service';
 import { GetUserNameByIdPipe } from './get-user-name-by-id.pipe';
+import { provideStorage } from '@angular/fire/storage';
+import { getStorage } from 'firebase/storage';
+import { HotToastModule } from '@ngneat/hot-toast';
 
 @NgModule({
   declarations: [
@@ -90,12 +92,14 @@ import { GetUserNameByIdPipe } from './get-user-name-by-id.pipe';
     AngularFireStorageModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
+    provideStorage(() => getStorage()),
     provideFirestore(() => getFirestore()),
     MatDialogModule,
     MatAutocompleteModule,
     FormsModule,
     QuillModule,
-    MatTooltipModule
+    MatTooltipModule,
+    HotToastModule.forRoot()
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }

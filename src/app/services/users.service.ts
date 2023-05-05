@@ -6,8 +6,10 @@ import {
   Firestore,
   collection,
   collectionData,
+  doc,
+  updateDoc,
 } from '@angular/fire/firestore';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, from } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 
 @Injectable({
@@ -65,5 +67,11 @@ export class UsersService {
         return 0;
       }
     });
+  }
+
+
+  updateUser(user: any): Observable<void> {
+    const ref = doc(this.afs, 'users', user.uid);
+    return from(updateDoc(ref, { ...user }));
   }
 }

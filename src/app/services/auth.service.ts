@@ -7,6 +7,7 @@ import {
 import { Router } from '@angular/router';
 import { User } from '../models/user';
 import { updateProfile } from 'firebase/auth';
+import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -75,10 +76,13 @@ export class AuthService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      status: false
+      status: false,
+      photoURL: user.photoURL
     };
     return userRef.set(userData, {
       merge: true,
     });
   }
+
+  
 }
