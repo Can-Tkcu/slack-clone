@@ -165,6 +165,7 @@
 ::ng-deep #emoji-palette {
     max-width: 360px;
     top: -300px !important;
+    left: 0 !important;
 
     #tab-toolbar {
         background-color: var(--secondary) !important;
