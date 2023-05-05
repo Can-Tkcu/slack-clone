@@ -40,7 +40,7 @@
           'logged-in':
             (channel.users.recipientID | getUserNameById | async)?.status ==
             true
-              ? 'logged-out'
+              , 'logged-out'
               : (channel.users.recipientID | getUserNameById | async)?.status ==
                 false
         }"
