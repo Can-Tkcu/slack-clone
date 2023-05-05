@@ -7,6 +7,8 @@ import { Firestore, collection } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { collectionData } from '@angular/fire/firestore';
 import { ChannelService } from '../services/channel.service';
+import { GetUserNameByIdPipe } from '../get-user-name-by-id.pipe';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-direct-messages',
@@ -17,6 +19,7 @@ export class DirectMessagesComponent implements OnInit {
   collapsed = false;
   users = [];
   allDmChannels: Array<any> = []
+  status$: boolean;
   constructor(
     public dialog: MatDialog,
     public dmService: DirectMessagesService,
@@ -34,6 +37,7 @@ export class DirectMessagesComponent implements OnInit {
         this.allDmChannels = []
         channels.forEach(channel => {
           if(channel.users.senderID == this.usersService.currentUserDataID)
+          
           this.allDmChannels.push(channel);
           this.allDmChannels.sort((a, b) => {
             if (a.users.recipientName.toLowerCase() < b.users.recipientName.toLowerCase()) {
@@ -48,7 +52,7 @@ export class DirectMessagesComponent implements OnInit {
       })
     setTimeout(() => {
      this.users = this.usersService.users 
-    }, 1000);
+    }, 500);
   }
 
 

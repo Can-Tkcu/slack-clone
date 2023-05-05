@@ -6,30 +6,18 @@ import {
 } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
-import { updateProfile } from 'firebase/auth';
+import { updateProfile, updateEmail } from 'firebase/auth';
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-
-  userLoggedIn: boolean;
-
+  ok: Observable<any>
   constructor(
     private router: Router,
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore
-  ) {
-    this.userLoggedIn = false;
-    this.afAuth.onAuthStateChanged((user) => {
-      if (user) {
-        // console.log(user)
-        this.userLoggedIn = true;
-      } else {
-        this.userLoggedIn = false;
-      }
-    });
-  }
+  ) {}
 
 
   async loginUser(email: string, password: string): Promise<any> {
@@ -47,7 +35,7 @@ export class AuthService {
       });
   }
 
-
+  
   async signupUser(user: any): Promise<any> {
     return await this.afAuth
       .createUserWithEmailAndPassword(user.email, user.password)
@@ -82,6 +70,11 @@ export class AuthService {
     return userRef.set(userData, {
       merge: true,
     });
+  }
+
+
+  async updateUserEmail(userData, newEmail: string) {
+    await updateEmail(userData, newEmail)
   }
 
   

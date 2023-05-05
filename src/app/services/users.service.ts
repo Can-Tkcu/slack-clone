@@ -11,6 +11,7 @@ import {
 } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable, from } from 'rxjs';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import { reauthenticateWithCredential } from 'firebase/auth';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +22,7 @@ export class UsersService {
   currentUserDataID: any
   users: any = [];
   currentUser$ = authState(this.auth)
+  userData: any;
 
   constructor(private afs: Firestore, private firestore: AngularFirestore, private auth: Auth) { }
 
@@ -29,9 +31,9 @@ export class UsersService {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {
+        this.userData = user;
         this.currentUserDataID = user.uid;
       }
-
       this.firestore
         .collection('users')
         .doc(this.currentUserDataID)

@@ -48,7 +48,6 @@ import { provideStorage } from '@angular/fire/storage';
 import { getStorage } from 'firebase/storage';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { MatChipsModule } from '@angular/material/chips';
-import { AuthGuard } from './services/auth.guard';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 @NgModule({
@@ -101,7 +100,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     MatTooltipModule,
     HotToastModule.forRoot(),
     MatTooltipModule,
-    MatChipsModule
+    MatChipsModule,
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }

@@ -1,36 +1,40 @@
 .channel-sidebar-container {
-    padding-top: 0;
+  padding-top: 0;
 }
 
 .channel-sidebar-name {
-    z-index: 10;
-    position: relative;
-    gap: 10px;
+  z-index: 10;
+  position: relative;
+  gap: 10px;
 }
 
-
 .logged-in {
-    height: 10px;
-    width: 10px;
-    border-radius: 100%;
-    position: absolute;
-    top: 20px;
-    left: 40px;
-    background-color: green;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  background-color: rgb(91 196 91);
 }
 
 .logged-out {
-    height: 10px;
-    width: 10px;
-    border-radius: 100%;
-    position: absolute;
-    top: 20px;
-    right: 40px;
-    background-color: red;
+  height: 10px;
+  width: 10px;
+  border-radius: 100%;
+  position: absolute;
+  top: 20px;
+  left: 40px;
+  background-color: rgb(167, 167, 167);
 }
 
 .profile-picture {
-    border-radius: 5px;
-    object-fit: cover;
-    object-position: center;
+  border-radius: 5px;
+  object-fit: cover;
+  object-position: center;
+}
+
+.margin-bottom {
+    margin-bottom: 10px;
+
 }
