@@ -32,8 +32,6 @@ import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogCreateChannelComponent } from './dialog-create-channel/dialog-create-channel.component';
 import { DialogCreateDirectMessageComponent } from './dialog-create-direct-message/dialog-create-direct-message.component';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
-import { AngularFireStorageModule } from '@angular/fire/compat/storage';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
@@ -49,6 +47,9 @@ import { GetUserNameByIdPipe } from './get-user-name-by-id.pipe';
 import { provideStorage } from '@angular/fire/storage';
 import { getStorage } from 'firebase/storage';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { MatChipsModule } from '@angular/material/chips';
+import { AuthGuard } from './services/auth.guard';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 @NgModule({
   declarations: [
@@ -89,7 +90,6 @@ import { HotToastModule } from '@ngneat/hot-toast';
     AngularFirestoreModule,
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    AngularFireStorageModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideStorage(() => getStorage()),
@@ -100,10 +100,12 @@ import { HotToastModule } from '@ngneat/hot-toast';
     QuillModule,
     MatTooltipModule,
     HotToastModule.forRoot()
+    MatTooltipModule,
+    MatChipsModule
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

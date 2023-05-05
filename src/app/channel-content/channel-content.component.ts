@@ -12,6 +12,12 @@ import { UsersService } from '../services/users.service';
 export class ChannelContentComponent implements OnInit {
   // channelId = '';
   // public channel: any = [];
+  currentDate = Date.now();
+  oneDayInMs: number = 86400000;
+  getLastMidnightTime = new Date().setHours(0,0,0,0);
+  getNextMidnightTime = new Date().setHours(24,0,0,0);
+  getNextNextMidnightTime = new Date().setHours(48,0,0,0);
+
 
   constructor(
     private route: ActivatedRoute, 
@@ -24,8 +30,19 @@ export class ChannelContentComponent implements OnInit {
       this.channelService.channelId = paramMap.get('id');
       // console.log('Got ID', this.channelService.channelId);
       this.channelService.getChannelDetails();
+      // this.getDate(1683204940148)
+      // this.getDate(this.currentDate);
+      // console.log((this.currentDate - 1683204940148));
+      // console.log(this.getLastMidnightTime);
+      // this.getDate(this.getLastMidnightTime);
+      // this.getDate(this.getNextMidnightTime);
+      // this.getDate(this.getNextNextMidnightTime);
     });
   }
 
+  getDate(timestamp) {
+    let date = new Date(timestamp);
+    console.log(date);
+  }
   
 }
