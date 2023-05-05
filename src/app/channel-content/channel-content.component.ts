@@ -14,6 +14,7 @@ export class ChannelContentComponent implements OnInit {
   // public channel: any = [];
   currentDate = Date.now();
   oneDayInMs: number = 86400000;
+  getDayBeforeMidnightTime = new Date().setHours(-24,0,0,0);
   getLastMidnightTime = new Date().setHours(0,0,0,0);
   getNextMidnightTime = new Date().setHours(24,0,0,0);
   getNextNextMidnightTime = new Date().setHours(48,0,0,0);
@@ -34,6 +35,7 @@ export class ChannelContentComponent implements OnInit {
       // this.getDate(this.currentDate);
       // console.log((this.currentDate - 1683204940148));
       // console.log(this.getLastMidnightTime);
+      // this.getDate(this.getDayBeforeMidnightTime);
       // this.getDate(this.getLastMidnightTime);
       // this.getDate(this.getNextMidnightTime);
       // this.getDate(this.getNextNextMidnightTime);

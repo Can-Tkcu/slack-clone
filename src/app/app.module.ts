@@ -99,7 +99,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     FormsModule,
     QuillModule,
     MatTooltipModule,
-    HotToastModule.forRoot()
+    HotToastModule.forRoot(),
     MatTooltipModule,
     MatChipsModule
   ],

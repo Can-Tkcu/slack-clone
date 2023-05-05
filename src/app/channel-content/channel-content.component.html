@@ -36,14 +36,18 @@
                     </span>
 
                     <!-- shows last answer from yesterday with hours -->
-                    <span
+                    <!-- <span
                         *ngIf="currentDate > getLastMidnightTime && thread.replies[thread.replies.length - 1]?.timestamp < getLastMidnightTime">
+                        Letzte Antwort vor {{ currentDate - thread.replies[thread.replies.length - 1]?.timestamp | date:'H'}} Stunden
+                    </span> -->
+                    <span
+                        *ngIf="thread.replies[thread.replies.length - 1]?.timestamp > getDayBeforeMidnightTime && thread.replies[thread.replies.length - 1]?.timestamp < getLastMidnightTime">
                         Letzte Antwort vor {{ currentDate - thread.replies[thread.replies.length - 1]?.timestamp | date:'H'}} Stunden
                     </span>
 
                     <!-- shows last answer from last days -->
                     <span
-                        *ngIf="thread.replies[thread.replies.length - 1]?.timestamp < getLastMidnightTime && currentDate > getNextMidnightTime">
+                        *ngIf="thread.replies[thread.replies.length - 1]?.timestamp < getDayBeforeMidnightTime">
                         Letzte Antwort vor {{ currentDate - thread.replies[thread.replies.length - 1]?.timestamp | date:'d'}} Tagen
                     </span>
                     <span>Thread ansehen</span>

@@ -161,3 +161,62 @@
 ::ng-deep .ql-container.ql-snow {
     border: none;
 }
+
+::ng-deep #emoji-palette {
+    max-width: 360px;
+    top: -300px !important;
+
+    #tab-toolbar {
+        background-color: var(--secondary) !important;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+
+        ul {
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+
+    #tab-panel {
+        background-color: var(--secondary);
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+        display: block;
+        padding: 5px;
+        height: 220px;
+    }
+}
+
+::ng-deep .ql-snow.ql-toolbar button,
+.ql-snow .ql-toolbar button {
+    height: 28px;
+    padding: 5px;
+    border-radius: 5px;
+    transition: all 125ms ease-in-out;
+
+    &:hover {
+        background-color: rgba(128, 128, 128, 0.082);
+        transition: all 125ms ease-in-out;
+    }
+}
+
+::ng-deep .ql-snow.ql-toolbar button.ql-active {
+    color: grey;
+    background-color: rgba(128, 128, 128, 0.178);
+}
+
+::ng-deep .ql-snow.ql-toolbar button.ql-active .ql-stroke {
+    stroke: grey;
+}
+
+::ng-deep .ql-snow.ql-toolbar button:hover .ql-stroke {
+    stroke: grey;
+}
+
+::ng-deep .ql-snow.ql-toolbar button.ql-active .ql-fill {
+    fill: grey;
+}
+
+::ng-deep .ql-snow.ql-toolbar button:hover .ql-fill {
+    fill: grey;
+}
