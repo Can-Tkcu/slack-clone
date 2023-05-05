@@ -395,6 +395,7 @@ h2 {
   display: flex;
   align-items: center;
   height: 28px;
+  gap: 10px;
 
   span {
       font-size: 18px;
@@ -421,7 +422,7 @@ h2 {
   display: flex;
   align-items: flex-start;
   padding: 16px 20px 8px;
-  gap: 5px;
+  gap: 10px;
   transition: all 125ms ease-in-out;
 
   &:hover {

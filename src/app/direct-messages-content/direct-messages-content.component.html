@@ -1,6 +1,16 @@
 <div class="content-header">
   <div class="channel-elements">
-    <mat-icon>numbers</mat-icon>
+    <div>
+      <img
+      class="profile-picture"
+      height="36"
+      width="36"
+      [src]="(dmService.currentChannelRecipient | getUserNameById | async)?.photoURL ?? 'assets/img/image-placeholder.png'"
+    /> 
+      <div
+        [ngClass]="{'logged-in': (dmService.currentChannelRecipient | getUserNameById | async)?.status == true , 'logged-out': (dmService.currentChannelRecipient | getUserNameById | async)?.status == false}"
+      ></div>
+    </div>
     <span>{{ (dmService.currentChannelRecipient | getUserNameById | async)?.displayName }}</span>
   </div>
 </div>
@@ -8,7 +18,12 @@
 <div class="content-container">
   <div class="message-container" *ngFor="let message of dmService.currentChannelMessages let i = index">
     <div>
-      <mat-icon>account_circle</mat-icon>
+      <img
+      class="profile-picture"
+      height="36"
+      width="36"
+      [src]="(message.author | getUserNameById | async)?.photoURL ?? 'assets/img/image-placeholder.png'"
+    /> 
     </div>
     <div class="message-container-right">
       <div class="user-and-time">
