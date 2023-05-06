@@ -23,6 +23,7 @@ export class UsersService {
   users: any = [];
   currentUser$ = authState(this.auth)
   userData: any;
+  color: any;
 
   constructor(private afs: Firestore, private firestore: AngularFirestore, private auth: Auth) { }
 
@@ -76,4 +77,39 @@ export class UsersService {
     const ref = doc(this.afs, 'users', user.uid);
     return from(updateDoc(ref, { ...user }));
   }
+
+
+  getHashOfString(str: any) {
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+      // tslint:disable-next-line: no-bitwise
+      hash = str.charCodeAt(i) + ((hash << 5) - hash);
+    }
+    hash = Math.abs(hash);
+    return hash;
+  };
+  
+
+  normalizeHash(hash: any, min, max) {
+    return Math.floor((hash % (max - min)) + min);
+  };
+  
+
+  generateHSL(name: any) {
+    const hash = this.getHashOfString(name);
+    const h = this.normalizeHash(hash, 0, 360);
+    const s = this.normalizeHash(hash, 0, 255);
+    const l = this.normalizeHash(hash, 0 , 255);
+    return [h, s, l];
+  };
+  
+
+  HSLtoString(hsl: any) {
+    return `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`;
+  };
+
+  
+  generateColorHsl(id: any) {
+    return this.HSLtoString(this.generateHSL(id));
+  };
 }

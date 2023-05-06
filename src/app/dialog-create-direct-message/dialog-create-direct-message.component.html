@@ -17,10 +17,11 @@
                  aria-label="Name"
                  matInput
                  formControlName="displayName"
+                 [formControl]="myControl"
                  [matAutocomplete]="auto">
           <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-            <mat-option (click)="selectUserId(user)" *ngFor="let user of usersService.users" [value]="user.displayName">
-              {{user.displayName}}
+            <mat-option (click)="selectUserId(user)" *ngFor="let user of filteredOptions | async" [value]="user['displayName']">
+              {{user['displayName']}}
             </mat-option>
           </mat-autocomplete>
         </mat-form-field>

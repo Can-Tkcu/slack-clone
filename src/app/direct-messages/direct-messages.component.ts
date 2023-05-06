@@ -37,7 +37,6 @@ export class DirectMessagesComponent implements OnInit {
         this.allDmChannels = []
         channels.forEach(channel => {
           if(channel.users.senderID == this.usersService.currentUserDataID)
-          
           this.allDmChannels.push(channel);
           this.allDmChannels.sort((a, b) => {
             if (a.users.recipientName.toLowerCase() < b.users.recipientName.toLowerCase()) {

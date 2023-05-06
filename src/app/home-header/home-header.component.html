@@ -6,6 +6,7 @@
         <img
           *ngIf="userLoaded"
           class="acc"
+          [ngStyle]="{'background-color': usersService.color}"
           mat-button
           [matMenuTriggerFor]="menu"
           height="40"

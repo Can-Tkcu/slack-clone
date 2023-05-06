@@ -84,7 +84,8 @@ mat-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  flex-direction: column;
+  gap: 20px;
   button {
     
    color: white; 
@@ -113,4 +114,17 @@ mat-icon {
 
 .top20 {
   top: 20px;
+}
+
+
+.guest-button {
+  color: var(--primary)!important;
+  background-color: white!important;
+  transition: all 225ms ease;
+  
+  &:hover {
+
+    background-color: var(--light-grey)!important;
+    color: white!important
+  }
 }

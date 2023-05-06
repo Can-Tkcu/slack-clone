@@ -3,20 +3,30 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { UsersService } from '../services/users.service';
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument,
+} from '@angular/fire/compat/firestore';
 import { DirectMessagesService } from '../services/direct-messages.service';
+import { MatDialog } from '@angular/material/dialog';
 @Component({
   selector: 'app-dialog-create-direct-message',
   templateUrl: './dialog-create-direct-message.component.html',
   styleUrls: ['./dialog-create-direct-message.component.scss'],
 })
-export class DialogCreateDirectMessageComponent {
+export class DialogCreateDirectMessageComponent implements OnInit {
   myControl = new FormControl('');
-  filteredOptions: Observable<string[]> | undefined;
+  filteredOptions: Observable<string[]>;
   selectedUserID: any;
 
   public dmForm: FormGroup;
-  constructor(public usersService: UsersService, private afs: AngularFirestore, private dmService: DirectMessagesService) {}
+  constructor(
+    public usersService: UsersService,
+    private afs: AngularFirestore,
+    private dmService: DirectMessagesService,
+    private dialog: MatDialog
+  ) {}
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -39,23 +49,23 @@ export class DialogCreateDirectMessageComponent {
   }
 
   async createDmChannel() {
-    const channelRef: AngularFirestoreCollection = this.afs.collection('direct-messages');
+    const channelRef: AngularFirestoreCollection =
+      this.afs.collection('direct-messages');
     const channelData = {
       users: {
         senderID: this.usersService.currentUserData.uid,
         senderName: this.usersService.currentUserData.displayName,
         recipientID: this.dmForm.value.uid,
-        recipientName: this.dmForm.value.displayName
+        recipientName: this.dmForm.value.displayName,
       },
       payload: {
-        messages: []
-      }
+        messages: [],
+      },
     };
-    const createdChannel = channelRef.add(channelData)
-    const createdChannelID = (await createdChannel).id
+    const createdChannel = channelRef.add(channelData);
+    const createdChannelID = (await createdChannel).id;
     this.dmService.directMessageChannelID = createdChannelID;
-    return createdChannel;
-    
+    return createdChannel && this.dialog.closeAll();
   }
 
   selectUserId(user) {

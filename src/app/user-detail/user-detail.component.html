@@ -11,6 +11,7 @@
       <img
         width="120"
         height="120"
+        [ngStyle]="{'background-color': usersService.color}"
         [src]="usersService.currentUserData.photoURL ?? 'assets/img/image-placeholder.png'"
       />#
       <button class="fab-button" mat-mini-fab (click)="inputField.click()">

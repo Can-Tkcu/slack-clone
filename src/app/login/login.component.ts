@@ -24,7 +24,7 @@ export class LoginComponent {
   });
 
   constructor(
-    private authService: AuthService,
+    public authService: AuthService,
     private router: Router,
     private afAuth: AngularFireAuth
   ) {

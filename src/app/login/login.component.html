@@ -95,6 +95,13 @@
           >
             Log In
           </button>
+          <button
+            mat-raised-button
+            class="guest-button"
+            (click)="authService.loginUser('guest@info.com', 'guest1234')"
+          >
+            Guest Log in
+          </button>
         </div>
       </mat-card-actions>
 

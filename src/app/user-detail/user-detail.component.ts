@@ -22,6 +22,7 @@ export class UserDetailComponent {
   user$ = this.usersService.currentUser$;
   oldEmail: string;
   password: string;
+  color: any;
   /**
    *
    */

@@ -7,15 +7,16 @@ import {
 import { MatDialog } from '@angular/material/dialog';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
 import { UsersService } from '../services/users.service';
+import { style } from '@angular/animations';
 @Component({
   selector: 'app-home-header',
   templateUrl: './home-header.component.html',
   styleUrls: ['./home-header.component.scss'],
 })
 export class HomeHeaderComponent implements OnInit {
-
   userLoaded: boolean = false; 
   userIsLoggedIn: boolean;
+
 
   constructor(
     public afAuth: Auth,
@@ -24,12 +25,13 @@ export class HomeHeaderComponent implements OnInit {
     public usersService: UsersService
   ) {}
 
+
   ngOnInit(): void {
     setTimeout(() => {
       this.userLoaded = true
       this.userIsLoggedIn = this.usersService.currentUserData.status
-
-    }, 300)
+      this.usersService.color = this.usersService.generateColorHsl(this.usersService.currentUserData.displayName)
+    }, 350)
   }
 
 
@@ -46,4 +48,6 @@ export class HomeHeaderComponent implements OnInit {
         .update({ status: false });
     });
   }
+
+  
 }
