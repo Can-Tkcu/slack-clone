@@ -82,7 +82,6 @@ export class UsersService {
   getHashOfString(str: any) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {
-      // tslint:disable-next-line: no-bitwise
       hash = str.charCodeAt(i) + ((hash << 5) - hash);
     }
     hash = Math.abs(hash);
@@ -109,7 +108,9 @@ export class UsersService {
   };
 
   
-  generateColorHsl(id: any) {
+  generateColorHsl(id: string) {
+    if(id !== null) 
     return this.HSLtoString(this.generateHSL(id));
+    else return ""
   };
 }

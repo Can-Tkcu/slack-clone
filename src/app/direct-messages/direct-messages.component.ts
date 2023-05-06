@@ -20,6 +20,7 @@ export class DirectMessagesComponent implements OnInit {
   users = [];
   allDmChannels: Array<any> = []
   status$: boolean;
+  isOk: boolean = false
   constructor(
     public dialog: MatDialog,
     public dmService: DirectMessagesService,
@@ -47,10 +48,11 @@ export class DirectMessagesComponent implements OnInit {
               return 0;
             }
           });
-        });
+        })
       })
     setTimeout(() => {
      this.users = this.usersService.users 
+     this.isOk = true
     }, 500);
   }
 

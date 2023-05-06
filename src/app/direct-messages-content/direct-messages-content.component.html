@@ -3,6 +3,9 @@
     <div>
       <img
       class="profile-picture"
+      [ngStyle]="{ 'background-color': usersService.generateColorHsl(
+                      (dmService.currentChannelRecipient| getUserNameById | async)?.displayName
+                   )}"
       height="36"
       width="36"
       [src]="(dmService.currentChannelRecipient | getUserNameById | async)?.photoURL ?? 'assets/img/image-placeholder.png'"

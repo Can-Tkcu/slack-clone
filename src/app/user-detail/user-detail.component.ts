@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import { UsersService } from '../services/users.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { reauthenticateWithCredential } from '@angular/fire/auth';
 import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '../services/auth.service';
 import { UserImageService } from '../services/user-image.service';
-import { Observable, switchMap } from 'rxjs';
+import { switchMap } from 'rxjs';
 import { HotToastService } from '@ngneat/hot-toast';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
 
