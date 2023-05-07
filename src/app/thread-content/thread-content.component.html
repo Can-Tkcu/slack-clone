@@ -4,37 +4,88 @@
         <mat-icon>numbers</mat-icon>
         <span>{{ channelService.channel.name }}</span>
     </div>
-    <mat-icon (click)="channelService.threadOpen = false">close</mat-icon>
+    <div class="close-btn" (click)="channelService.threadOpen = false">
+        <mat-icon>close</mat-icon>
+    </div>
 </div>
 
 <div class="content-container">
     <div class="message-container">
-        <div>
-            <mat-icon>{{ channelService.threadContent.authorPic }}</mat-icon>
-        </div>
+        <!-- <div> -->
+            <!-- <mat-icon>{{ channelService.threadContent.authorPic }}</mat-icon> -->
+            <img class="profile-picture" height="45" width="45"
+                [src]="(channelService.threadContent.author | getUserNameById | async)?.photoURL ?? 'assets/img/image-placeholder.png'" />
+        <!-- </div> -->
         <div class="message-container-right">
             <div class="user-and-time">
-                <span>{{  (channelService.threadContent.author | getUserNameById | async)?.displayName  }}</span>
-                <span>{{ channelService.threadContent.timestamp | date:'HH:mm' }}</span>
+                <span>{{ (channelService.threadContent.author | getUserNameById | async)?.displayName }}</span>
+                <!-- <span>{{ channelService.threadContent.timestamp | date:'HH:mm' }}</span> -->
+
+                <!-- shows last answer of today in hours-->
+                <span
+                    *ngIf="channelService.threadContent.timestamp > channelService.getLastMidnightTime && channelService.currentDate < channelService.getNextMidnightTime">
+                    vor {{ channelService.currentDate - channelService.threadContent.timestamp |
+                    date:'m'}}
+                    Minuten
+                </span>
+
+                <!-- shows last answer from yesterday with hours -->
+                <span
+                    *ngIf="channelService.threadContent.timestamp > channelService.getDayBeforeMidnightTime && channelService.currentDate < channelService.getLastMidnightTime">
+                    vor {{ channelService.currentDate - channelService.threadContent.timestamp |
+                    date:'H'}} Stunden
+                </span>
+
+                <!-- shows last answer from last days -->
+                <span
+                    *ngIf="channelService.threadContent.timestamp < channelService.getDayBeforeMidnightTime || channelService.threadContent.timestamp < channelService.getLastMidnightTime">
+                    vor {{ channelService.getLastMidnightTime - channelService.threadContent.timestamp |
+                    date:'d'}} Tagen
+                </span>
             </div>
             <!-- <p class="message-text">{{ channelService.threadContent.message }}</p> -->
-            <quill-view class="message-text" [content]="channelService.threadContent.message" format="html" theme="snow"></quill-view>
+            <quill-view class="message-text" [content]="channelService.threadContent.message" format="html"
+                theme="snow"></quill-view>
         </div>
     </div>
 
     <div class="answers-divider">
-        <span>{{ channelService.channel.thread[this.channelService.threadContentIndex].replies.length }} Antworten</span>
+        <span>{{ channelService.channel.thread[this.channelService.threadContentIndex].replies.length }}
+            Antworten</span>
         <div class="divider-line"></div>
     </div>
 
-    <div class="message-container" *ngFor="let replies of channelService.channel.thread[this.channelService.threadContentIndex].replies">
+    <div class="message-container"
+        *ngFor="let replies of channelService.channel.thread[this.channelService.threadContentIndex].replies">
         <div>
-            <mat-icon>{{ replies.authorPic }}</mat-icon>
+            <img class="profile-picture" height="45" width="45"
+                [src]="(replies.author | getUserNameById | async)?.photoURL ?? 'assets/img/image-placeholder.png'" />
         </div>
         <div class="message-container-right">
             <div class="user-and-time">
-                <span>{{  (replies.author | getUserNameById | async)?.displayName }}</span>
-                <span>{{ replies.timestamp | date:'HH:mm' }} Uhr</span>
+                <span>{{ (replies.author | getUserNameById | async)?.displayName }}</span>
+                <!-- <span>{{ replies.timestamp | date:'HH:mm' }} Uhr</span> -->
+
+                <!-- shows last answer of today in minutes-->
+                <span
+                    *ngIf="replies.timestamp > channelService.getLastMidnightTime && channelService.currentDate < channelService.getNextMidnightTime">
+                    vor {{ channelService.currentDate - replies.timestamp | date:'m'}}
+                    Minuten
+                </span>
+
+                <!-- shows last answer from yesterday with hours -->
+                <span
+                    *ngIf="replies.timestamp > channelService.getDayBeforeMidnightTime && channelService.currentDate < channelService.getLastMidnightTime">
+                    vor {{ channelService.currentDate - replies.timestamp |
+                    date:'H'}} Stunden
+                </span>
+
+                <!-- shows last answer from last days -->
+                <span
+                    *ngIf="replies.timestamp < channelService.getDayBeforeMidnightTime || replies.timestamp < channelService.getLastMidnightTime">
+                    vor {{ channelService.getLastMidnightTime - replies.timestamp |
+                    date:'d'}} Tagen
+                </span>
             </div>
             <!-- <p class="message-text">{{ replies.message }}</p> -->
             <quill-view class="message-text" [content]="replies.message" format="html" theme="snow"></quill-view>

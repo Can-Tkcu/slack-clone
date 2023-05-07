@@ -19,6 +19,11 @@
     transition: all 125ms ease-in-out;
     border: 1px solid transparent;
 
+    img {
+        height: 24px;
+        width: 24px;
+    }
+
     &:hover {
         background-color: var(--primary);
         transition: all 125ms ease-in-out;
@@ -95,7 +100,13 @@
 .message-list-day-divider {
     display: flex;
     align-items: center;
+    justify-content: center;
+    
+    &:first-of-type {
+        padding-top: 16px;
+    }
 }
+
 
 .divider-line {
     display: flex;
@@ -117,12 +128,14 @@
 }
 
 .sticky {
-    // position: absolute;
-    // top: 80px;
-    // overflow: hidden;
-    // z-index: 10;
-    // left: 500px;
-    // right: auto;
-    position: sticky;
-    top: 0;
+    position: absolute;
+    top: 65px;
 }
+
+.profile-picture {
+    height: 36px;
+    width: 36px;
+    border-radius: 5px;
+    object-fit: cover;
+    object-position: center;
+  }

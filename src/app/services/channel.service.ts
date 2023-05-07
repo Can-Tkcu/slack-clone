@@ -16,6 +16,10 @@ export class ChannelService {
   // currentChannel: any = [];
   public threadOpen: boolean = false;
   currentUserName: any;
+  currentDate = Date.now();
+  getDayBeforeMidnightTime = new Date().setHours(-24, 0, 0, 0);
+  getLastMidnightTime = new Date().setHours(0, 0, 0, 0);
+  getNextMidnightTime = new Date().setHours(24, 0, 0, 0);
 
   constructor(
     private route: ActivatedRoute, 
