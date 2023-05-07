@@ -3,12 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogCreateDirectMessageComponent } from '../dialog-create-direct-message/dialog-create-direct-message.component';
 import { DirectMessagesService } from '../services/direct-messages.service';
 import { UsersService } from '../services/users.service';
-import { Firestore, collection } from '@angular/fire/firestore';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { collectionData } from '@angular/fire/firestore';
 import { ChannelService } from '../services/channel.service';
-import { GetUserNameByIdPipe } from '../get-user-name-by-id.pipe';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-direct-messages',
@@ -18,9 +14,8 @@ import { Observable } from 'rxjs';
 export class DirectMessagesComponent implements OnInit {
   collapsed = false;
   users = [];
-  allDmChannels: Array<any> = []
-  status$: boolean;
-  isOk: boolean = false
+  allDmChannels1: Array<any> = [];
+
   constructor(
     public dialog: MatDialog,
     public dmService: DirectMessagesService,
@@ -29,45 +24,16 @@ export class DirectMessagesComponent implements OnInit {
     public channelService: ChannelService
   ) {}
 
-
   ngOnInit(): void {
-    this.afs
-      .collection('direct-messages')
-      .valueChanges({idField: 'dmChannelId'})
-      .subscribe((channels: any) => {
-        this.allDmChannels = []
-        channels.forEach(channel => {
-          if(channel.users.senderID == this.usersService.currentUserDataID)
-          this.allDmChannels.push(channel);
-          this.allDmChannels.sort((a, b) => {
-            if (a.users.recipientName.toLowerCase() < b.users.recipientName.toLowerCase()) {
-              return -1;
-            } else if (a.users.recipientName.toLowerCase() > b.users.recipientName.toLowerCase()) {
-              return 1;
-            } else {
-              return 0;
-            }
-          });
-        })
-      })
-    setTimeout(() => {
-     this.users = this.usersService.users 
-     this.isOk = true
-    }, 500);
+    this.dmService.getAllDms();
   }
-
 
   openDialog() {
     this.dialog.open(DialogCreateDirectMessageComponent);
   }
 
-
   toggleDropdown() {
     this.collapsed = !this.collapsed;
   }
 
-
-  public btnMessage() {
-    console.log('Creating new direct message');
-  }
 }

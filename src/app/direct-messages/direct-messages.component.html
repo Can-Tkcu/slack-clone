@@ -21,7 +21,7 @@
 
   <div *ngIf="!collapsed">
     <div
-      *ngFor="let channel of allDmChannels; let i = index"
+      *ngFor="let channel of dmService.allDmChannels; let i = index"
       class="channel-sidebar-name margin-bottom"
       [routerLink]="['/home/direct-messages/' + channel.dmChannelId]"
       (click)="channelService.threadOpen = false"

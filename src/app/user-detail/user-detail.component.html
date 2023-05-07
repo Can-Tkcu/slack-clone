@@ -1,5 +1,6 @@
 <div class="dialog-header">
-  <h1>Change User Credentials</h1>
+  <h1 *ngIf="!isGuest">Change User Credentials</h1>
+  <h1 *ngIf="isGuest">Disabled for Guest</h1>
   <div class="icon-container">
     <mat-icon mat-button mat-dialog-close>close</mat-icon>
   </div>
@@ -11,14 +12,20 @@
       <img
         width="120"
         height="120"
-        [ngStyle]="{'background-color': usersService.color}"
+        [ngStyle]="{'background-color': usersService.generateColorHsl(usersService.currentUserData.displayName)}"
         [src]="usersService.currentUserData.photoURL ?? 'assets/img/image-placeholder.png'"
       />
       <button class="fab-button" mat-mini-fab (click)="inputField.click()">
         <mat-icon>edit</mat-icon>
       </button>
     </div>
-    <input type="file" hidden #inputField (change)="uploadFile($event, user)">
+    <input
+     type="file" 
+     hidden 
+     #inputField 
+     (change)="uploadFile($event, user)"
+     [disabled]="isGuest"
+     >
   </div>
   <div class="create-channel-input">
     <mat-icon>numbers</mat-icon>
@@ -27,6 +34,7 @@
       class="channel-input"
       type="text"
       placeholder="Your Name"
+      [disabled]="isGuest"
     />
   </div>
   <div class="create-channel-input">
@@ -36,6 +44,7 @@
       class="channel-input"
       type="text"
       placeholder="Your E-mail"
+      [disabled]="isGuest"
     />
   </div>
 </div>
@@ -44,7 +53,7 @@
   <button
     mat-button
     class="btn"
-    [disabled]="!userName"
+    [disabled]="!userName && !userEmail || isGuest"
     (click)="updateUserCredentials()"
   >
     Weiter

@@ -20,8 +20,8 @@ export class UserDetailComponent {
   userStatus: boolean;
   user$ = this.usersService.currentUser$;
   oldEmail: string;
-  password: string;
-  color: any;
+  isGuest: boolean = false;
+  // password: string;
   /**
    *
    */
@@ -39,6 +39,8 @@ export class UserDetailComponent {
     this.userEmail = this.usersService.currentUserData.email;
     this.oldEmail = this.userEmail;
     this.userStatus = this.usersService.currentUserData.status;
+    if(this.userName == "Guest")
+    this.isGuest = true
   }
 
   uploadFile(event: any, user: any) {

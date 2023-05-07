@@ -21,6 +21,7 @@ export class DirectMessagesContentComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap) => {
       this.dmService.channelID = paramMap.get('id');
       this.dmService.getChatsFromDb();
+      // this.dmService.getAllDms()
     });
   }
 }

@@ -28,7 +28,7 @@ export class UsersService {
   constructor(private afs: Firestore, private firestore: AngularFirestore, private auth: Auth) { }
 
   
-  getCurrentUser() {
+  async getCurrentUser() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
       if (user) {

@@ -4,16 +4,17 @@
     <mat-icon>search</mat-icon>
   </div>
         <img
-          *ngIf="userLoaded"
+          *ngIf="usersService.currentUserData"
           class="acc"
-          [ngStyle]="{'background-color': usersService.color}"
+          [ngStyle]="{'background-color': usersService.generateColorHsl(usersService.currentUserData.displayName)}"
           mat-button
           [matMenuTriggerFor]="menu"
           height="40"
           width="40"
           [src]="usersService.currentUserData.photoURL ?? 'assets/img/image-placeholder.png'"
       />
-      <div [ngClass]="{'logged-in': userIsLoggedIn == true ? 'logged-out': userIsLoggedIn == false}"></div>
+      <div *ngIf="usersService.currentUserData" [ngClass]="{'logged-in': usersService.currentUserData.status == true ? 'logged-out': usersService.currentUserData.status == false}"></div>
+
 
 
   <mat-menu #menu="matMenu">

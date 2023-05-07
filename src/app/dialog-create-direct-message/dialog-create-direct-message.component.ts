@@ -18,7 +18,6 @@ import { MatDialog } from '@angular/material/dialog';
 export class DialogCreateDirectMessageComponent implements OnInit {
   myControl = new FormControl('');
   filteredOptions: Observable<string[]>;
-  selectedUserID: any;
 
   public dmForm: FormGroup;
   constructor(
@@ -49,8 +48,8 @@ export class DialogCreateDirectMessageComponent implements OnInit {
   }
 
   async createDmChannel() {
-    const channelRef: AngularFirestoreCollection =
-      this.afs.collection('direct-messages');
+    const channelRef: AngularFirestoreCollection = this.afs.collection('direct-messages');
+
     const channelData = {
       users: {
         senderID: this.usersService.currentUserData.uid,
@@ -62,9 +61,8 @@ export class DialogCreateDirectMessageComponent implements OnInit {
         messages: [],
       },
     };
+
     const createdChannel = channelRef.add(channelData);
-    const createdChannelID = (await createdChannel).id;
-    this.dmService.directMessageChannelID = createdChannelID;
     return createdChannel && this.dialog.closeAll();
   }
 
