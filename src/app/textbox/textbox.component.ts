@@ -18,20 +18,20 @@ import {
 import 'quill-emoji/dist/quill-emoji.js';
 import { ActivatedRoute } from '@angular/router';
 import { DirectMessagesContentComponent } from '../direct-messages-content/direct-messages-content.component';
-// import '~quill/dist/quill.bubble.css';
-// import '~quill/dist/quill.snow.css';
+import { ChannelContentComponent } from '../channel-content/channel-content.component';
 
 @Component({
   selector: 'app-textbox',
   templateUrl: './textbox.component.html',
   styleUrls: ['./textbox.component.scss'],
 })
-export class TextboxComponent {
+export class TextboxComponent implements OnInit {
   public focusTextbox: boolean = false;
   public chatInput: any;
   @ViewChild('textMessage') textMessage!: ViewContainerRef;
   @ViewChild('chatBox') chatBox!: ElementRef;
   public textToUpload: any;
+  public textBoxPlaceholder: any;
   // @Input() editorRef: string;
 
   config = {
@@ -48,9 +48,9 @@ export class TextboxComponent {
     'emoji-shortname': true,
     keyboard: {
       bindings: {
-        ctrl_enter: {
+        enter: {
           key: 13,
-          ctrlKey: true,
+          // ctrlKey: true,
           handler: () => {
             this.sendMessage();
           },
@@ -64,8 +64,23 @@ export class TextboxComponent {
     public channelService: ChannelService,
     private dmService: DirectMessagesService,
     private firestore: AngularFirestore,
-    private route: ActivatedRoute
+    public route: ActivatedRoute
   ) {}
+
+
+  ngOnInit(): void {
+    console.log(this.route.firstChild.url['value'][0].path)
+
+  }
+
+  ngAfterViewInit() {
+  
+    
+    // if (this.route.firstChild.component == ChannelContentComponent) {
+    //   this.textBoxPlaceholder = 'Nachricht an #' + this.channelService.channel.name;
+    //   console.log(this.channelService.channel.name)
+    // }
+  }
 
   /**
    * Checks if user clicked into the chatbox and focuses the input + highlights the box
@@ -100,6 +115,19 @@ export class TextboxComponent {
       //     (box?.firstElementChild?.lastElementChild?.firstElementChild as HTMLElement)?.focus();
       //   }
       // });
+      console.log(this.route.firstChild)
+    }
+  }
+
+  checkRoute() {
+    return this.route.firstChild.url['value'][0].path === 'channel';
+  }
+
+  showCorrectPlaceholder() {
+    if (this.checkRoute && this.route.firstChild.component == ChannelContentComponent) {
+      return 'Nachricht an #' + this.channelService.channel.name;
+    } else {
+      return '';
     }
   }
 

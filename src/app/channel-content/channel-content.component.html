@@ -6,24 +6,20 @@
 </div>
 
 
-<div class="content-container">
-    <!-- <div class="message-list-day-divider" *ngFor="let thread of channelService.channel.thread; let i = index"> -->
-    <div *ngFor="let thread of channelService.channel.thread; let i = index">
-        <!-- <div class="divider-line"></div>
-        <mat-chip>Gestern</mat-chip>
-        <div class="divider-line"></div> -->
-        <div class="message-list-day-divider" *ngIf="isDifferentDay(i)">
-            <!-- <div>{{ getMessageDate(i) }}</div> -->
+<div class="content-container" #contentContainer>
+    <div *ngFor="let thread of channelService.channel.thread; let i = index; let last = last" #messages>
+        <!-- {{ last ? scrollToBottom() : ''}} -->
+        <div class="message-list-day-divider" *ngIf="isDifferentDay(i)" id="message-list-day-divider(i)">
             <div class="divider-line"></div>
-            <mat-chip class="sticky">{{ getMessageDate(i) }}</mat-chip>
+            <mat-chip [class.sticky]="sticky" id="sticky-chip" #stickyChip>{{ getMessageDate(i) }}</mat-chip>
             <div class="divider-line"></div>
         </div>
 
-
         <div class="message-container">
-            <div>
-                <mat-icon>{{ thread.authorPic }}</mat-icon>
-            </div>
+            <!-- <div> -->
+                <img class="profile-picture" height="45" width="45"
+                    [src]="(thread.author | getUserNameById | async)?.photoURL ?? 'assets/img/image-placeholder.png'" />
+            <!-- </div> -->
             <div class="message-container-right">
                 <div class="user-and-time">
                     <span>{{ (thread.author | getUserNameById | async)?.displayName }}</span>
@@ -31,40 +27,52 @@
                 </div>
                 <quill-view class="message-text" [content]="thread.message" format="html" theme="snow"></quill-view>
                 <div *ngIf="thread.replies.length" class="answers" (click)="channelService.openThread(i)">
-                    <mat-icon>account_circle</mat-icon>
+                    <img class="profile-picture" height="45" width="45"
+                        [src]="(thread.author | getUserNameById | async)?.photoURL ?? 'assets/img/image-placeholder.png'" />
                     <span>{{ thread.replies.length }} Antworten</span>
                     <div class="reply-bar-description">
-                        <!-- <span>Letzte Antwort vor 1 Tag</span> -->
-                        <!-- <span>Letzte Antwort vor {{ (thread.replies[thread.replies.length - 1].timestamp) - currentDate | date:'H'}}</span> -->
 
                         <!-- shows last answer of today -->
                         <span
-                            *ngIf="thread.replies[thread.replies.length - 1]?.timestamp > getLastMidnightTime && currentDate < getNextMidnightTime">
+                            *ngIf="thread.replies[thread.replies.length - 1]?.timestamp > channelService.getLastMidnightTime && channelService.currentDate < channelService.getNextMidnightTime">
                             Letzte Antwort heute um {{ thread.replies[thread.replies.length - 1]?.timestamp |
                             date:'HH:mm'}}
                             Uhr
                         </span>
 
                         <!-- shows last answer from yesterday with hours -->
-                        <!-- <span
-                        *ngIf="currentDate > getLastMidnightTime && thread.replies[thread.replies.length - 1]?.timestamp < getLastMidnightTime">
-                        Letzte Antwort vor {{ currentDate - thread.replies[thread.replies.length - 1]?.timestamp | date:'H'}} Stunden
-                    </span> -->
                         <span
-                            *ngIf="thread.replies[thread.replies.length - 1]?.timestamp > getDayBeforeMidnightTime && thread.replies[thread.replies.length - 1]?.timestamp < getLastMidnightTime">
-                            Letzte Antwort vor {{ currentDate - thread.replies[thread.replies.length - 1]?.timestamp |
+                            *ngIf="thread.replies[thread.replies.length - 1]?.timestamp > channelService.getDayBeforeMidnightTime && channelService.currentDate < channelService.getLastMidnightTime">
+                            Letzte Antwort vor {{ channelService.currentDate - thread.replies[thread.replies.length -
+                            1]?.timestamp |
                             date:'H'}} Stunden
                         </span>
 
                         <!-- shows last answer from last days -->
-                        <span *ngIf="thread.replies[thread.replies.length - 1]?.timestamp < getDayBeforeMidnightTime">
-                            Letzte Antwort vor {{ currentDate - thread.replies[thread.replies.length - 1]?.timestamp |
+                        <span
+                            *ngIf="thread.replies[thread.replies.length - 1]?.timestamp < channelService.getDayBeforeMidnightTime || thread.replies[thread.replies.length - 1]?.timestamp < channelService.getLastMidnightTime">
+                            Letzte Antwort vor {{ channelService.getLastMidnightTime -
+                            thread.replies[thread.replies.length - 1]?.timestamp |
                             date:'d'}} Tagen
                         </span>
                         <span>Thread ansehen</span>
                     </div>
                     <mat-icon class="thread-icon">navigate_next</mat-icon>
                 </div>
+            </div>
+            <div class="options-container">
+                <button matTooltip="Im Thread antworten" [matTooltipPosition]="'above'" (click)="channelService.openThread(i)">
+                    <mat-icon>chat</mat-icon>
+                </button>
+                <!-- <button>
+                    <mat-icon>chat</mat-icon>
+                </button>
+                <button>
+                    <mat-icon>chat</mat-icon>
+                </button>
+                <button>
+                    <mat-icon>chat</mat-icon>
+                </button> -->
             </div>
         </div>
     </div>

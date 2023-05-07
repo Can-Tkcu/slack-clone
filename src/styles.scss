@@ -395,7 +395,7 @@ h2 {
   display: flex;
   align-items: center;
   height: 28px;
-  gap: 10px;
+  // gap: 10px;
 
   span {
       font-size: 18px;
@@ -424,12 +424,50 @@ h2 {
   padding: 16px 20px 8px;
   gap: 10px;
   transition: all 125ms ease-in-out;
+  position: relative;
 
   &:hover {
       background-color: #222529;
       transition: all 125ms ease-in-out;
+
+      .options-container {
+        display: flex;
+      }
   }
 
+}
+
+.options-container {
+  display: none;
+  background-color: var(--primary);
+  border-radius: 5px;
+  padding: 2px;
+  position: absolute;
+  right: 20px;
+  top: -20px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent;
+    border: none;
+    border-radius: 5px;
+    padding: 5px;
+
+    &:hover {
+      background-color: rgba(128, 128, 128, 0.151);
+      cursor: pointer;
+    }
+
+    mat-icon {
+      height: 18px;
+      width: 18px;
+      font-size: 18px;
+      color: grey;
+    }
+  }
 }
 
 .message-container-right {
@@ -460,6 +498,14 @@ h2 {
     padding: 0 !important;
     color: #D1D2D3;
   }
+}
+
+.profile-picture {
+  height: 36px;
+  width: 36px;
+  border-radius: 5px;
+  object-fit: cover;
+  object-position: center;
 }
 
 // ::ng-deep .mat-drawer-container {
