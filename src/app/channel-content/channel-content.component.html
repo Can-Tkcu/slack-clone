@@ -9,9 +9,9 @@
 <div class="content-container" #contentContainer>
     <div *ngFor="let thread of channelService.channel.thread; let i = index; let last = last" #messages>
         {{ last ? scrollToBottom() : ''}}
-        <div class="message-list-day-divider" *ngIf="isDifferentDay(i)" id="message-list-day-divider(i)">
+        <div class="message-list-day-divider" *ngIf="channelService.isDifferentDay(i, channelService.channel.thread)" id="message-list-day-divider(i)">
             <div class="divider-line"></div>
-            <mat-chip [class.sticky]="sticky" id="sticky-chip" #stickyChip>{{ getMessageDate(i) }}</mat-chip>
+            <mat-chip [class.sticky]="sticky">{{ channelService.getMessageDate(i, channelService.channel.thread) }}</mat-chip>
             <div class="divider-line"></div>
         </div>
 

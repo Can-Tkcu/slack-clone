@@ -1,0 +1,127 @@
+<div class="content-header">
+    <div class="channel-elements">
+        <span>Threads</span>
+    </div>
+</div>
+
+<div class="content-container" #contentContainer>
+
+    <div *ngFor="let thread of ownThreads; let i = index; let last = last">
+        <div class="threads-heading">
+            <div class="channel-elements">
+                <mat-icon>numbers</mat-icon>
+                <span>{{ channelNames[i] }}</span>
+                <!-- <span>angular</span> -->
+            </div>
+        </div>
+
+        <div class="threads-content">
+
+            <div class="message-container">
+                <img class="profile-picture-content" height="45" width="45" [ngStyle]="{
+                'background-color': usersService.generateColorHsl(
+                  (thread.author | getUserNameById | async)
+                    ?.displayName
+                )
+              }" [src]="(thread.author | getUserNameById | async)?.photoURL ?? 'assets/img/image-placeholder.png'" />
+                <div class="message-container-right">
+                    <div class="user-and-time">
+                        <span>{{ (thread.author | getUserNameById | async)?.displayName }}</span>
+                        <!-- <span>{{ thread.timestamp | date:'HH:mm' }} Uhr</span> -->
+
+                        <span
+                            *ngIf="thread.timestamp > channelService.getLastMidnightTime && channelService.currentDate < channelService.getNextMidnightTime">
+                            vor {{ channelService.currentDate - thread.timestamp |
+                            date:'m'}}
+                            Minuten
+                        </span>
+
+                        <!-- shows last answer from yesterday with hours -->
+                        <span
+                            *ngIf="thread.timestamp > channelService.getDayBeforeMidnightTime && channelService.currentDate < channelService.getLastMidnightTime">
+                            vor {{ channelService.currentDate - thread.timestamp |
+                            date:'H'}} Stunden
+                        </span>
+
+                        <!-- shows last answer from last days -->
+                        <span
+                            *ngIf="thread.timestamp < channelService.getDayBeforeMidnightTime || thread.timestamp < channelService.getLastMidnightTime">
+                            vor {{ channelService.getLastMidnightTime - thread.timestamp |
+                            date:'d'}} Tagen
+                        </span>
+                    </div>
+                    <quill-view class="message-text" [content]="thread.message" format="html" theme="snow"></quill-view>
+
+                    <div class="options-container">
+                        <!-- <button matTooltip="Im Thread antworten" [matTooltipPosition]="'above'"
+                            (click)="channelService.openThread(i)">
+                            <mat-icon>chat</mat-icon>
+                        </button> -->
+                        <!-- <button>
+                            <mat-icon>chat</mat-icon>
+                        </button>
+                        <button>
+                            <mat-icon>chat</mat-icon>
+                        </button>
+                        <button>
+                            <mat-icon>chat</mat-icon>
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="message-container" *ngFor="let replies of ownThreads[i].replies">
+                <img class="profile-picture-content" height="45" width="45" [ngStyle]="{
+                'background-color': usersService.generateColorHsl(
+                  (replies.author | getUserNameById | async)
+                    ?.displayName
+                )
+              }" [src]="(thread.author | getUserNameById | async)?.photoURL ?? 'assets/img/image-placeholder.png'" />
+                <div class="message-container-right">
+                    <div class="user-and-time">
+                        <span>{{ (replies.author | getUserNameById | async)?.displayName }}</span>
+                        <!-- <span>{{ replies.timestamp | date:'HH:mm' }} Uhr</span> -->
+
+                        <span
+                            *ngIf="replies.timestamp > channelService.getLastMidnightTime && channelService.currentDate < channelService.getNextMidnightTime">
+                            vor {{ channelService.currentDate - replies.timestamp |
+                            date:'m'}}replies
+                            Minuten
+                        </span>
+
+                        <!-- shows last answer from yesterday with hours -->
+                        <span
+                            *ngIf="replies.timestamp > channelService.getDayBeforeMidnightTime && channelService.currentDate < channelService.getLastMidnightTime">
+                            vor {{ channelService.currentDate - replies.timestamp |
+                            date:'H'}} Stunden
+                        </span>
+
+                        <!-- shows last answer from last days -->
+                        <span
+                            *ngIf="replies.timestamp < channelService.getDayBeforeMidnightTime || replies.timestamp < channelService.getLastMidnightTime">
+                            vor {{ channelService.getLastMidnightTime - replies.timestamp |
+                            date:'d'}} Tagen
+                        </span>
+                    </div>
+                    <quill-view class="message-text" [content]="replies.message" format="html"
+                        theme="snow"></quill-view>
+
+                    <div class="options-container">
+                        <!-- <button matTooltip="Im Thread antworten" [matTooltipPosition]="'above'"
+                            (click)="channelService.openThread(i)">
+                            <mat-icon>chat</mat-icon>
+                        </button> -->
+                        <!-- <button>
+                            <mat-icon>chat</mat-icon>
+                        </button>
+                        <button>
+                            <mat-icon>chat</mat-icon>
+                        </button>
+                        <button>
+                            <mat-icon>chat</mat-icon>
+                        </button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

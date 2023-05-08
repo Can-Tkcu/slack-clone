@@ -14,7 +14,7 @@
         <!-- threads -->
 
         <div class="channel-sidebar-container border-bottom">
-            <div class="channel-sidebar-name">
+            <div class="channel-sidebar-name" [routerLink]="['/home/threads-list']" routerLinkActive="active" (click)="channelService.threadOpen = false">
                 <mat-icon>chat</mat-icon>
                 <span>Threads</span>
             </div>
@@ -45,7 +45,7 @@
         <!-- content -->
         <div class="channel-content">
             <router-outlet></router-outlet>
-            <app-textbox id="text-content"></app-textbox>
+            <app-textbox *ngIf="checkRoute()" id="text-content"></app-textbox>
         </div>
 
         <!-- thread -->

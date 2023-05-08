@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,7 +15,10 @@ export class DialogCreateChannelComponent {
   channels$: Observable<any>;
   channelsList: Array<any>;
 
-  constructor(public dialog: MatDialog, private firestore: AngularFirestore) { }
+  constructor(
+    public dialog: MatDialog,
+    private firestore: AngularFirestore,
+    private router: Router) { }
 
   addChannel() {
     this.firestore
@@ -26,6 +30,7 @@ export class DialogCreateChannelComponent {
       .then((result: any) => {
         console.log('Added new Channel', result)
         this.dialog.closeAll();
+        this.router.navigate(['/home/channel/' + result.id])
       });
   }
 }
