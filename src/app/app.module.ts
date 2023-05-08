@@ -49,6 +49,7 @@ import { getStorage } from 'firebase/storage';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { MatChipsModule } from '@angular/material/chips';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -67,7 +68,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     ThreadContentComponent,
     DirectMessagesContentComponent,
     UserDetailComponent,
-    GetUserNameByIdPipe
+    GetUserNameByIdPipe,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
