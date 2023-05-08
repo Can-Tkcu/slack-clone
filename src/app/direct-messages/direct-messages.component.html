@@ -28,7 +28,7 @@
       routerLinkActive="active"
     >
       <img
-        class="profile-picture-content"
+        class="profile-picture"
         [ngStyle]="{ 'background-color': usersService.generateColorHsl(
                       (channel.users.recipientID | getUserNameById | async)?.displayName
                    )}"
