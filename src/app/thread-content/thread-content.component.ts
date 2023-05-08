@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { ChannelContentComponent } from '../channel-content/channel-content.component';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ChannelService } from '../services/channel.service';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-thread-content',
@@ -11,6 +12,8 @@ import { ChannelService } from '../services/channel.service';
 export class ThreadContentComponent {
   // channels_ = [];
 
-  constructor(public channelService: ChannelService) { }
+  constructor(
+    public channelService: ChannelService,
+    public usersService: UsersService) { }
 
 }

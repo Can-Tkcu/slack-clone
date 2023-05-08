@@ -88,22 +88,22 @@ export class ChannelContentComponent implements OnInit {
   }
 
 
-  @HostListener('document:mousewheel', ['$event'])
-  handleScroll() {
-    const windowScroll = window.pageYOffset;
-    // console.log(window.pageYOffset)
-    if (this.menuPosition === 0) {
-      // debugger;
-      console.log(this.menuPosition)
-      // console.log(this.menuPosition)
-      this.sticky = true;
-    } else {
-      this.sticky = false;
-    }
-    // console.log('scroll')
-    // console.log(this.menuPosition)
-    // console.log(this.container.nativeElement.scrollTop)
-  }
+  // @HostListener('document:mousewheel', ['$event'])
+  // handleScroll() {
+  //   const windowScroll = window.pageYOffset;
+  //   // console.log(window.pageYOffset)
+  //   if (this.menuPosition === 0) {
+  //     // debugger;
+  //     console.log(this.menuPosition)
+  //     // console.log(this.menuPosition)
+  //     this.sticky = true;
+  //   } else {
+  //     this.sticky = false;
+  //   }
+  //   // console.log('scroll')
+  //   // console.log(this.menuPosition)
+  //   // console.log(this.container.nativeElement.scrollTop)
+  // }
 
   getDate(timestamp) {
     let date = new Date(timestamp);

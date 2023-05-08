@@ -19,11 +19,15 @@ import 'quill-emoji/dist/quill-emoji.js';
 import { ActivatedRoute } from '@angular/router';
 import { DirectMessagesContentComponent } from '../direct-messages-content/direct-messages-content.component';
 import { ChannelContentComponent } from '../channel-content/channel-content.component';
+import { GetUserNameByIdPipe } from '../get-user-name-by-id.pipe';
 
 @Component({
   selector: 'app-textbox',
   templateUrl: './textbox.component.html',
   styleUrls: ['./textbox.component.scss'],
+  providers: [
+    GetUserNameByIdPipe
+  ]
 })
 export class TextboxComponent implements OnInit {
   public focusTextbox: boolean = false;
@@ -64,12 +68,12 @@ export class TextboxComponent implements OnInit {
     public channelService: ChannelService,
     private dmService: DirectMessagesService,
     private firestore: AngularFirestore,
-    public route: ActivatedRoute
+    public route: ActivatedRoute,
+    private pipe: GetUserNameByIdPipe
   ) {}
 
 
   ngOnInit(): void {
-    console.log(this.route.firstChild.url['value'][0].path)
 
   }
 
@@ -115,7 +119,7 @@ export class TextboxComponent implements OnInit {
       //     (box?.firstElementChild?.lastElementChild?.firstElementChild as HTMLElement)?.focus();
       //   }
       // });
-      console.log(this.route.firstChild)
+      // console.log(this.route.firstChild)
     }
   }
 
@@ -124,11 +128,12 @@ export class TextboxComponent implements OnInit {
   }
 
   showCorrectPlaceholder() {
-    if (this.checkRoute && this.route.firstChild.component == ChannelContentComponent) {
-      return 'Nachricht an #' + this.channelService.channel.name;
-    } else {
-      return '';
-    }
+    return 'Nachricht an #' + this.channelService.channel.name;
+  }
+
+  showOtherPlaceholder() {
+    // console.log(this.pipe.transform(this.dmService.currentChannelRecipient))
+    return 'Nachricht an ' + this.pipe.transform(this.dmService.currentChannelRecipient);
   }
 
   /**

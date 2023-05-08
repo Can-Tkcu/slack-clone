@@ -103,7 +103,8 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
     MatChipsModule,
   ],
   providers: [
-    { provide: FIREBASE_OPTIONS, useValue: environment.firebase }
+    { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
+    GetUserNameByIdPipe
   ],
   bootstrap: [AppComponent],
 })

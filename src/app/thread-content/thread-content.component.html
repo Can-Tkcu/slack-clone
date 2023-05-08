@@ -13,7 +13,13 @@
     <div class="message-container">
         <!-- <div> -->
             <!-- <mat-icon>{{ channelService.threadContent.authorPic }}</mat-icon> -->
-            <img class="profile-picture" height="45" width="45"
+            <img class="profile-picture-content" height="45" width="45"
+            [ngStyle]="{
+                'background-color': usersService.generateColorHsl(
+                  (channelService.threadContent.author | getUserNameById | async)
+                    ?.displayName
+                )
+              }"
                 [src]="(channelService.threadContent.author | getUserNameById | async)?.photoURL ?? 'assets/img/image-placeholder.png'" />
         <!-- </div> -->
         <div class="message-container-right">
@@ -58,7 +64,13 @@
     <div class="message-container"
         *ngFor="let replies of channelService.channel.thread[this.channelService.threadContentIndex].replies">
         <div>
-            <img class="profile-picture" height="45" width="45"
+            <img class="profile-picture-content" height="45" width="45"
+            [ngStyle]="{
+                'background-color': usersService.generateColorHsl(
+                  (replies.author | getUserNameById | async)
+                    ?.displayName
+                )
+              }"
                 [src]="(replies.author | getUserNameById | async)?.photoURL ?? 'assets/img/image-placeholder.png'" />
         </div>
         <div class="message-container-right">
