@@ -88,7 +88,7 @@ export class ChannelContentComponent implements OnInit {
   }
 
 
-  @HostListener('document:mousewheel', ['$event'])
+  // @HostListener('document:mousewheel', ['$event'])
   handleScroll() {
     const windowScroll = window.pageYOffset;
     // console.log(window.pageYOffset)
