@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogCreateDirectMessageComponent } from '../dialog-create-direct-message/dialog-create-direct-message.component';
-import { DirectMessagesService } from '../services/direct-messages.service';
-import { UsersService } from '../services/users.service';
+import { DirectMessagesService } from '../../services/direct-messages.service';
+import { UsersService } from '../../services/users.service';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ChannelService } from '../services/channel.service';
+import { ChannelService } from '../../services/channel.service';
 
 @Component({
   selector: 'app-direct-messages',

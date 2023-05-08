@@ -7,7 +7,12 @@
 
 
 <div class="content-container" #contentContainer>
-    <div *ngFor="let thread of channelService.channel.thread; let i = index; let last = last" #messages>
+    <div
+    [class.d-none]="
+        !thread.message.includes(channelService.searchValue) && 
+        !(thread.author | getUserNameById | async)?.displayName.includes(channelService.searchValue)
+            "
+     *ngFor="let thread of channelService.channel.thread; let i = index; let last = last" #messages>
         {{ last ? scrollToBottom() : ''}}
         <div class="message-list-day-divider" *ngIf="isDifferentDay(i)" id="message-list-day-divider(i)">
             <div class="divider-line"></div>

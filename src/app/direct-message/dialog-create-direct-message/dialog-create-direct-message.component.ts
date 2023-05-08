@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
-import { UsersService } from '../services/users.service';
-import { DirectMessagesService } from '../services/direct-messages.service';
+import { UsersService } from '../../services/users.service';
+import { DirectMessagesService } from '../../services/direct-messages.service';
 @Component({
   selector: 'app-dialog-create-direct-message',
   templateUrl: './dialog-create-direct-message.component.html',

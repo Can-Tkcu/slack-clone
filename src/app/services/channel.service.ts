@@ -14,6 +14,7 @@ export class ChannelService {
   threadContentIndex: number;
   currentChannelThread: any;
   // currentChannel: any = [];
+  searchValue: string = '';
   public threadOpen: boolean = false;
   currentUserName: any;
   currentDate = Date.now();
@@ -38,6 +39,7 @@ export class ChannelService {
       // console.log(channel)
     });
   }
+
 
   openThread(index) {
     this.threadOpen = true;

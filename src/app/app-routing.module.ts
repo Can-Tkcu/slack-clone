@@ -4,9 +4,9 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './services/auth.guard';
-import { ChannelContentComponent } from './channel-content/channel-content.component';
-import { DirectMessagesComponent } from './direct-messages/direct-messages.component';
-import { DirectMessagesContentComponent } from './direct-messages-content/direct-messages-content.component';
+import { ChannelContentComponent } from './channel/channel-content/channel-content.component';
+import { DirectMessagesComponent } from './direct-message/direct-messages/direct-messages.component';
+import { DirectMessagesContentComponent } from './direct-message/direct-messages-content/direct-messages-content.component';
 import { UserListComponent } from './user-list/user-list.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { DirectMessagesService } from '../services/direct-messages.service';
+import { DirectMessagesService } from '../../services/direct-messages.service';
 import { ActivatedRoute } from '@angular/router';
-import { UsersService } from '../services/users.service';
+import { UsersService } from '../../services/users.service';
+import { ChannelService } from 'src/app/services/channel.service';
 
 @Component({
   selector: 'app-direct-messages-content',
@@ -14,7 +15,8 @@ export class DirectMessagesContentComponent implements OnInit {
   constructor(
     public dmService: DirectMessagesService,
     private route: ActivatedRoute,
-    public usersService: UsersService
+    public usersService: UsersService,
+    public channelService: ChannelService
   ) {}
 
   async ngOnInit(): Promise<void> {

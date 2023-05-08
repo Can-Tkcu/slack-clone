@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { DirectMessagesService } from '../services/direct-messages.service';
 import { UsersService } from '../services/users.service';
+import { ChannelService } from '../services/channel.service';
 
 @Component({
   selector: 'app-user-list',
@@ -10,7 +11,11 @@ import { UsersService } from '../services/users.service';
 export class UserListComponent {
 
 
-  constructor(public dmService: DirectMessagesService, public usersService: UsersService) {}
+  constructor(
+    public dmService: DirectMessagesService,
+    public usersService: UsersService,
+    public channelService: ChannelService
+    ) {}
 
   async getId() {
     setTimeout(() => {

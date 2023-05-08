@@ -37,6 +37,10 @@
   <div
     class="message-container"
     *ngFor="let message of dmService.currentChannelMessages; let i = index"
+    [class.d-none]="
+        !message.content.includes(channelService.searchValue) && 
+        !(message.author | getUserNameById | async)?.displayName.includes(channelService.searchValue)
+            "
   >
     <div>
       <img
@@ -56,9 +60,7 @@
     </div>
     <div class="message-container-right">
       <div class="user-and-time">
-        <span>{{
-          (message.author | getUserNameById | async)?.displayName
-        }}</span>
+        <span>{{ (message.author | getUserNameById | async)?.displayName }}</span>
         <span>{{ message.timestamp | date : "HH:mm" }} Uhr</span>
       </div>
       <quill-view

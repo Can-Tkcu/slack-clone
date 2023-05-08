@@ -9,6 +9,9 @@
   <div
     class="message-container pointer"
     *ngFor="let user of usersService.users; let i = index"
+    [class.d-none]="
+        !(user.uid | getUserNameById | async)?.displayName.includes(channelService.searchValue)
+            "
     (click)="dmService.createDmChannel(user.uid, user.displayName)"
     matTooltip="Write this person a message."
   >
@@ -16,7 +19,8 @@
       <img
         class="profile-picture-content"
         [ngStyle]="{
-          'background-color': usersService.generateColorHsl(
+          'background-color': 
+            usersService.generateColorHsl(
             (user.uid | getUserNameById | async)?.displayName
           )
         }"

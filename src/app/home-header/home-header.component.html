@@ -1,6 +1,7 @@
 <mat-toolbar class="header">
   <div class="searchbar">
-    <input type="text" placeholder="Workspace durchsuchen" />
+    <input type="text" [(ngModel)]="channelService.searchValue"  placeholder="Workspace durchsuchen" />
+    <mat-icon class="margin-right" *ngIf="channelService.searchValue != ''" (click)="clearInput()">delete</mat-icon>
     <mat-icon>search</mat-icon>
   </div>
         <img
@@ -13,7 +14,7 @@
           width="40"
           [src]="usersService.currentUserData.photoURL ?? 'assets/img/image-placeholder.png'"
       />
-      <div *ngIf="usersService.currentUserData" [ngClass]="{'logged-in': usersService.currentUserData.status == true ? 'logged-out': usersService.currentUserData.status == false}"></div>
+      <div *ngIf="usersService.currentUserData" [ngClass]="{'logged-in': usersService.currentUserData.status == true}"></div>
 
 
 

@@ -1,8 +1,8 @@
 import { Component, ElementRef, HostListener, OnInit, Query, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
-import { ChannelService } from '../services/channel.service';
-import { UsersService } from '../services/users.service';
+import { ChannelService } from '../../services/channel.service';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-channel-content',
