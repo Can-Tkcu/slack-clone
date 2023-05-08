@@ -125,3 +125,32 @@
   .d-none {
     display: none;
   }
+
+  .message-list-day-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    &:first-of-type {
+        padding-top: 16px;
+    }
+}
+
+  .divider-line {
+    display: flex;
+    border: none;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    width: 75%;
+    margin-left: auto;
+}
+
+::ng-deep .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) {
+    background-color: var(--primary) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+::ng-deep .mat-mdc-standard-chip:not(.mdc-evolution-chip--disabled) .mdc-evolution-chip__text-label {
+    font-size: 13px;
+    color: #D1D2D3 !important;
+    font-weight: 500;
+}

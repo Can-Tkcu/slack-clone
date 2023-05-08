@@ -8,6 +8,7 @@ import { ChannelContentComponent } from './channel/channel-content/channel-conte
 import { DirectMessagesComponent } from './direct-message/direct-messages/direct-messages.component';
 import { DirectMessagesContentComponent } from './direct-message/direct-messages-content/direct-messages-content.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { ThreadsListComponent } from './threads-list/threads-list.component';
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
