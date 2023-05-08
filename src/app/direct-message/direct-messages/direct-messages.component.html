@@ -29,9 +29,11 @@
     >
       <img
         class="profile-picture"
-        [ngStyle]="{ 'background-color': usersService.generateColorHsl(
-                      (channel.users.recipientID | getUserNameById | async)?.displayName
-                   )}"
+        [ngStyle]="{
+          'background-color': usersService.generateColorHsl(
+            (channel.users.recipientID | getUserNameById | async)?.displayName
+          )
+        }"
         mat-button
         height="23"
         width="23"

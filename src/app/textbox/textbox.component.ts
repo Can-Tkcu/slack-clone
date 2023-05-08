@@ -17,8 +17,8 @@ import {
 } from 'ngx-quill/public-api';
 import 'quill-emoji/dist/quill-emoji.js';
 import { ActivatedRoute } from '@angular/router';
-import { DirectMessagesContentComponent } from '../direct-messages-content/direct-messages-content.component';
-import { ChannelContentComponent } from '../channel-content/channel-content.component';
+import { DirectMessagesContentComponent } from '../direct-message/direct-messages-content/direct-messages-content.component';
+import { ChannelContentComponent } from '../channel/channel-content/channel-content.component';
 import { GetUserNameByIdPipe } from '../get-user-name-by-id.pipe';
 
 @Component({

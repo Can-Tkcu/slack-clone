@@ -1,19 +1,29 @@
-import { Injectable, OnInit } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Injectable } from '@angular/core';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { UsersService } from './users.service';
+import { MatDialog } from '@angular/material/dialog';
 @Injectable({
   providedIn: 'root',
 })
 export class DirectMessagesService {
   channelID: string;
+  selectedChannelID: string;
   currentChannelMessages: any;
   currentChannelRecipient: any;
   currentChannelPayload: any;
   currentChannelData: any;
   allDmChannels: Array<any> = [];
 
-  constructor(private afs: AngularFirestore, private route: Router, private usersService: UsersService) {}
+  constructor(
+    private afs: AngularFirestore,
+    private route: Router,
+    private usersService: UsersService,
+    private dialog: MatDialog
+  ) {}
 
   /**
    * Retrieves all chats from the data base
@@ -40,7 +50,7 @@ export class DirectMessagesService {
         channels.forEach((channel) => {
           if (channel.users.senderID == this.usersService.currentUserDataID)
             this.allDmChannels.push(channel);
-            this.sortUsersByName();
+          this.sortUsersByName();
         });
       });
   }
@@ -61,5 +71,28 @@ export class DirectMessagesService {
         return 0;
       }
     });
+  }
+
+  async createDmChannel(uid: string, name: string) {
+    const channelRef: AngularFirestoreCollection =
+      this.afs.collection('direct-messages');
+
+    const channelData = {
+      users: {
+        senderID: this.usersService.currentUserData.uid,
+        senderName: this.usersService.currentUserData.displayName,
+        recipientID: uid,
+        recipientName: name,
+      },
+      payload: {
+        messages: [],
+      },
+    };
+
+    const createdChannel = channelRef.add(channelData).then((channel) => {
+      this.route.navigate(['/home/direct-messages/' + channel.id]);
+    });
+
+    return this.dialog.closeAll();
   }
 }

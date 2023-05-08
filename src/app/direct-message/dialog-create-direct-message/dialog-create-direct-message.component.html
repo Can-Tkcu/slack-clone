@@ -1,0 +1,48 @@
+<div class="dialog-header">
+  <h1>Leute zum Workspace einladen</h1>
+  <div class="icon-container">
+    <mat-icon mat-button mat-dialog-close>close</mat-icon>
+  </div>
+</div>
+
+<h4>An:</h4>
+<form
+  (ngSubmit)="
+    dmService.createDmChannel(dmForm.value.uid, dmForm.value.displayName)
+  "
+  [formGroup]="dmForm"
+  id="dm-form"
+  class="create-channel-input create-direct-message"
+>
+  <mat-form-field class="form-field-direct-message" appearance="fill">
+    <mat-label>Name</mat-label>
+    <input
+      type="text"
+      placeholder="Pick one"
+      aria-label="Name"
+      matInput
+      formControlName="displayName"
+      [formControl]="myControl"
+      [matAutocomplete]="auto"
+    />
+    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+      <mat-option
+        (click)="selectUserId(user)"
+        *ngFor="let user of filteredOptions | async"
+        [value]="user['displayName']"
+      >
+        {{ user["displayName"] }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</form>
+
+<p class="dialog-description">
+  In Channels werden Unterhaltungen rund um ein Thema geführt. Verwende einen
+  Namen, der einfach zu finden und zu verstehen ist.
+</p>
+<div mat-dialog-actions class="btn-container">
+  <button form="dm-form" ng mat-button class="btn" disabled="false">
+    Senden
+  </button>
+</div>

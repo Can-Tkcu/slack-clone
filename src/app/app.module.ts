@@ -20,8 +20,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MainComponent } from './main/main.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { ChannelsComponent } from './channels/channels.component';
-import { DirectMessagesComponent } from './direct-messages/direct-messages.component';
+import { ChannelsComponent } from './channel/channels/channels.component';
+import { DirectMessagesComponent } from './direct-message/direct-messages/direct-messages.component';
 import { RegisterComponent } from './register/register.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -30,16 +30,16 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 import { FIREBASE_OPTIONS } from '@angular/fire/compat';
 import { MatDialogModule } from '@angular/material/dialog';
-import { DialogCreateChannelComponent } from './dialog-create-channel/dialog-create-channel.component';
-import { DialogCreateDirectMessageComponent } from './dialog-create-direct-message/dialog-create-direct-message.component';
+import { DialogCreateChannelComponent } from './channel/dialog-create-channel/dialog-create-channel.component';
+import { DialogCreateDirectMessageComponent } from './direct-message/dialog-create-direct-message/dialog-create-direct-message.component';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireDatabaseModule } from '@angular/fire/compat/database';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { TextboxComponent } from './textbox/textbox.component';
-import { ChannelContentComponent } from './channel-content/channel-content.component';
+import { ChannelContentComponent } from './channel/channel-content/channel-content.component';
 import { ThreadContentComponent } from './thread-content/thread-content.component';
 import { FormsModule } from '@angular/forms';
-import { DirectMessagesContentComponent } from './direct-messages-content/direct-messages-content.component';
+import { DirectMessagesContentComponent } from './direct-message/direct-messages-content/direct-messages-content.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { QuillModule } from 'ngx-quill'
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -50,6 +50,7 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { MatChipsModule } from '@angular/material/chips';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ThreadsListComponent } from './threads-list/threads-list.component';
+import { UserListComponent } from './user-list/user-list.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import { ThreadsListComponent } from './threads-list/threads-list.component';
     DirectMessagesContentComponent,
     UserDetailComponent,
     GetUserNameByIdPipe,
+    UserListComponent,
     ThreadsListComponent
   ],
   imports: [

@@ -4,6 +4,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
 import { UsersService } from '../services/users.service';
+import { ChannelService } from '../services/channel.service';
 @Component({
   selector: 'app-home-header',
   templateUrl: './home-header.component.html',
@@ -14,11 +15,18 @@ export class HomeHeaderComponent {
     public afAuth: Auth,
     private afs: AngularFirestore,
     private dialog: MatDialog,
-    public usersService: UsersService
+    public usersService: UsersService,
+    public channelService: ChannelService
   ) {}
+
 
   openDialog() {
     this.dialog.open(UserDetailComponent);
+  }
+
+
+  clearInput() {
+    this.channelService.searchValue = '';
   }
 
   logout(): void {
