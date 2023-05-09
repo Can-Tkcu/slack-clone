@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UsersService } from '../services/users.service';
 import { ChannelService } from '../services/channel.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { where } from 'firebase/firestore';
 
 
 @UntilDestroy()
@@ -38,14 +39,19 @@ export class ThreadsListComponent implements OnInit {
   getOwnThreads() {
     this.ownThreads = [];
     // this.ownChannels = [];
-    this.allChannels.forEach(e => {
+    this.allChannels.forEach((e, i)  => {
       e.thread?.forEach(element => {
-        // console.log(e)
         // console.log(element)
-        if (element.author.match(this.usersService.currentUserDataID)) {
-          this.ownThreads.push(element);
-          this.channelNames.push(e.name);
+        if (element.author == this.usersService.currentUserDataID) {
+          // console.log(e)
+          this.ownThreads.push({
+            elem: element,
+            name: e.name
+          });
+          // console.log(this.ownThreads)
+          // this.channelNames.push(e.name);
           this.ownThreads.sort(function (x, y) {
+            
             return y.timestamp - x.timestamp;
           });
 

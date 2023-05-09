@@ -67,6 +67,7 @@ export class UsersService {
    * function to sort users by name
    */
   sortUsers(_users: DocumentData[]) {
+    this.removeGuest(_users)
     this.users = _users;
     this.users.sort((a, b) => {
       if (a.displayName.toLowerCase() < b.displayName.toLowerCase()) {
@@ -77,6 +78,14 @@ export class UsersService {
         return 0;
       }
     });
+  }
+
+  removeGuest(_users: DocumentData[]) {
+    _users.splice(
+      _users.findIndex((user) => 
+        user["uid"] == "Br68JJNC4PYPLrkI3iboILMpFYZ2"
+      )
+    , 1);
   }
 
   updateUser(user: any): Observable<void> {
