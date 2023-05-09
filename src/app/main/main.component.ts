@@ -6,26 +6,27 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.scss']
+  styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit {
   public currentRoute: any;
 
-constructor(
-  public usersService: UsersService, 
-  public channelService: ChannelService,
-  private router: Router
-  ) {
-    
-  }
+  constructor(
+    public usersService: UsersService,
+    public channelService: ChannelService,
+    private router: Router
+  ) {}
 
-
-ngOnInit(): void {
-    this.usersService.getAllUsers()
-    this.usersService.getCurrentUser()
+  ngOnInit(): void {
+    this.usersService.getAllUsers();
+    this.usersService.getCurrentUser();
   }
 
   checkRoute() {
-    return (this.router.url === '/home' || this.router.url === '/home/threads-list') ? false : true;
+    return this.router.url === '/home' ||
+      this.router.url === '/home/threads-list' ||
+      this.router.url === '/home/user-list'
+      ? false
+      : true;
   }
 }

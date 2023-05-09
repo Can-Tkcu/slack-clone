@@ -6,7 +6,12 @@
 
 <div class="content-container" #contentContainer>
 
-    <div *ngFor="let thread of ownThreads; let i = index; let last = last">
+    <div *ngFor="let thread of ownThreads; let i = index; let last = last"
+    [class.d-none]="
+    !thread.message.toLowerCase().includes(channelService.searchValue.toLowerCase()) && 
+    !(thread.author | getUserNameById | async)?.displayName.toLowerCase().includes(channelService.searchValue.toLowerCase())
+        "
+    >
         <div class="threads-heading">
             <div class="channel-elements">
                 <mat-icon>numbers</mat-icon>

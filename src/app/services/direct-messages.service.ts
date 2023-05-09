@@ -6,6 +6,9 @@ import {
 import { Router } from '@angular/router';
 import { UsersService } from './users.service';
 import { MatDialog } from '@angular/material/dialog';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+
+@UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })
@@ -33,6 +36,7 @@ export class DirectMessagesService {
       .collection('direct-messages')
       .doc(this.channelID)
       .valueChanges()
+      .pipe(untilDestroyed(this))
       .subscribe((channel: any) => {
         this.currentChannelMessages = channel.payload.messages;
         this.currentChannelRecipient = channel.users.recipientID;
@@ -45,6 +49,7 @@ export class DirectMessagesService {
     this.afs
       .collection('direct-messages')
       .valueChanges({ idField: 'dmChannelId' })
+      .pipe(untilDestroyed(this))
       .subscribe((channels: any) => {
         this.allDmChannels = [];
         channels.forEach((channel) => {
@@ -89,7 +94,7 @@ export class DirectMessagesService {
       },
     };
 
-    const createdChannel = channelRef.add(channelData).then((channel) => {
+    channelRef.add(channelData).then((channel) => {
       this.route.navigate(['/home/direct-messages/' + channel.id]);
     });
 

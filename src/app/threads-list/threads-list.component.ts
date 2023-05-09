@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UsersService } from '../services/users.service';
 import { ChannelService } from '../services/channel.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+
+@UntilDestroy()
 @Component({
   selector: 'app-threads-list',
   templateUrl: './threads-list.component.html',
@@ -24,6 +27,7 @@ export class ThreadsListComponent implements OnInit {
     this.firestore
     .collection('channels')
     .valueChanges({idField: 'channelId'})
+    .pipe(untilDestroyed(this))
     .subscribe((channels: any) => {
       // console.log(channels)
       this.allChannels = channels;

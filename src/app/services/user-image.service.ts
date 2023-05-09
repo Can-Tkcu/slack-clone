@@ -10,7 +10,6 @@ export class UserImageService {
   constructor(private storage: Storage) { }
 
 
-
   uploadImage(image: File, path: string): Observable<string> {
     const storageRef = ref(this.storage, path);
     const uploadTask = from(uploadBytes(storageRef, image))

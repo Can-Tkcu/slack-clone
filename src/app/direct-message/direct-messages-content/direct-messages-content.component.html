@@ -28,8 +28,8 @@
 <div class="content-container">
 
   <div *ngFor="let message of dmService.currentChannelMessages; let i = index; let last = last;" [class.d-none]="
-  !message.content.includes(channelService.searchValue) && 
-  !(message.author | getUserNameById | async)?.displayName.includes(channelService.searchValue)
+  !message.content.toLowerCase().includes(channelService.searchValue.toLowerCase()) && 
+  !(message.author | getUserNameById | async)?.displayName.toLowerCase().includes(channelService.searchValue.toLowerCase())
       ">
     <div class="message-list-day-divider" *ngIf="channelService.isDifferentDay(i, dmService.currentChannelMessages)"
       id="">

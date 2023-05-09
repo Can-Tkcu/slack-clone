@@ -20,6 +20,7 @@
         routerLinkActive="active"
         [routerLink]="['/home/user-list/']"
         class="channel-sidebar-name"
+        (click)="channelService.threadOpen = false"
       >
         <mat-icon>group</mat-icon>
         <span>Users</span>

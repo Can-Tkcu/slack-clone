@@ -3,7 +3,9 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { ChannelService } from '../../services/channel.service';
 import { UsersService } from '../../services/users.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-channel-content',
   templateUrl: './channel-content.component.html',
@@ -32,7 +34,7 @@ export class ChannelContentComponent implements OnInit {
     public usersService: UsersService) { }
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe(paramMap => {
+    this.route.paramMap.pipe(untilDestroyed(this)).subscribe(paramMap => {
       this.channelService.channelId = paramMap.get('id');
       // console.log('Got ID', this.channelService.channelId);
       this.channelService.getChannelDetails();
@@ -49,7 +51,7 @@ export class ChannelContentComponent implements OnInit {
     //   console.log('hallo')
     //   console.log(this.menuPosition)
     // }, 5000);
-    this.chips.changes.subscribe(() => {
+    this.chips.changes.pipe(untilDestroyed(this)).subscribe(() => {
       let chip = this.chips.toArray().map(x => x.nativeElement.offsetTop);
       // console.log(chip);
       // this.menuPosition = chip;
@@ -72,7 +74,7 @@ export class ChannelContentComponent implements OnInit {
     // console.log(this.menuPosition)
     // console.log(this.menuElement.first)
     this.scrollToBottom();
-    this.messages.changes.subscribe(this.scrollToBottom);
+    this.messages.changes.pipe(untilDestroyed(this)).subscribe(this.scrollToBottom);
   }
 
   scrollToBottom = () => {

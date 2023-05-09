@@ -4,7 +4,9 @@ import { DialogCreateChannelComponent } from '../dialog-create-channel/dialog-cr
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ChannelService } from '../../services/channel.service';
+import { UntilDestroy } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Component({
   selector: 'app-channels',
   templateUrl: './channels.component.html',

@@ -2,8 +2,10 @@ import { Injectable, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from './users.service';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
 
+@UntilDestroy()
 @Injectable({
   providedIn: 'root'
 })
@@ -40,6 +42,7 @@ export class ChannelService {
     .collection('channels')
     .doc(this.channelId)
     .valueChanges()
+    .pipe(untilDestroyed(this))
     .subscribe((channel: any) => {
       this.channel = channel;
       this.currentChannelThread = channel.thread;

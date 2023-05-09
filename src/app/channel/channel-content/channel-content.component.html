@@ -9,8 +9,8 @@
 <div class="content-container" #contentContainer>
     <div
     [class.d-none]="
-        !thread.message.includes(channelService.searchValue) && 
-        !(thread.author | getUserNameById | async)?.displayName.includes(channelService.searchValue)
+        !thread.message.toLowerCase().includes(channelService.searchValue.toLowerCase()) && 
+        !(thread.author | getUserNameById | async)?.displayName.toLowerCase().includes(channelService.searchValue.toLowerCase())
             "
      *ngFor="let thread of channelService.channel.thread; let i = index; let last = last" #messages>
         {{ last ? scrollToBottom() : ''}}

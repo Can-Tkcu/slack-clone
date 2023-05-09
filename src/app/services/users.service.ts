@@ -1,5 +1,10 @@
 import { Injectable } from '@angular/core';
-import { getAuth, onAuthStateChanged, Auth, authState } from '@angular/fire/auth';
+import {
+  getAuth,
+  onAuthStateChanged,
+  Auth,
+  authState,
+} from '@angular/fire/auth';
 import { User } from '../models/user';
 import {
   DocumentData,
@@ -10,24 +15,27 @@ import {
   updateDoc,
 } from '@angular/fire/firestore';
 import { BehaviorSubject, Observable, from } from 'rxjs';
-import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
-import { reauthenticateWithCredential } from 'firebase/auth';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 
+@UntilDestroy()
 @Injectable({
   providedIn: 'root',
 })
 export class UsersService {
   public usersCollListener = new BehaviorSubject<any>({ users: [] });
   currentUserData: User;
-  currentUserDataID: any
+  currentUserDataID: any;
   users: any = [];
-  currentUser$ = authState(this.auth)
+  currentUser$ = authState(this.auth);
   userData: any;
-  color: any;
 
-  constructor(private afs: Firestore, private firestore: AngularFirestore, private auth: Auth) { }
+  constructor(
+    private afs: Firestore,
+    private firestore: AngularFirestore,
+    private auth: Auth
+  ) {}
 
-  
   async getCurrentUser() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
@@ -39,22 +47,21 @@ export class UsersService {
         .collection('users')
         .doc(this.currentUserDataID)
         .valueChanges()
+        .pipe(untilDestroyed(this))
         .subscribe((changes: any) => {
           this.currentUserData = changes;
         });
     });
   }
 
-
   getAllUsers(): any {
     const usersCollection = collection(this.afs, 'users');
     const users$ = collectionData(usersCollection, { idField: 'uid' });
-    users$.subscribe((_users) => {
+    users$.pipe(untilDestroyed(this)).subscribe((_users) => {
       this.usersCollListener.next({ users: _users });
-      this.sortUsers(_users)
+      this.sortUsers(_users);
     });
   }
-
 
   /**
    * function to sort users by name
@@ -72,12 +79,10 @@ export class UsersService {
     });
   }
 
-
   updateUser(user: any): Observable<void> {
     const ref = doc(this.afs, 'users', user.uid);
     return from(updateDoc(ref, { ...user }));
   }
-
 
   getHashOfString(str: any) {
     let hash = 0;
@@ -86,31 +91,26 @@ export class UsersService {
     }
     hash = Math.abs(hash);
     return hash;
-  };
-  
+  }
 
   normalizeHash(hash: any, min, max) {
     return Math.floor((hash % (max - min)) + min);
-  };
-  
+  }
 
   generateHSL(name: any) {
     const hash = this.getHashOfString(name);
     const h = this.normalizeHash(hash, 0, 360);
     const s = this.normalizeHash(hash, 0, 255);
-    const l = this.normalizeHash(hash, 0 , 255);
+    const l = this.normalizeHash(hash, 0, 255);
     return [h, s, l];
-  };
-  
+  }
 
   HSLtoString(hsl: any) {
     return `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`;
-  };
+  }
 
-  
   generateColorHsl(id: string) {
-    if(id !== null) 
-    return this.HSLtoString(this.generateHSL(id));
-    else return ""
-  };
+    if (id !== null) return this.HSLtoString(this.generateHSL(id));
+    else return '';
+  }
 }
