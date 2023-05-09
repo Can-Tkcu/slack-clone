@@ -356,6 +356,12 @@ h4 {
 .channel-sidebar-header {
   cursor: default;
 
+  img {
+    height: 36px;
+    width: 36px;
+    margin-right: 25px
+  }
+
   span {
       font-size: 18px;
       font-weight: 600;
