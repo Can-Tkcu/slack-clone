@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { ElementRef, Injectable, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from './users.service';
@@ -18,6 +18,7 @@ export class ChannelService {
   // currentChannel: any = [];
   searchValue: string = '';
   public threadOpen: boolean = false;
+  // @ViewChild('drawer') drawer: ElementRef;
   currentUserName: any;
   currentDate = Date.now();
   getDayBeforeMidnightTime = new Date().setHours(-24, 0, 0, 0);

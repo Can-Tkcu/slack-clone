@@ -5,26 +5,32 @@
 .channel-sidebar-name {
   z-index: 10;
   position: relative;
-  gap: 10px;
+  // gap: 10px;
+  // padding: 0 16px;
+}
+
+.direct-messages {
+  padding: 0 13px 1px;
+  gap: 5px;
 }
 
 .logged-in {
-  height: 10px;
-  width: 10px;
+  height: 8px;
+  width: 8px;
   border-radius: 100%;
   position: absolute;
-  top: 18px;
-  left: 33px;
+  top: 20px;
+  left: 31px;
   background-color: rgb(91 196 91);
 }
 
 .logged-out {
-  height: 10px;
-  width: 10px;
+  height: 8px;
+  width: 8px;
   border-radius: 100%;
   position: absolute;
-  top: 18px;
-  left: 33px;
+  top: 20px;
+  left: 31px;
   background-color: rgb(167, 167, 167);
 }
 

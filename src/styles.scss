@@ -69,6 +69,7 @@ body {
   border-radius: 5px;
   cursor: pointer;
   transition: all 125ms ease-in-out;
+  color: #FFFFFFB3;
 
   &:hover:not(.active){
     background-color: rgba(255, 255, 255, 0.2);
@@ -88,6 +89,8 @@ body {
   align-items: center;
   height: 28px;
   padding: 0 16px;
+  color: #FFFFFFB3;
+
 
   span {
     display: flex;
@@ -136,7 +139,7 @@ body {
 
 .no-hover {
   &:hover {
-    background-color: unset;
+    background-color: unset !important;
   }
 }
 
@@ -359,7 +362,7 @@ h4 {
   img {
     height: 36px;
     width: 36px;
-    margin-right: 25px
+    margin-right: 10px
   }
 
   span {
@@ -483,6 +486,7 @@ h2 {
 .message-container-right {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
 .user-and-time {
@@ -525,4 +529,36 @@ h2 {
 
 .active {
   background-color: var(--mint);
+  color: white;
+}
+
+.sidenav-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  padding: 2px;
+  background-color: transparent;
+  border: none;
+  transition: all 125ms ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 125ms ease-in-out;
+  }
+
+  mat-icon {
+    margin: 0;
+    height: 30px;
+    width: 30px;
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 1354px) {
+  .thread-content {
+      width: 385px;
+  }
+
 }

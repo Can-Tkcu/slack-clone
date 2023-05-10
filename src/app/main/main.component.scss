@@ -1,0 +1,21 @@
+.channel-sidebar-header {
+    display: flex;
+    align-items: center;
+    padding-left: 6px;
+}
+
+.header-logo {
+    padding: 12px 8px;
+}
+
+@media (max-width: 771px) {
+    #thread-content {
+       position: absolute;
+       top: 0;
+       left: 0;
+       right: 0;
+       bottom: 0;
+       width: 100%;
+       background-color: var(--primary);
+    }
+}

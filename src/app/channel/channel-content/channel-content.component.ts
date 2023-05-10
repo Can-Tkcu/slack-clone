@@ -1,9 +1,11 @@
-import { Component, ElementRef, HostListener, OnInit, Query, QueryList, ViewChild, ViewChildren } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Query, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { ChannelService } from '../../services/channel.service';
 import { UsersService } from '../../services/users.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { SidebarService } from 'src/app/services/sidebar.service';
+
 
 @UntilDestroy()
 @Component({
@@ -12,26 +14,20 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
   styleUrls: ['./channel-content.component.scss']
 })
 export class ChannelContentComponent implements OnInit {
-  // channelId = '';
-  // public channel: any = [];
-  // currentDate = Date.now();
-  // getDayBeforeMidnightTime = new Date().setHours(-24, 0, 0, 0);
-  // getLastMidnightTime = new Date().setHours(0, 0, 0, 0);
-  // getNextMidnightTime = new Date().setHours(24, 0, 0, 0);
-  // getNextNextMidnightTime = new Date().setHours(48, 0, 0, 0);
   sticky: boolean = false;
   @ViewChildren('stickyChip', { read: ElementRef }) chips: QueryList<ElementRef>;
   @ViewChildren('messages') messages: QueryList<any>
   @ViewChild('contentContainer') container: ElementRef;
   menuPosition: any;
-
-  
+  public responsiveView: boolean;
 
   constructor(
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
     public channelService: ChannelService,
-    public usersService: UsersService) { }
+    public usersService: UsersService,
+    public sidenav: SidebarService
+    ) { }
 
   ngOnInit(): void {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe(paramMap => {
@@ -39,6 +35,9 @@ export class ChannelContentComponent implements OnInit {
       // console.log('Got ID', this.channelService.channelId);
       this.channelService.getChannelDetails();
     });
+    this.sidenav.getValue().subscribe((value) => {
+      this.responsiveView = value;
+    })
   }
 
   ngAfterViewInit() {
@@ -106,5 +105,7 @@ export class ChannelContentComponent implements OnInit {
     console.log(date);
   }
 
-  
+  toggleSidenav() {
+    this.sidenav.toggle();
+ }
 }

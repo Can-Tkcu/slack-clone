@@ -101,7 +101,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    
+
     &:first-of-type {
         padding-top: 16px;
     }
@@ -138,9 +138,14 @@
     border-radius: 5px;
     object-fit: cover;
     object-position: center;
-  }
+}
 
 
-  .d-none {
+.d-none {
     display: none;
-  }
+}
+
+
+@media (max-width: 1354px) {
+    
+}

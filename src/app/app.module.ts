@@ -51,6 +51,7 @@ import { MatChipsModule } from '@angular/material/chips';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ThreadsListComponent } from './threads-list/threads-list.component';
 import { UserListComponent } from './user-list/user-list.component';
+import { SidebarService } from './services/sidebar.service';
 
 @NgModule({
   declarations: [

@@ -1,6 +1,9 @@
 <div class="text-box" #chatBox [ngClass]="{'active': focusTextbox}">
+    <!-- <quill-editor (onEditorChanged)="getContent($event)" id="editor" [modules]="config"
+        [placeholder]="checkRoute() ? showChannelPlaceholder() : 'Nachricht an ' + (dmService.currentChannelRecipient | getUserNameById | async)?.displayName" #textMessage></quill-editor> -->
     <quill-editor (onEditorChanged)="getContent($event)" id="editor" [modules]="config"
-        placeholder="Nachricht an #{{ channelService.channel.name }}" #textMessage></quill-editor>
+        [placeholder]="checkRoute() ? showChannelPlaceholder() : 'Nachricht an ' + (dmService.currentChannelRecipient | getUserNameById | async)?.displayName"
+        #textMessage></quill-editor>
     <div class="text-box-footer">
         <button class="send-btn" [disabled]="!textToUpload" (click)="sendMessage()" matTooltip="Return drücken">
             <mat-icon>send</mat-icon>

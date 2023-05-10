@@ -18,16 +18,13 @@ import {
 import 'quill-emoji/dist/quill-emoji.js';
 import { ActivatedRoute } from '@angular/router';
 import { DirectMessagesContentComponent } from '../direct-message/direct-messages-content/direct-messages-content.component';
-import { ChannelContentComponent } from '../channel/channel-content/channel-content.component';
-import { GetUserNameByIdPipe } from '../get-user-name-by-id.pipe';
+import { map } from 'rxjs';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-textbox',
   templateUrl: './textbox.component.html',
   styleUrls: ['./textbox.component.scss'],
-  providers: [
-    GetUserNameByIdPipe
-  ]
 })
 export class TextboxComponent implements OnInit {
   public focusTextbox: boolean = false;
@@ -36,6 +33,7 @@ export class TextboxComponent implements OnInit {
   @ViewChild('chatBox') chatBox!: ElementRef;
   public textToUpload: any;
   public textBoxPlaceholder: any;
+  public placeholder: any = 'Antworten ...';
   // @Input() editorRef: string;
 
   config = {
@@ -66,10 +64,10 @@ export class TextboxComponent implements OnInit {
   constructor(
     private usersService: UsersService,
     public channelService: ChannelService,
-    private dmService: DirectMessagesService,
+    public dmService: DirectMessagesService,
     private firestore: AngularFirestore,
     public route: ActivatedRoute,
-    private pipe: GetUserNameByIdPipe
+    private cdRef:ChangeDetectorRef
   ) {}
 
 
@@ -77,13 +75,8 @@ export class TextboxComponent implements OnInit {
 
   }
 
-  ngAfterViewInit() {
-  
-    
-    // if (this.route.firstChild.component == ChannelContentComponent) {
-    //   this.textBoxPlaceholder = 'Nachricht an #' + this.channelService.channel.name;
-    //   console.log(this.channelService.channel.name)
-    // }
+  ngAfterViewChecked() {
+    this.cdRef.detectChanges();
   }
 
   /**
@@ -127,14 +120,20 @@ export class TextboxComponent implements OnInit {
     return this.route.firstChild.url['value'][0].path === 'channel';
   }
 
-  showCorrectPlaceholder() {
-    return 'Nachricht an #' + this.channelService.channel.name;
+  showChannelPlaceholder() {
+    if (this.chatBox?.nativeElement?.parentElement?.id == 'text-content') {
+      return 'Nachricht an #' + this.channelService.channel.name;
+    } else {
+      return 'Antworten ...';
+    } 
   }
 
-  showOtherPlaceholder() {
-    // console.log(this.pipe.transform(this.dmService.currentChannelRecipient))
-    return 'Nachricht an ' + this.pipe.transform(this.dmService.currentChannelRecipient);
-  }
+  // showDirectMessagesPlaceholder() {
+  //   // console.log(this.pipe.transform(this.dmService.currentChannelRecipient))
+  //   return this.pipe.transform(this.dmService.currentChannelRecipient).pipe(
+  //     map(displayName =>  'Nachricht an ' + displayName)
+  //   );
+  // }
 
   /**
    * function to get text and emojis of the editor
@@ -176,8 +175,7 @@ export class TextboxComponent implements OnInit {
     if (this.chatBox.nativeElement.parentElement.id == 'text-content') {
       this.channelService.currentChannelThread.push({
         author: this.usersService.currentUserData.uid,
-        authorPic: 'account_circle',
-        timestamp: new Date().getTime(),
+        timestamp: Date.now(),
         message: this.textToUpload ?? '',
         replies: [],
       });
@@ -186,8 +184,7 @@ export class TextboxComponent implements OnInit {
         this.channelService.threadContentIndex
       ].replies.push({
         author: this.usersService.currentUserData.uid,
-        authorPic: 'account_circle',
-        timestamp: new Date().getTime(),
+        timestamp: Date.now(),
         message: this.textToUpload ?? '',
       });
     }

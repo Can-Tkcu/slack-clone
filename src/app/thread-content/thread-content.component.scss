@@ -8,7 +8,7 @@
 .thread-header {
     justify-content: space-between;
 
-    
+
 }
 
 .close-btn {
@@ -71,4 +71,17 @@
     border-top: 1px solid rgba(255, 255, 255, 0.2);
     width: 75%;
     margin-left: auto;
+}
+
+@media (max-width: 1354px) {
+    :host {
+        width: 385px;
+    }
+}
+
+@media (max-width: 771px) {
+    :host {
+        width: 100%;
+        
+    }
 }

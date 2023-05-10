@@ -10,8 +10,8 @@
           [ngStyle]="{'background-color': usersService.generateColorHsl(usersService.currentUserData.displayName)}"
           mat-button
           [matMenuTriggerFor]="menu"
-          height="40"
-          width="40"
+          height="36"
+          width="36"
           [src]="usersService.currentUserData.photoURL ?? 'assets/img/image-placeholder.png'"
       />
       <div *ngIf="usersService.currentUserData" [ngClass]="{'logged-in': usersService.currentUserData.status == true}"></div>
