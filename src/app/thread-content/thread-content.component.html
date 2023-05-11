@@ -27,9 +27,14 @@
                 <span>{{ (channelService.threadContent.author | getUserNameById | async)?.displayName }}</span>
                 <!-- <span>{{ channelService.threadContent.timestamp | date:'HH:mm' }}</span> -->
 
+                <span
+                    *ngIf="channelService.currentDate - channelService.threadContent.timestamp < 120000">
+                    vor < 1 Minute
+                </span>
+
                 <!-- shows last answer of today in hours-->
                 <span
-                    *ngIf="channelService.threadContent.timestamp > channelService.getLastMidnightTime && channelService.currentDate < channelService.getNextMidnightTime">
+                    *ngIf="channelService.currentDate - channelService.threadContent.timestamp < 3600000">
                     vor {{ channelService.currentDate - channelService.threadContent.timestamp |
                     date:'m'}}
                     Minuten
@@ -37,7 +42,7 @@
 
                 <!-- shows last answer from yesterday with hours -->
                 <span
-                    *ngIf="channelService.threadContent.timestamp > channelService.getDayBeforeMidnightTime && channelService.currentDate < channelService.getLastMidnightTime">
+                    *ngIf="channelService.currentDate - channelService.threadContent.timestamp > 3600000 && channelService.threadContent.timestamp > channelService.getLastMidnightTime">
                     vor {{ channelService.currentDate - channelService.threadContent.timestamp |
                     date:'H'}} Stunden
                 </span>
@@ -78,16 +83,21 @@
                 <span>{{ (replies.author | getUserNameById | async)?.displayName }}</span>
                 <!-- <span>{{ replies.timestamp | date:'HH:mm' }} Uhr</span> -->
 
+                <span
+                    *ngIf="channelService.currentDate - replies.timestamp < 120000">
+                    vor < 1 Minute
+                </span>
+
                 <!-- shows last answer of today in minutes-->
                 <span
-                    *ngIf="replies.timestamp > channelService.getLastMidnightTime && channelService.currentDate < channelService.getNextMidnightTime">
+                    *ngIf="channelService.currentDate - replies.timestamp < 3600000">
                     vor {{ channelService.currentDate - replies.timestamp | date:'m'}}
                     Minuten
                 </span>
 
                 <!-- shows last answer from yesterday with hours -->
                 <span
-                    *ngIf="replies.timestamp > channelService.getDayBeforeMidnightTime && channelService.currentDate < channelService.getLastMidnightTime">
+                    *ngIf="channelService.currentDate - replies.timestamp > 3600000 && replies.timestamp > channelService.getLastMidnightTime">
                     vor {{ channelService.currentDate - replies.timestamp |
                     date:'H'}} Stunden
                 </span>

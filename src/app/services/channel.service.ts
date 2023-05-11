@@ -47,7 +47,7 @@ export class ChannelService {
     .subscribe((channel: any) => {
       this.channel = channel;
       this.currentChannelThread = channel.thread;
-      console.log(channel)
+      // console.log(channel)
     });
   }
 
