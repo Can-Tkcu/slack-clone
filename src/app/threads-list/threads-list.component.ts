@@ -5,6 +5,7 @@ import { ChannelService } from '../services/channel.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { doc, where } from 'firebase/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ViewportScroller } from '@angular/common';
 
 @UntilDestroy()
 @Component({
@@ -21,7 +22,8 @@ export class ThreadsListComponent implements OnInit {
     public usersService: UsersService,
     public channelService: ChannelService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public scroller: ViewportScroller
   ) {}
 
   ngOnInit() {
@@ -62,8 +64,11 @@ export class ThreadsListComponent implements OnInit {
 
   goToChannel(index) {
     console.log(index);
-    console.log(this.ownThreads[index].channelId);
-    this.router.navigate(['/home/channel/' + this.ownThreads[index].channelId], { fragment : this.ownThreads[index].elem});
+    console.log(this.ownThreads[index]);
+    this.router.navigate(['/home/channel/' + this.ownThreads[index].channelId]).then(() => {
+      this.channelService.selectedThread = this.ownThreads[index].elem.timestamp
+    })
+    
     // console.log(this.ownThreads[index].elem)
     // if (this.channelService.channelId.match(this.ownThreads[index].channelId) && this.channelService.channel.thread.find(e => e.timestamp == this.ownThreads[index].elem.timestamp)) {
     //   console.log('match');

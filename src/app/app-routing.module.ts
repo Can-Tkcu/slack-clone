@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
@@ -9,30 +9,40 @@ import { DirectMessagesComponent } from './direct-message/direct-messages/direct
 import { DirectMessagesContentComponent } from './direct-message/direct-messages-content/direct-messages-content.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { ThreadsListComponent } from './threads-list/threads-list.component';
+
+
+// const routerOptions: ExtraOptions = {
+//   scrollPositionRestoration: 'enabled',
+//   anchorScrolling: 'enabled',
+//   scrollOffset: [0, 64],
+//   onSameUrlNavigation: 'reload',
+// };
+
+
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   {
-    path: 'home', 
-    component: HomeComponent, 
-    canActivate: [AuthGuard], 
+    path: 'home',
+    component: HomeComponent,
+    canActivate: [AuthGuard],
     children: [
       {
-        path: 'channel/:id', 
-        component: ChannelContentComponent
+        path: 'channel/:id',
+        component: ChannelContentComponent,
       },
       {
-        path: 'direct-messages/:id', 
-        component: DirectMessagesContentComponent
+        path: 'direct-messages/:id',
+        component: DirectMessagesContentComponent,
       },
       {
-        path: 'user-list', 
-        component: UserListComponent
+        path: 'user-list',
+        component: UserListComponent,
       },
       {
-        path: 'threads-list', 
-        component: ThreadsListComponent
-      }
-    ]
+        path: 'threads-list',
+        component: ThreadsListComponent,
+      },
+    ],
   },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
@@ -43,4 +53,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

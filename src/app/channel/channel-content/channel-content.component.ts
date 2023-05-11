@@ -1,10 +1,11 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, Query, QueryList, ViewChild, ViewChildren } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ChannelService } from '../../services/channel.service';
 import { UsersService } from '../../services/users.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SidebarService } from 'src/app/services/sidebar.service';
+import { ViewportScroller } from '@angular/common';
 
 
 @UntilDestroy()
@@ -22,11 +23,13 @@ export class ChannelContentComponent implements OnInit {
   public responsiveView: boolean;
 
   constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
     public channelService: ChannelService,
     public usersService: UsersService,
-    public sidenav: SidebarService
+    public sidenav: SidebarService,
+    public scroller: ViewportScroller
     ) { }
 
   ngOnInit(): void {
@@ -41,6 +44,16 @@ export class ChannelContentComponent implements OnInit {
   }
 
   ngAfterViewInit() {
+    setTimeout(() => {
+      
+    this.router.navigate([], {fragment: this.channelService.selectedThread.toString()}).then((res) => {
+      const element = document.getElementById(this.channelService.selectedThread.toString())
+      if (element != undefined) element.scrollIntoView({behavior: "smooth"})
+    })
+    }, 1000);
+    // this.scroller.scrollToAnchor(this.channelService.selectedThread.toString())
+    
+    // document.getElementById(this.channelService.selectedThread.toString()).scrollIntoView({ behavior: "smooth", block: "start" })
     // this.menuPosition = document.querySelectorAll('#sticky-chip').forEach(chip => {
     //   console.log(chip);
     //   this.menuPosition = (chip as HTMLElement)?.offsetTop
@@ -73,7 +86,7 @@ export class ChannelContentComponent implements OnInit {
     // console.log(this.menuPosition)
     // console.log(this.menuElement.first)
     this.scrollToBottom();
-    this.messages.changes.pipe(untilDestroyed(this)).subscribe(this.scrollToBottom);
+    this.messages.changes.pipe(untilDestroyed(this)).subscribe(this.scrollToBottom)
   }
 
   scrollToBottom = () => {

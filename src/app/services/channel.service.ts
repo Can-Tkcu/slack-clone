@@ -24,6 +24,7 @@ export class ChannelService {
   getLastMidnightTime = new Date().setHours(0, 0, 0, 0);
   getNextMidnightTime = new Date().setHours(24, 0, 0, 0);
   messageDateString: any;
+  selectedThread: string = "";
   options: any = {
     weekday: "long",
     year: "numeric",

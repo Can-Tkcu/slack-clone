@@ -1,13 +1,14 @@
 <mat-toolbar>
   <div class="mat-container">
-    <!--Insert Slack logo  -->
+    <img src="../../assets/img/Logo.png" alt="">
+
     <div>
       <span>Slack clone</span>
     </div>
   </div>
   <mat-icon [matMenuTriggerFor]="menu">settings </mat-icon>
   <mat-menu class="top20" #menu="matMenu">
-    <button mat-menu-item routerLink="/register">register</button>
+    <button mat-menu-item routerLink="/register">Register</button>
   </mat-menu>
 </mat-toolbar>
 <div class="card-container">

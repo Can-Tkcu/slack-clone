@@ -23,7 +23,8 @@
             <div class="divider-line"></div>
         </div>
 
-        <div class="message-container">
+        <div [id]="thread.timestamp" class="message-container">
+
                 <img class="profile-picture-content" height="45" width="45"
                 [ngStyle]="{
                     'background-color': usersService.generateColorHsl(

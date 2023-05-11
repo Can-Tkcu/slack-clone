@@ -39,6 +39,8 @@ $slack-clone-theme: mat.define-dark-theme((color: (primary: $slack-clone-primary
 html,
 body {
   height: 100%;
+
+  scroll-behavior: smooth!important;
 }
 
 body {

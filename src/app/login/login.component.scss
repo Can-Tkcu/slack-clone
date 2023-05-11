@@ -2,6 +2,13 @@ mat-toolbar {
   background: var(--light-grey);
   display: flex;
   justify-content: center;
+  img {
+    height: 36px;
+    width: 36px;
+  }
+
+  @media (max-width: 600px) {
+  }
 }
 
 mat-card-header {
@@ -23,7 +30,7 @@ mat-icon {
 }
 
 .mat-mdc-form-field {
-  width: 300px
+  width: 300px;
 }
 
 .progress-bar {
@@ -46,6 +53,11 @@ mat-icon {
   align-items: center;
   justify-content: center;
   width: 100%;
+  gap: 20px;
+
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+  }
 }
 
 .login-card {
@@ -57,7 +69,13 @@ mat-icon {
   background: var(--light-grey);
   display: flex;
   justify-content: space-between;
-  position:relative;
+  position: relative;
+
+  @media (max-width: 600px) {
+    max-height: unset;
+    max-width: unset;
+    border-radius: 0px;
+  }
 }
 
 .card-container {
@@ -68,6 +86,9 @@ mat-icon {
   width: 100%;
   align-items: center;
   background: var(--primary);
+  @media (max-width: 600px) {
+    height: calc(100% - 56px);
+  }
 }
 
 .input-container {
@@ -87,21 +108,20 @@ mat-icon {
   flex-direction: column;
   gap: 20px;
   button {
-    
-   color: white; 
-   width: 100%;
-   height: 50px;
-   max-width: 300px;
+    color: white;
+    width: 100%;
+    height: 50px;
+    max-width: 300px;
   }
 }
 
 .mdc-text-field .mdc-text-field__input:focus {
-    color: var(--mint);
+  color: var(--mint);
 }
 
 .return-link {
   display: flex;
-  
+
   margin-top: 20px;
   span {
     color: white;
@@ -110,21 +130,23 @@ mat-icon {
     color: #1d9bd1;
     cursor: pointer;
   }
+
+  @media (max-width: 600px) {
+    display: none;
+  }
 }
 
 .top20 {
   top: 20px;
 }
 
-
 .guest-button {
-  color: var(--primary)!important;
-  background-color: white!important;
+  color: var(--primary) !important;
+  background-color: white !important;
   transition: all 225ms ease;
-  
-  &:hover {
 
-    background-color: var(--light-grey)!important;
-    color: white!important
+  &:hover {
+    background-color: var(--light-grey) !important;
+    color: white !important;
   }
 }
