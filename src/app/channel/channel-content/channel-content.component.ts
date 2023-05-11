@@ -35,7 +35,7 @@ export class ChannelContentComponent implements OnInit {
       // console.log('Got ID', this.channelService.channelId);
       this.channelService.getChannelDetails();
     });
-    this.sidenav.getValue().subscribe((value) => {
+    this.sidenav.getValue().pipe(untilDestroyed(this)).subscribe((value) => {
       this.responsiveView = value;
     })
   }
@@ -50,18 +50,18 @@ export class ChannelContentComponent implements OnInit {
     //   console.log('hallo')
     //   console.log(this.menuPosition)
     // }, 5000);
-    this.chips.changes.pipe(untilDestroyed(this)).subscribe(() => {
-      let chip = this.chips.toArray().map(x => x.nativeElement.offsetTop);
-      // console.log(chip);
-      // this.menuPosition = chip;
-      // chip.forEach((c) => {
-      //   this.menuPosition = c;
-      // })
-      this.menuPosition = chip[0];
-      // setInterval(() => {
-      //   console.log(chip)
-      // }, 1000)
-    })
+    // this.chips.changes.pipe(untilDestroyed(this)).subscribe(() => {
+    //   let chip = this.chips.toArray().map(x => x.nativeElement.offsetTop);
+    //   // console.log(chip);
+    //   // this.menuPosition = chip;
+    //   // chip.forEach((c) => {
+    //   //   this.menuPosition = c;
+    //   // })
+    //   this.menuPosition = chip[0];
+    //   // setInterval(() => {
+    //   //   console.log(chip)
+    //   // }, 1000)
+    // })
     // setInterval(() => {
     //   console.log(this.container.nativeElement.pageYOffset)
     // }, 1000)
@@ -78,6 +78,7 @@ export class ChannelContentComponent implements OnInit {
 
   scrollToBottom = () => {
     try {
+      // debugger;
       this.container.nativeElement.scrollTop = this.container.nativeElement.scrollHeight;
     } catch (err) {}
   }

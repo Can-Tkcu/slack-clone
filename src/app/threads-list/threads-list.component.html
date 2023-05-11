@@ -58,8 +58,8 @@
                     <quill-view class="message-text" [content]="thread.elem.message" format="html" theme="snow"></quill-view>
 
                     <div class="options-container">
-                        <button matTooltip="Im Thread antworten" [matTooltipPosition]="'above'"
-                            (click)="channelService.openThread(i)">
+                        <button matTooltip="In Channel öffnen" [matTooltipPosition]="'above'"
+                            (click)="goToChannel(i)">
                             <mat-icon>chat</mat-icon>
                         </button>
                         <!-- <button>
@@ -90,7 +90,7 @@
                         <span
                             *ngIf="replies.timestamp > channelService.getLastMidnightTime && channelService.currentDate < channelService.getNextMidnightTime">
                             vor {{ channelService.currentDate - replies.timestamp |
-                            date:'m'}}replies
+                            date:'m'}}
                             Minuten
                         </span>
 
@@ -112,8 +112,8 @@
                         theme="snow"></quill-view>
 
                     <div class="options-container">
-                        <button matTooltip="Im Thread antworten" [matTooltipPosition]="'above'"
-                            (click)="channelService.openThread(i)">
+                        <button matTooltip="In Channel öffnen" [matTooltipPosition]="'above'"
+                            (click)="goToChannel(i)">
                             <mat-icon>chat</mat-icon>
                         </button>
                         <!-- <button>

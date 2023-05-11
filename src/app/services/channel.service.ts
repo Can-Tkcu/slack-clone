@@ -18,7 +18,6 @@ export class ChannelService {
   // currentChannel: any = [];
   searchValue: string = '';
   public threadOpen: boolean = false;
-  // @ViewChild('drawer') drawer: ElementRef;
   currentUserName: any;
   currentDate = Date.now();
   getDayBeforeMidnightTime = new Date().setHours(-24, 0, 0, 0);
@@ -47,12 +46,13 @@ export class ChannelService {
     .subscribe((channel: any) => {
       this.channel = channel;
       this.currentChannelThread = channel.thread;
-      // console.log(channel)
+      console.log(channel)
     });
   }
 
 
   openThread(index) {
+    // debugger;
     this.threadOpen = true;
     this.threadContent = this.channel.thread[index];
     this.threadContentIndex = index;

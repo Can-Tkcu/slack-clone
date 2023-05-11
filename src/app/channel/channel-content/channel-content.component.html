@@ -16,7 +16,7 @@
         !(thread.author | getUserNameById | async)?.displayName.toLowerCase().includes(channelService.searchValue.toLowerCase())
             "
      *ngFor="let thread of channelService.channel.thread; let i = index; let last = last" #messages>
-        {{ last ? scrollToBottom() : ''}}
+        <!-- {{ last ? scrollToBottom() : ''}} -->
         <div class="message-list-day-divider" *ngIf="channelService.isDifferentDay(i, channelService.channel.thread)" id="message-list-day-divider(i)">
             <div class="divider-line"></div>
             <mat-chip [class.sticky]="sticky">{{ channelService.getMessageDate(i, channelService.channel.thread) }}</mat-chip>

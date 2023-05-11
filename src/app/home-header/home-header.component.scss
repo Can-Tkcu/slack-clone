@@ -20,7 +20,7 @@
         width: 10px;
         border-radius: 100%;
         position: absolute;
-        top: 43px;
+        top: 41px;
         right: 12px;
         background-color: rgb(91, 196, 91);
     }
@@ -30,7 +30,7 @@
         width: 10px;
         border-radius: 100%;
         position: absolute;
-        top: 43px;
+        top: 41px;
         right: 12px;
         background-color: red;
     }
@@ -89,6 +89,18 @@
     .header {
         .acc {
             margin-left: 180px;
+        }
+    }
+}
+
+@media (max-width: 800px) {
+    .searchbar {
+        margin-left: 0;
+    }
+
+    .header {
+        .acc {
+            margin-left: 20px;
         }
     }
 }

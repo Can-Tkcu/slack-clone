@@ -100,7 +100,7 @@ export class MainComponent implements OnInit {
         // }
 
         if (window.innerWidth <= 800 || cr.width <= 400 && this.channelService.threadOpen) {
-          console.log(window.innerWidth)
+          // console.log(window.innerWidth)
           this.sidenavService.setValue(true);
           this.sidenav.mode = 'over';
           this.sidenav.close();
@@ -109,7 +109,7 @@ export class MainComponent implements OnInit {
           // this.sidenavService.responsiveView = true;
           
           // console.log(this.sidenavService.responsiveView)
-          console.log('Answers wird geändert')
+          // console.log('Answers wird geändert')
           document.querySelectorAll('.answers').forEach((el) => {
             (el as HTMLElement).style.width = '100%';
           });

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { UsersService } from '../services/users.service';
 import { ChannelService } from '../services/channel.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
-import { where } from 'firebase/firestore';
+import { doc, where } from 'firebase/firestore';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @UntilDestroy()
 @Component({
@@ -13,14 +14,14 @@ import { where } from 'firebase/firestore';
 })
 export class ThreadsListComponent implements OnInit {
   allChannels: any = [];
-  // public ownChannels: any = []
   ownThreads: any = [];
-  public channelNames: any = [];
 
   constructor(
     private firestore: AngularFirestore,
     public usersService: UsersService,
-    public channelService: ChannelService
+    public channelService: ChannelService,
+    private route: ActivatedRoute,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -32,28 +33,50 @@ export class ThreadsListComponent implements OnInit {
         // console.log(channels)
         this.allChannels = channels;
         this.getOwnThreads();
+        // console.log(this.allChannels)
       });
+      // this.route.paramMap.pipe(untilDestroyed(this)).subscribe(paramMap => {
+      //   this.channelService.channelId = paramMap.get('id');
+      //   // console.log('Got ID', this.channelService.channelId);
+      //   this.channelService.getChannelDetails();
+      // });
   }
 
   getOwnThreads() {
     this.ownThreads = [];
-    // this.ownChannels = [];
     this.allChannels.forEach((e) => {
       e.thread?.forEach((element) => {
-        // console.log(element)
         if (element.author == this.usersService.currentUserDataID) {
-          // console.log(e)
           this.ownThreads.push({
             elem: element,
             name: e.name,
+            channelId: e.channelId
           });
-          // console.log(this.ownThreads)
-          // this.channelNames.push(e.name);
           this.ownThreads.sort(function (x, y) {
             return y.elem.timestamp - x.elem.timestamp;
           });
         }
       });
     });
+  }
+
+  goToChannel(index) {
+    console.log(index);
+    console.log(this.ownThreads[index].channelId);
+    this.router.navigate(['/home/channel/' + this.ownThreads[index].channelId], { fragment : this.ownThreads[index].elem});
+    // console.log(this.ownThreads[index].elem)
+    // if (this.channelService.channelId.match(this.ownThreads[index].channelId) && this.channelService.channel.thread.find(e => e.timestamp == this.ownThreads[index].elem.timestamp)) {
+    //   console.log('match');
+    //   let found = this.channelService.channel.thread.find(e => e.timestamp == this.ownThreads[index].elem.timestamp);
+    //   console.log((found as HTMLAnchorElement));
+    //   document.querySelectorAll('.message-container').forEach(e => {
+    //     console.log(e);
+    //   })
+    //   // console.log(document.querySelector(found));
+    //   // (found as HTMLAnchorElement).scrollIntoView();
+    // }
+    // console.log(fragment)
+    // this.channelService.channelId = this.ownThreads[index].channelId;
+    // this.channelService.getChannelDetails();
   }
 }
