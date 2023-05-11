@@ -1,5 +1,8 @@
 <div class="content-header">
     <div class="channel-elements">
+        <button *ngIf="responsiveView" class="sidenav-btn" (click)="toggleSidenav()">
+            <mat-icon>menu_open</mat-icon>
+        </button>
         <span>Threads</span>
     </div>
 </div>

@@ -4,7 +4,9 @@ import { DialogCreateChannelComponent } from '../dialog-create-channel/dialog-cr
 import { Observable } from 'rxjs';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ChannelService } from '../../services/channel.service';
-import { UntilDestroy } from '@ngneat/until-destroy';
+import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { SidebarService } from 'src/app/services/sidebar.service';
+
 
 @UntilDestroy()
 @Component({
@@ -16,11 +18,14 @@ export class ChannelsComponent implements OnInit {
   collapsed = false;
   channels$: Observable<any>;
   allChannel: Array<any>;
+  public responsiveView: boolean;
 
   constructor(
     public dialog: MatDialog, 
     private firestore: AngularFirestore,
-    public channelService: ChannelService) { }
+    public channelService: ChannelService,
+    public sidenav: SidebarService
+    ) { }
 
   ngOnInit(): void {
     this.firestore
@@ -38,6 +43,9 @@ export class ChannelsComponent implements OnInit {
             return 0;
           }
         });
+      })
+      this.sidenav.getValue().pipe(untilDestroyed(this)).subscribe((value) => {
+        this.responsiveView = value;
       })
   }
   // constructor(public dialog: MatDialog, firestore: Firestore) {

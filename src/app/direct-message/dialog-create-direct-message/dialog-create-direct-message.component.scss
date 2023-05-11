@@ -5,13 +5,6 @@
     background-color: var(--primary);
 }
 
-:host {
-    display: flex;
-    flex-direction: column;
-    width: 520px;
-    background-color: var(--primary);
-}
-
 .create-direct-message {
     height: 55px;
 
@@ -37,4 +30,16 @@
 
 ::ng-deep .mdc-line-ripple::before {
     border-bottom-color: transparent !important;
+}
+
+@media (max-width: 650px) {
+    :host {
+        width: auto;
+    }
+}
+
+@media (max-width: 650px) {
+    .dialog-header h1 {
+        font-size: 20px;
+    }
 }

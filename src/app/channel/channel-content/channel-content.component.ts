@@ -48,7 +48,13 @@ export class ChannelContentComponent implements OnInit {
       
     this.router.navigate([], {fragment: this.channelService.selectedThread.toString()}).then((res) => {
       const element = document.getElementById(this.channelService.selectedThread.toString())
-      if (element != undefined) element.scrollIntoView({behavior: "smooth"})
+      if (element != undefined) {
+        element.scrollIntoView({behavior: "smooth"});
+        element.classList.add('selected');
+        setTimeout(() => {
+          element.classList.remove('selected');
+        }, 5500)
+      }
     })
     }, 1000);
     // this.scroller.scrollToAnchor(this.channelService.selectedThread.toString())

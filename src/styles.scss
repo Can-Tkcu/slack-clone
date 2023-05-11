@@ -152,11 +152,11 @@ body {
   align-items: center;
   justify-content: space-between;
   padding-right: 24px;
-  padding: 20px 28px 0;
+  padding: 20px 17px 0 28px;
 
   h1 {
     margin: 0;
-    color: white;
+    color: #D1D2D3;
   }
 
 
@@ -176,7 +176,7 @@ body {
     font-size: 18px;
     height: 18px;
     width: 18px;
-    color: white;
+    color: #D1D2D3;
   }
 
   &:hover {
@@ -186,7 +186,7 @@ body {
 }
 
 h4 {
-  color: white;
+  color: #D1D2D3;
   margin: 0 !important;
   padding: 20px 28px;
 }
@@ -293,7 +293,7 @@ h4 {
 
 .dialog-description {
   padding: 6px 28px 0;
-  color: white;
+  color: grey;
   font-size: 13px;
 }
 
@@ -452,6 +452,16 @@ h2 {
 
 }
 
+.selected {
+  // background-color: rgba(210, 156, 0, 0.4);
+  animation: selectedAnimation 5s ease-out;
+}
+
+@keyframes selectedAnimation {
+  from {background-color: rgba(210, 156, 0, 0.5);}
+  to {background-color: rgba(210, 156, 0, 0);}
+}
+
 .options-container {
   display: none;
   background-color: var(--primary);
@@ -544,6 +554,7 @@ h2 {
   border: none;
   transition: all 125ms ease-in-out;
   cursor: pointer;
+  margin-right: 8px;
 
   &:hover {
     background-color: rgba(255, 255, 255, 0.2);
@@ -563,4 +574,18 @@ h2 {
       width: 385px;
   }
 
+}
+
+@media (max-width: 350px) {
+    .channel-input {
+      padding: 4px 27px 4px 36px;
+    }
+
+    .dialog-header h1 {
+      font-size: 20px;
+    }
+
+    h4 {
+      font-size: 16px;
+    }
 }

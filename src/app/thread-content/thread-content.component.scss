@@ -82,6 +82,11 @@
 @media (max-width: 771px) {
     :host {
         width: 100%;
-        
+    }
+}
+
+@media (max-width: 385px) {
+    .divider-line {
+        width: 70%;
     }
 }

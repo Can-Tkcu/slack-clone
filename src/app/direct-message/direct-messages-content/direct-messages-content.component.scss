@@ -91,6 +91,11 @@
     left: 0px;
 }
 
+.profile-picture-container {
+    display: flex;
+    position: relative;
+}
+
 .profile-picture {
     border-radius: 5px;
     object-fit: cover;
@@ -106,8 +111,8 @@
     width: 10px;
     border-radius: 100%;
     position: absolute;
-    top: 32px;
-    left: 37px;
+    top: 16px;
+    left: 17px;
     background-color: rgb(91 196 91);
   }
   
@@ -116,8 +121,8 @@
     width: 10px;
     border-radius: 100%;
     position: absolute;
-    top: 32px;
-    left: 37px;
+    top: 16px;
+    left: 17px;
     background-color: rgb(167, 167, 167);
   }
 
@@ -153,4 +158,45 @@
     font-size: 13px;
     color: #D1D2D3 !important;
     font-weight: 500;
+}
+
+.direct-message-info {
+    display: flex;
+    flex-direction: column;
+    padding: 16px 20px;
+
+    p {
+        margin: 0;
+        color: #D1D2D3;
+        font-size: 18px;
+
+        span {
+            color: #1d9bd1;
+        }
+    }
+}
+
+.direct-message-header {
+    display: flex;
+    align-items: center;
+    font-size: 15px;
+    color: #D1D2D3;
+    font-weight: 500;
+    margin-bottom: 16px;
+    // position: relative;
+
+    .profile-picture {
+        height: 56px;
+        width: 56px;
+    }
+
+    .logged-in {
+        position: unset;
+        margin-left: 10px;
+    }
+
+    .logged-out {
+        position: unset;
+        margin-left: 10px;
+    }
 }

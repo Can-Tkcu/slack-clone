@@ -6,6 +6,7 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { doc, where } from 'firebase/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
+import { SidebarService } from '../services/sidebar.service';
 
 @UntilDestroy()
 @Component({
@@ -16,6 +17,7 @@ import { ViewportScroller } from '@angular/common';
 export class ThreadsListComponent implements OnInit {
   allChannels: any = [];
   ownThreads: any = [];
+  public responsiveView: boolean;
 
   constructor(
     private firestore: AngularFirestore,
@@ -23,7 +25,8 @@ export class ThreadsListComponent implements OnInit {
     public channelService: ChannelService,
     private route: ActivatedRoute,
     private router: Router,
-    public scroller: ViewportScroller
+    public scroller: ViewportScroller,
+    public sidenav: SidebarService
   ) {}
 
   ngOnInit() {
@@ -42,6 +45,9 @@ export class ThreadsListComponent implements OnInit {
       //   // console.log('Got ID', this.channelService.channelId);
       //   this.channelService.getChannelDetails();
       // });
+      this.sidenav.getValue().pipe(untilDestroyed(this)).subscribe((value) => {
+        this.responsiveView = value;
+      })
   }
 
   getOwnThreads() {
@@ -84,4 +90,8 @@ export class ThreadsListComponent implements OnInit {
     // this.channelService.channelId = this.ownThreads[index].channelId;
     // this.channelService.getChannelDetails();
   }
+
+  toggleSidenav() {
+    this.sidenav.toggle();
+ }
 }

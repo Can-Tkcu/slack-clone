@@ -53,6 +53,8 @@
         font-size: 13px;
         color: #1d9bd1;
         font-weight: 700;
+        white-space: nowrap;
+
         transition: all 125ms ease-in-out;
 
         &:hover {
@@ -65,6 +67,7 @@
 
 .reply-bar-description {
     position: relative;
+    display: flex;
 
     span {
 
@@ -143,6 +146,25 @@
 }
 
 
-@media (max-width: 1354px) {
-    
+@media (max-width: 700px) {
+    .answers {
+        width: 100% !important;
+    }
+
+    .reply-bar-description span {
+        &:first-of-type {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis !important;
+        }
+    }
+}
+
+@media (max-width: 380px) {
+
+    .reply-bar-description span {
+        &:first-of-type {
+            width: 100px;
+        }
+    }
 }

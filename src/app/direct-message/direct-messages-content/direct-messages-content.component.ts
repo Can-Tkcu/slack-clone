@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { ChannelService } from 'src/app/services/channel.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
+import { SidebarService } from 'src/app/services/sidebar.service';
 
 @UntilDestroy()
 @Component({
@@ -13,12 +14,14 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 })
 export class DirectMessagesContentComponent implements OnInit {
   currMessages: any;
+  public responsiveView: boolean;
 
   constructor(
     public dmService: DirectMessagesService,
     private route: ActivatedRoute,
     public usersService: UsersService,
-    public channelService: ChannelService
+    public channelService: ChannelService,
+    public sidenav: SidebarService
   ) {}
 
   async ngOnInit(): Promise<void> {
@@ -27,5 +30,12 @@ export class DirectMessagesContentComponent implements OnInit {
       this.dmService.getChatsFromDb();
       // this.dmService.getAllDms()
     });
+    this.sidenav.getValue().pipe(untilDestroyed(this)).subscribe((value) => {
+      this.responsiveView = value;
+    })
   }
+
+  toggleSidenav() {
+    this.sidenav.toggle();
+ }
 }

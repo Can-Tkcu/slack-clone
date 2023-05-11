@@ -14,11 +14,11 @@
     </div>
 
     <div *ngIf="!collapsed">
-        <div class="channel-sidebar-name" *ngFor="let channel of allChannel" [routerLink]="['/home/channel/' + channel.channelId]" routerLinkActive="active" (click)="channelService.threadOpen = false">
+        <div class="channel-sidebar-name" *ngFor="let channel of allChannel" [routerLink]="['/home/channel/' + channel.channelId]" routerLinkActive="active" (click)="channelService.threadOpen = false; responsiveView && sidenav.close()">
             <mat-icon>numbers</mat-icon>
             <span>{{ channel.name }}</span>
         </div>
-        <div class="channel-sidebar-name no-hover" (click)="openDialog()">
+        <div class="channel-sidebar-name no-hover" (click)="openDialog(); channelService.threadOpen = false; responsiveView && sidenav.close()">
             <mat-icon>add_box</mat-icon>
             <span>Channels hinzufügen</span>
         </div>

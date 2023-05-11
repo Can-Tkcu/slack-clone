@@ -13,7 +13,7 @@
     <!-- threads -->
 
     <div class="channel-sidebar-container border-bottom">
-      <div class="channel-sidebar-name" [routerLink]="['/home/threads-list']" routerLinkActive="active" (click)="channelService.threadOpen = false">
+      <div class="channel-sidebar-name" [routerLink]="['/home/threads-list']" routerLinkActive="active" (click)="channelService.threadOpen = false; responsiveView && sidenav.close()">
         <mat-icon>chat</mat-icon>
         <span>Threads</span>
       </div>
@@ -21,7 +21,7 @@
         routerLinkActive="active"
         [routerLink]="['/home/user-list/']"
         class="channel-sidebar-name"
-        (click)="channelService.threadOpen = false"
+        (click)="channelService.threadOpen = false; responsiveView && sidenav.close()"
       >
         <mat-icon>group</mat-icon>
         <span>Users</span>

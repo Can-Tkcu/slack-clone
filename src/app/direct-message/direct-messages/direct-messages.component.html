@@ -24,7 +24,7 @@
       *ngFor="let channel of dmService.allDmChannels; let i = index"
       class="channel-sidebar-name direct-messages"
       [routerLink]="['/home/direct-messages/' + channel.dmChannelId]"
-      (click)="channelService.threadOpen = false"
+      (click)="channelService.threadOpen = false; responsiveView && sidenav.close()"
       routerLinkActive="active"
     >
       <img
@@ -57,7 +57,7 @@
       }}</span>
     </div>
 
-    <div class="channel-sidebar-name no-hover" (click)="openDialog()">
+    <div class="channel-sidebar-name no-hover" (click)="openDialog(); channelService.threadOpen = false; responsiveView && sidenav.close()">
       <mat-icon>add_box</mat-icon>
       <span>Kolleg:innen hinzufügen</span>
     </div>

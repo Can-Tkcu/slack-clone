@@ -68,3 +68,13 @@
     bottom: -7px;
     right: -7px;
 }
+
+@media (max-width: 650px) {
+    :host {
+        width: auto;
+    }
+
+    .dialog-header h1 {
+        font-size: 20px;
+    }
+}

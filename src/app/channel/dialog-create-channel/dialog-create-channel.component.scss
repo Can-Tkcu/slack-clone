@@ -5,3 +5,11 @@
     background-color: var(--primary);
 }
 
+
+@media (max-width: 650px) {
+    :host {
+        width: auto;
+    }
+}
+
+

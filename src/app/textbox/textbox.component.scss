@@ -221,3 +221,9 @@
 ::ng-deep .ql-snow.ql-toolbar button:hover .ql-fill {
     fill: grey;
 }
+
+@media (max-width: 385px) {
+    ::ng-deep .ql-toolbar.ql-snow .ql-formats {
+        margin-right: 0;
+    }
+}
