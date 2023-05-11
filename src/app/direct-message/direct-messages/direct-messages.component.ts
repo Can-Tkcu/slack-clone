@@ -38,6 +38,7 @@ export class DirectMessagesComponent implements OnInit {
 
   openDialog() {
     this.dialog.open(DialogCreateDirectMessageComponent);
+    this.dmService.userExists = false
   }
 
   toggleDropdown() {

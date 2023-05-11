@@ -22,8 +22,8 @@
       aria-label="Name"
       matInput
       formControlName="displayName"
-      [formControl]="myControl"
       [matAutocomplete]="auto"
+      required
     />
     <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
       <mat-option
@@ -36,12 +36,14 @@
     </mat-autocomplete>
   </mat-form-field>
 </form>
-
+<mat-error>
+  <ng-container *ngIf="dmService.userExists">
+    <p class="error">Channel exists</p>
+  </ng-container>
+</mat-error>
 <p class="dialog-description">
   Suche nach Leuten und lade Sie zu einer Unterhaltung ein.
 </p>
 <div mat-dialog-actions class="btn-container">
-  <button form="dm-form" ng mat-button class="btn" [disabled]="">
-    Senden
-  </button>
+  <button form="dm-form" ng mat-button class="btn" [disabled]="!dmForm.value.displayName">Senden</button>
 </div>

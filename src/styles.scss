@@ -454,11 +454,11 @@ h2 {
 
 .selected {
   // background-color: rgba(210, 156, 0, 0.4);
-  animation: selectedAnimation 5s ease-out;
+  animation: selectedAnimation 2s ease-out;
 }
 
 @keyframes selectedAnimation {
-  from {background-color: rgba(210, 156, 0, 0.5);}
+  from {background-color: rgba($color: rgb(202, 202, 202), $alpha: 1.0);}
   to {background-color: rgba(210, 156, 0, 0);}
 }
 

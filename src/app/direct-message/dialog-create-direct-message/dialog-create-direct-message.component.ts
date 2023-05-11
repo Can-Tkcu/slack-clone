@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { UsersService } from '../../services/users.service';
 import { DirectMessagesService } from '../../services/direct-messages.service';
+
+
 @Component({
   selector: 'app-dialog-create-direct-message',
   templateUrl: './dialog-create-direct-message.component.html',
@@ -19,16 +21,18 @@ export class DialogCreateDirectMessageComponent implements OnInit {
     public dmService: DirectMessagesService
   ) {}
 
-  ngOnInit() {
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map((value) => this._filter(value || ''))
-    );
 
+  ngOnInit() {
     this.dmForm = new FormGroup({
       displayName: new FormControl('', [Validators.required]),
       uid: new FormControl('', [Validators.required]),
     });
+    this.filteredOptions = this.dmForm.valueChanges.pipe(
+      startWith(''),
+      map((value) => this._filter(value.displayName || ''))
+    );
+
+    
   }
 
   private _filter(value: string): string[] {

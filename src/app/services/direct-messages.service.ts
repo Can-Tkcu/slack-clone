@@ -20,7 +20,7 @@ export class DirectMessagesService {
   currentChannelPayload: any;
   currentChannelData: any;
   allDmChannels: Array<any> = [];
-
+  userExists: boolean = false;
   constructor(
     private afs: AngularFirestore,
     private route: Router,
@@ -54,8 +54,9 @@ export class DirectMessagesService {
         this.allDmChannels = [];
         channels.forEach((channel) => {
           if (channel.users.senderID == this.usersService.currentUserDataID)
+            // console.log(this.allDmChannels.)
             this.allDmChannels.push(channel);
-          this.sortUsersByName();
+            this.sortUsersByName();
         });
       });
   }
@@ -94,10 +95,12 @@ export class DirectMessagesService {
       },
     };
 
-    channelRef.add(channelData).then((channel) => {
-      this.route.navigate(['/home/direct-messages/' + channel.id]);
-    });
+    const indexOfUser = this.allDmChannels.findIndex((channel) => channel.users.recipientID === uid);
+      indexOfUser > -1 ? this.userExists = true : channelRef.add(channelData).then((channel) => {
+        this.route.navigate(['/home/direct-messages/' + channel.id]);
+        return this.dialog.closeAll();
+      });
 
-    return this.dialog.closeAll();
+      
   }
 }
