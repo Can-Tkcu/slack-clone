@@ -9,7 +9,7 @@
 </div>
 
 
-<div class="content-container" #contentContainer (scroll)="onScroll()">
+<div class="content-container scroller" #contentContainer (scroll)="onScroll()">
     <div
     [class.d-none]="
         !thread.message.toLowerCase().includes(channelService.searchValue.toLowerCase()) && 

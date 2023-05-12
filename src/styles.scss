@@ -322,6 +322,12 @@ h4 {
 
 // channel-content
 
+.scroller {
+  // overflow-y: scroll;
+  scrollbar-color: rgba($color: #797B7E, $alpha: 0.8) transparent;
+  scrollbar-width: thin;
+}
+
 /* width */
 ::-webkit-scrollbar {
   width: 8px;
