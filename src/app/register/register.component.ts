@@ -29,7 +29,9 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-
+  /**
+   * firebase function to sign up a user. creates a new user.
+   */
   signUp() {
     if (this.registerForm.invalid) return;
     this.authService

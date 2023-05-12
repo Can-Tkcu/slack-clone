@@ -43,6 +43,12 @@ export class UserDetailComponent {
     this.isGuest = true
   }
 
+  /**
+   * This function takes in the file event and user data and posts and image to the firebase storage
+   * using linking it with the users unique id then notifies the user with a popup (ngNeat toastService)
+   * @param event - chosen file
+   * @param user - user data for image upload
+   */
   uploadFile(event: any, user: any) {
     const uid = user.uid;
     this.userImageService
@@ -63,6 +69,19 @@ export class UserDetailComponent {
       .subscribe();
   }
 
+  updateData(UserData) {
+    this.afs
+      .collection('users')
+      .doc(this.usersService.currentUserData.uid)
+      .update(UserData)
+      .then(() => {
+        this.dialog.closeAll();
+      });
+  }
+
+  /**
+   * updates the user credentials in Firebase auth and firebase users collection accordingly
+   */
   async updateUserCredentials() {
     const UserData = {
       displayName: this.userName,
@@ -78,12 +97,6 @@ export class UserDetailComponent {
         .updateUser({ uid: this.userUid, email: this.userEmail })
     }
 
-    this.afs
-      .collection('users')
-      .doc(this.usersService.currentUserData.uid)
-      .update(UserData)
-      .then(() => {
-        this.dialog.closeAll();
-      });
+    this.updateData(UserData)
   }
 }

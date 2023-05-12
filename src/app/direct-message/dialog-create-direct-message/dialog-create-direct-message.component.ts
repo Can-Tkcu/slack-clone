@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map, startWith } from 'rxjs/operators';
 import { UsersService } from '../../services/users.service';
@@ -27,12 +27,11 @@ export class DialogCreateDirectMessageComponent implements OnInit {
       displayName: new FormControl('', [Validators.required]),
       uid: new FormControl('', [Validators.required]),
     });
+
     this.filteredOptions = this.dmForm.valueChanges.pipe(
       startWith(''),
       map((value) => this._filter(value.displayName || ''))
     );
-
-    
   }
 
   private _filter(value: string): string[] {
@@ -42,7 +41,11 @@ export class DialogCreateDirectMessageComponent implements OnInit {
       user.displayName.toLowerCase().includes(filterValue)
     );
   }
-
+  
+  /**
+   *  assings id of the selected user to the form value 
+   * @param user - Id of selected user
+   */
   selectUserId(user) {
     this.dmForm.value.uid = user.uid;
   }

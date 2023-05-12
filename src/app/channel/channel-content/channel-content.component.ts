@@ -30,7 +30,6 @@ export class ChannelContentComponent implements OnInit {
     public channelService: ChannelService,
     public usersService: UsersService,
     public sidenav: SidebarService,
-    public scroller: ViewportScroller
     ) { }
 
   ngOnInit(): void {
@@ -45,7 +44,7 @@ export class ChannelContentComponent implements OnInit {
 
   ngAfterViewInit() {
     setTimeout(() => {
-      
+    if(this.channelService.selectedThread !== '')  
     this.router.navigate([], {fragment: this.channelService.selectedThread.toString()}).then((res) => {
       const element = document.getElementById(this.channelService.selectedThread.toString())
       if (element != undefined) {
@@ -53,6 +52,7 @@ export class ChannelContentComponent implements OnInit {
         element.classList.add('selected');
         setTimeout(() => {
           element.classList.remove('selected');
+          this.channelService.selectedThread = ''
         }, 5500)
       }
     })

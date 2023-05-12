@@ -19,7 +19,12 @@ export class AuthService {
     private afs: AngularFirestore
   ) {}
 
-
+  /**
+   * 
+   * @param email - string  
+   * @param password - string
+   * @returns promise that logs in the user with email and password
+   */  
   async loginUser(email: string, password: string): Promise<any> {
     return await this.afAuth
       .signInWithEmailAndPassword(email, password)
@@ -35,7 +40,11 @@ export class AuthService {
       });
   }
 
-  
+  /**
+   * 
+   * @param user - user Object with user credentials
+   * @returns promise that signs up the user 
+   */  
   async signupUser(user: any): Promise<any> {
     return await this.afAuth
       .createUserWithEmailAndPassword(user.email, user.password)
@@ -57,9 +66,8 @@ export class AuthService {
   sign up with username/password and sign in with social auth  
   provider in Firestore database using AngularFirestore + AngularFirestoreDocument service */
   SetUserData(user: any) {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(
-      `users/${user.uid}`
-    );
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+
     const userData: User = {
       uid: user.uid,
       email: user.email,
@@ -76,6 +84,4 @@ export class AuthService {
   async updateUserEmail(userData, newEmail: string) {
     await updateEmail(userData, newEmail)
   }
-
-  
 }
