@@ -36,6 +36,10 @@ export class UsersService {
     private auth: Auth
   ) {}
 
+  
+  /**
+   * upon succesfull authentication the currentUser is assinged and the data is set accordingly
+   */  
   async getCurrentUser() {
     const auth = getAuth();
     onAuthStateChanged(auth, (user) => {
@@ -54,14 +58,20 @@ export class UsersService {
     });
   }
 
+
+  /**
+   * gets all users of the users collection to display a list to choose from in dialog-create-directmessage and dialog-create-channel
+   */
   getAllUsers(): any {
     const usersCollection = collection(this.afs, 'users');
     const users$ = collectionData(usersCollection, { idField: 'uid' });
     users$.pipe(untilDestroyed(this)).subscribe((_users) => {
       this.usersCollListener.next({ users: _users });
       this.sortUsers(_users);
+      // console.log(this.users)
     });
   }
+
 
   /**
    * function to sort users by name
@@ -80,6 +90,11 @@ export class UsersService {
     });
   }
 
+
+  /**
+   * removes the guest from the list since guest is not a real user
+   * @param _users - array of all users
+   */
   removeGuest(_users: DocumentData[]) {
     _users.splice(
       _users.findIndex((user) => 
@@ -88,11 +103,22 @@ export class UsersService {
     , 1);
   }
 
+
+  /**
+   * updates currentUser data and posts the data to the firebase db(used for image upload)
+   * @param user - currentUser
+   */
   updateUser(user: any): Observable<void> {
     const ref = doc(this.afs, 'users', user.uid);
     return from(updateDoc(ref, { ...user }));
   }
 
+
+  /**
+   * The set of functions below takes any users id and returns a color HSL unique to the user id
+   * @param str - user id
+   * @returns 
+   */
   getHashOfString(str: any) {
     let hash = 0;
     for (let i = 0; i < str.length; i++) {

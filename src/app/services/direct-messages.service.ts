@@ -1,8 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  AngularFirestore,
-  AngularFirestoreCollection,
-} from '@angular/fire/compat/firestore';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import { UsersService } from './users.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -21,6 +18,8 @@ export class DirectMessagesService {
   currentChannelData: any;
   allDmChannels: Array<any> = [];
   userExists: boolean = false;
+  onlyExistingUsers: boolean = false;
+  
   constructor(
     private afs: AngularFirestore,
     private route: Router,
@@ -44,7 +43,9 @@ export class DirectMessagesService {
         this.currentChannelData = channel;
       });
   }
-
+  /**
+   * subcribes to the direct messages collection and returns all chats the curretUser is participating in
+   */
   getAllDms(): void {
     this.afs
       .collection('direct-messages')
@@ -61,6 +62,9 @@ export class DirectMessagesService {
       });
   }
 
+  /**
+   * sorts all users by their name displayed in the direct messages component
+   */
   sortUsersByName() {
     this.allDmChannels.sort((a, b) => {
       if (
@@ -79,10 +83,12 @@ export class DirectMessagesService {
     });
   }
 
-  async createDmChannel(uid: string, name: string) {
-    const channelRef: AngularFirestoreCollection =
-      this.afs.collection('direct-messages');
-
+  /**
+   * sets the user data json that used to add to data to the dm channel collection
+   * @param uid - unique identifier of user
+   * @param name - user name 
+   */
+  setUserData(uid: string, name: string) {
     const channelData = {
       users: {
         senderID: this.usersService.currentUserData.uid,
@@ -94,13 +100,40 @@ export class DirectMessagesService {
         messages: [],
       },
     };
+    return channelData
+  }
 
-    const indexOfUser = this.allDmChannels.findIndex((channel) => channel.users.recipientID === uid);
-      indexOfUser > -1 ? this.userExists = true : channelRef.add(channelData).then((channel) => {
+  /**
+   * determines if a user exists within the user collection
+   * and if the user exists and hasn't already been assigned a channel with the 
+   * currentuser then a new channel is created
+   * @param uid - unique identifier of user 
+   * @param channelRef - referrence to the collection the data gets posted to 
+   * @param channelData - Object data representing the channel data
+   */
+  userIsValid(uid, channelRef, channelData) {
+    if (uid !== "") {
+      const indexOfUser = this.allDmChannels.findIndex((channel) => channel.users.recipientID === uid);
+      indexOfUser > -1 ? (this.userExists = true) && (this.onlyExistingUsers = false) : channelRef.add(channelData).then((channel) => {
         this.route.navigate(['/home/direct-messages/' + channel.id]);
         return this.dialog.closeAll();
-      });
+      })
+    } else {
+      this.onlyExistingUsers = true;
+      this.userExists = false;
+    }
+  }
 
-      
+
+  /**
+   * creates a direct message channel
+   * @param uid unique identifier that represents each users collection id
+   * @param name name of selected user for dm channel
+   */ 
+  async createDmChannel(uid: string, name: string) {
+    const channelRef: AngularFirestoreCollection = this.afs.collection('direct-messages');
+    const channelData = this.setUserData(uid, name)
+    this.userIsValid(uid, channelRef, channelData)
+    
   }
 }

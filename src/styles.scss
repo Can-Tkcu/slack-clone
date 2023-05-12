@@ -369,7 +369,7 @@ h4 {
 
   span {
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 500;
   }
 }
 
@@ -458,7 +458,7 @@ h2 {
 }
 
 @keyframes selectedAnimation {
-  from {background-color: rgba($color: rgb(202, 202, 202), $alpha: 1.0);}
+  from {background-color: rgba($color: rgb(202, 202, 202), $alpha: 0.3);}
   to {background-color: rgba(210, 156, 0, 0);}
 }
 

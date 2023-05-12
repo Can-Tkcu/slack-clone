@@ -28,7 +28,6 @@ export class DirectMessagesContentComponent implements OnInit {
     this.route.paramMap.pipe(untilDestroyed(this)).subscribe((paramMap) => {
       this.dmService.channelID = paramMap.get('id');
       this.dmService.getChatsFromDb();
-      // this.dmService.getAllDms()
     });
     this.sidenav.getValue().pipe(untilDestroyed(this)).subscribe((value) => {
       this.responsiveView = value;

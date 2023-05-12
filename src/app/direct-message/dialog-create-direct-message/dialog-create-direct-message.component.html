@@ -37,8 +37,11 @@
   </mat-form-field>
 </form>
 <mat-error>
-  <ng-container *ngIf="dmService.userExists">
+  <ng-container *ngIf="dmService.userExists && !dmService.onlyExistingUsers">
     <p class="error">Channel exists</p>
+  </ng-container>
+  <ng-container *ngIf="dmService.onlyExistingUsers && !dmService.userExists">
+    <p class="error">User does not Exist</p>
   </ng-container>
 </mat-error>
 <p class="dialog-description">

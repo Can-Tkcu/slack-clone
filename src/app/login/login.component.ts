@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -31,6 +30,9 @@ export class LoginComponent {
     this.firebaseErrorMessage = '';
   }
 
+  /**
+   * firebase function that logs in the user with given user credentials
+   */
   loginUser() {
     if (this.loginForm.invalid) return;
     this.loading = true;

@@ -1,22 +1,13 @@
 import { NgModule } from '@angular/core';
-import { ExtraOptions, RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuard } from './services/auth.guard';
 import { ChannelContentComponent } from './channel/channel-content/channel-content.component';
-import { DirectMessagesComponent } from './direct-message/direct-messages/direct-messages.component';
 import { DirectMessagesContentComponent } from './direct-message/direct-messages-content/direct-messages-content.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { ThreadsListComponent } from './threads-list/threads-list.component';
-
-
-// const routerOptions: ExtraOptions = {
-//   scrollPositionRestoration: 'enabled',
-//   anchorScrolling: 'enabled',
-//   scrollOffset: [0, 64],
-//   onSameUrlNavigation: 'reload',
-// };
 
 
 const routes: Routes = [

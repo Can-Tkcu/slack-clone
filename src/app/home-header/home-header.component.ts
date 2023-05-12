@@ -29,6 +29,9 @@ export class HomeHeaderComponent {
     this.channelService.searchValue = '';
   }
 
+  /**
+   * firebase function is used to log out the currently logged in user
+   */
   logout(): void {
     this.afAuth.signOut().then(() => {
       this.afs
