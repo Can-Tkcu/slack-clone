@@ -1,9 +1,14 @@
 .channel-sidebar-header {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     padding-left: 6px;
 }
 
+.logo-wrapper {
+    display: flex;
+    align-items: center;
+}
 .header-logo {
     padding: 12px 8px;
 }

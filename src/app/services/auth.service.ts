@@ -26,7 +26,6 @@ export class AuthService {
    * @returns promise that logs in the user with email and password
    */  
   async loginUser(email: string, password: string): Promise<any> {
-    debugger
     return await this.afAuth
       .signInWithEmailAndPassword(email, password)
       .then((result) => {
