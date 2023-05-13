@@ -34,6 +34,7 @@ export class HomeHeaderComponent {
 
   checkRoute() {
     if (this.route.firstChild != null) {
+      // debugger;
       return this.route.firstChild.url['value'][0].path != 'direct-messages';
     } else {
       return '';
