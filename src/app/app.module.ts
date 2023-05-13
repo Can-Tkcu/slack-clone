@@ -41,7 +41,7 @@ import { ThreadContentComponent } from './thread-content/thread-content.componen
 import { FormsModule } from '@angular/forms';
 import { DirectMessagesContentComponent } from './direct-message/direct-messages-content/direct-messages-content.component';
 import { UserDetailComponent } from './user-detail/user-detail.component';
-import { QuillModule } from 'ngx-quill'
+import { QuillModule } from 'ngx-quill';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { GetUserNameByIdPipe } from './get-user-name-by-id.pipe';
 import { provideStorage } from '@angular/fire/storage';
@@ -52,7 +52,7 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ThreadsListComponent } from './threads-list/threads-list.component';
 import { UserListComponent } from './user-list/user-list.component';
 import { SidebarService } from './services/sidebar.service';
-
+import { MatTabsModule } from '@angular/material/tabs';
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +72,7 @@ import { SidebarService } from './services/sidebar.service';
     UserDetailComponent,
     GetUserNameByIdPipe,
     UserListComponent,
-    ThreadsListComponent
+    ThreadsListComponent,
   ],
   imports: [
     BrowserModule,
@@ -106,11 +106,12 @@ import { SidebarService } from './services/sidebar.service';
     HotToastModule.forRoot(),
     MatTooltipModule,
     MatChipsModule,
+    MatTabsModule
   ],
   providers: [
     { provide: FIREBASE_OPTIONS, useValue: environment.firebase },
-    GetUserNameByIdPipe
+    GetUserNameByIdPipe,
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

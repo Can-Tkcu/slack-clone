@@ -11,6 +11,37 @@ mat-toolbar {
   }
 }
 
+.register {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+  align-items: center
+}
+
+::ng-deep .mat-mdc-tab-group {
+  height: 100%;
+  width: 100%
+}
+
+::ng-deep .mat-mdc-tab-body {
+  height: 100%;
+  width: 100%
+}
+
+::ng-deep .mat-mdc-tab-body-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%
+}
+
+::ng-deep .mat-mdc-tab-body-wrapper {
+  height: 100%;
+  width: 100%
+}
 mat-card-header {
   color: white;
   display: flex;
@@ -94,7 +125,7 @@ mat-icon {
 .input-container {
   display: flex;
   flex-direction: column;
-  gap: 60px;
+  gap: 45px;
   height: 100%;
   justify-content: flex-end;
 }
@@ -149,4 +180,8 @@ mat-icon {
     background-color: var(--light-grey) !important;
     color: white !important;
   }
+}
+
+.m-40 {
+  margin-top: 40px;
 }

@@ -1,6 +1,6 @@
-<mat-toolbar>
+<!-- <mat-toolbar>
   <div class="mat-container">
-    <img src="../../assets/img/Logo.png" alt="" />
+    <img src="assets/img/Logo.png" alt="" />
     <div>
       <span>Slack clone</span>
     </div>
@@ -10,9 +10,9 @@
   <mat-menu class="top20" #menu="matMenu">
     <button mat-menu-item routerLink="/login">Login</button>
   </mat-menu>
-</mat-toolbar>
+</mat-toolbar> -->
 
-<div class="card-container">
+<!-- <div class="card-container"> -->
   <mat-card class="login-card">
     <form [formGroup]="registerForm" (ngSubmit)="signUp()">
       <mat-card-header>
@@ -63,9 +63,10 @@
                     <p class="error" *ngIf="errors['required']">
                       Your Email is required.
                     </p>
-                    <p class="error" *ngIf="errors['email']">
+                    <p class="error" *ngIf="errors['pattern']">
                       Please enter a valid Email.
                     </p>
+                    
                   </ng-container>
                 </ng-container>
               </ng-container>
@@ -136,9 +137,4 @@
       ></mat-progress-bar>
     </form>
   </mat-card>
-
-  <div class="return-link">
-    <span>Already have an account? </span>&nbsp;
-    <p routerLink="/login">click here.</p>
-  </div>
-</div>
+<!-- </div> -->
