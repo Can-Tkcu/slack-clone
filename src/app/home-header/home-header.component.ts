@@ -33,7 +33,11 @@ export class HomeHeaderComponent {
   }); }
 
   checkRoute() {
-    return this.route.firstChild.url['value'][0].path != 'direct-messages';
+    if (this.route.firstChild != null) {
+      return this.route.firstChild.url['value'][0].path != 'direct-messages';
+    } else {
+      return '';
+    }
   }
 
   showChannelPlaceholder() {
