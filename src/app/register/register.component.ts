@@ -39,7 +39,7 @@ export class RegisterComponent implements OnInit {
       .then((result) => {
         if (result == null) {    // null is success
           
-          this.router.navigate(['/home']);
+          this.router.navigate(['/home/threads-list']);
         } 
         else if (result.isValid == false)
           this.firebaseErrorMessage = result.message;

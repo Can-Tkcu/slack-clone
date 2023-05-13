@@ -5,19 +5,48 @@ import { MatDialog } from '@angular/material/dialog';
 import { UserDetailComponent } from '../user-detail/user-detail.component';
 import { UsersService } from '../services/users.service';
 import { ChannelService } from '../services/channel.service';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { DirectMessagesService } from '../services/direct-messages.service';
+import { filter } from 'rxjs';
 @Component({
   selector: 'app-home-header',
   templateUrl: './home-header.component.html',
   styleUrls: ['./home-header.component.scss'],
 })
 export class HomeHeaderComponent {
+  url: any;
+
   constructor(
     public afAuth: Auth,
     private afs: AngularFirestore,
     private dialog: MatDialog,
     public usersService: UsersService,
-    public channelService: ChannelService
-  ) {}
+    public channelService: ChannelService,
+    public dmService: DirectMessagesService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {  router.events.pipe(
+    filter(event => event instanceof NavigationEnd)  
+  ).subscribe((event: NavigationEnd) => {
+    console.log(event.url);
+    this.url = event.url;
+  }); }
+
+  checkRoute() {
+    return this.route.firstChild.url['value'][0].path != 'direct-messages';
+  }
+
+  showChannelPlaceholder() {
+    if (this.url.includes('channel')) {
+      return 'In #' + this.channelService.channel.name + ' suchen';
+    } else if (this.url.includes('threads-list')) {
+      return 'In Threads suchen';
+    } else if (this.url.includes('user-list')) {
+      return 'In Users suchen';
+    } else {
+      return '';
+    }
+  }
 
 
   openDialog() {

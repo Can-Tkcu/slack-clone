@@ -32,7 +32,7 @@ export class AuthService {
       .then((result) => {
         this.afs.collection('users').doc( result.user?.uid).update({status: true})
         console.log('Auth Service: loginUser: success', result.user?.uid);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home/threads-list']);
       })
       .catch((error) => {
         console.log('Auth Service: login error...');
