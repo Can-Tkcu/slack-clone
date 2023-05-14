@@ -69,8 +69,8 @@ export class ThreadsListComponent implements OnInit {
   }
 
   goToChannel(index) {
-    console.log(index);
-    console.log(this.ownThreads[index]);
+    // console.log(index);
+    // console.log(this.ownThreads[index]);
     this.router.navigate(['/home/channel/' + this.ownThreads[index].channelId]).then(() => {
       this.channelService.selectedThread = this.ownThreads[index].elem.timestamp
     })

@@ -28,7 +28,7 @@ export class HomeHeaderComponent {
   ) {  router.events.pipe(
     filter(event => event instanceof NavigationEnd)  
   ).subscribe((event: NavigationEnd) => {
-    console.log(event.url);
+    // console.log(event.url);
     this.url = event.url;
   }); }
 
@@ -45,9 +45,9 @@ export class HomeHeaderComponent {
     if (this.url.includes('channel')) {
       return 'In #' + this.channelService.channel.name + ' suchen';
     } else if (this.url.includes('threads-list')) {
-      return 'In Threads suchen';
+      return 'Search in Threads';
     } else if (this.url.includes('user-list')) {
-      return 'In Users suchen';
+      return 'Search in Users';
     } else {
       return '';
     }

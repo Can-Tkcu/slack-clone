@@ -28,7 +28,7 @@ export class DialogCreateChannelComponent {
         thread: []
       })
       .then((result: any) => {
-        console.log('Added new Channel', result)
+        // console.log('Added new Channel', result)
         this.dialog.closeAll();
         this.router.navigate(['/home/channel/' + result.id])
       });

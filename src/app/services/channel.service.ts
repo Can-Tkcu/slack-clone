@@ -103,9 +103,9 @@ export class ChannelService {
       new Date().getFullYear()
     ) {
       if (this.messageDateString === today) {
-        return "Heute";
+        return "Today";
       } else if (this.messageDateString === yesterday) {
-        return "Gestern";
+        return "Yesterday";
       } else {
         return this.messageDateString;
       }

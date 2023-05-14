@@ -9,12 +9,12 @@
       >
     </div>
     <span mat-button [matMenuTriggerFor]="messages">
-      Direktnachrichten
+      Directmessages
       <mat-icon>keyboard_arrow_down</mat-icon>
     </span>
     <mat-menu #messages="matMenu">
       <button mat-menu-item (click)="openDialog()">
-        Direktnachricht starten
+        Start a Directmessage
       </button>
     </mat-menu>
   </div>
@@ -59,7 +59,7 @@
 
     <div class="channel-sidebar-name no-hover" (click)="openDialog(); channelService.threadOpen = false; responsiveView && sidenav.close()">
       <mat-icon>add_box</mat-icon>
-      <span>Kolleg:innen hinzufügen</span>
+      <span>Add Colleagues</span>
     </div>
   </div>
 </div>

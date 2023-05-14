@@ -1,6 +1,6 @@
 <div class="dialog-header">
-  <h1 *ngIf="!isGuest">Benutzerdaten ändern</h1>
-  <h1 *ngIf="isGuest">Für Gast deaktiviert</h1>
+  <h1 *ngIf="!isGuest">Change User Credentials</h1>
+  <h1 *ngIf="isGuest">Deactivated for Guest</h1>
   <div class="icon-container">
     <mat-icon mat-button mat-dialog-close>close</mat-icon>
   </div>
@@ -48,7 +48,7 @@
     />
   </div>
 </div>
-<p class="dialog-description">Hier kannst du deine Benutzerdaten abändern</p>
+<p class="dialog-description">You can change you User-Credentials here.</p>
 <div mat-dialog-actions class="btn-container">
   <button
     mat-button
@@ -56,6 +56,6 @@
     [disabled]="!userName && !userEmail || isGuest"
     (click)="updateUserCredentials()"
   >
-    Weiter
+    Continue
   </button>
 </div>

@@ -98,7 +98,7 @@ export class UsersService {
   removeGuest(_users: DocumentData[]) {
     _users.splice(
       _users.findIndex((user) => 
-        user["uid"] == "Br68JJNC4PYPLrkI3iboILMpFYZ2"
+        user["uid"] == "woeeWn3fXRXy92Zm4EG2hM7Xd2H3"
       )
     , 1);
   }
@@ -134,9 +134,9 @@ export class UsersService {
 
   generateHSL(name: any) {
     const hash = this.getHashOfString(name);
-    const h = this.normalizeHash(hash, 0, 360);
-    const s = this.normalizeHash(hash, 0, 255);
-    const l = this.normalizeHash(hash, 0, 255);
+    const h = this.normalizeHash(hash, 1, 360);
+    const s = this.normalizeHash(hash, 50, 75);
+    const l = this.normalizeHash(hash, 25, 70);
     return [h, s, l];
   }
 

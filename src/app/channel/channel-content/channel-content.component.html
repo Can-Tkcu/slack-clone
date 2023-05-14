@@ -35,7 +35,7 @@
             <div class="message-container-right">
                 <div class="user-and-time">
                     <span>{{ (thread.author | getUserNameById | async)?.displayName }}</span>
-                    <span>{{ thread.timestamp | date:'HH:mm' }} Uhr</span>
+                    <span>{{ thread.timestamp | date:'HH:mm' }}</span>
                 </div>
                 <quill-view class="message-text" [content]="thread.message" format="html" theme="snow"></quill-view>
                 <div *ngIf="thread.replies.length" class="answers" (click)="channelService.openThread(i)">
@@ -47,39 +47,38 @@
                         )
                       }"
                         [src]="(thread.author | getUserNameById | async)?.photoURL ?? 'assets/img/image-placeholder.png'" />
-                    <span>{{ thread.replies.length }} Antworten</span>
+                    <span>{{ thread.replies.length }} Replies</span>
                     <div class="reply-bar-description">
 
                         <!-- shows last answer of today -->
                         <span
                             *ngIf="thread.replies[thread.replies.length - 1]?.timestamp > channelService.getLastMidnightTime && channelService.currentDate < channelService.getNextMidnightTime">
-                            Letzte Antwort heute um {{ thread.replies[thread.replies.length - 1]?.timestamp |
+                            Last Answer at {{ thread.replies[thread.replies.length - 1]?.timestamp |
                             date:'HH:mm'}}
-                            Uhr
                         </span>
 
                         <!-- shows last answer from yesterday with hours -->
                         <span
                             *ngIf="thread.replies[thread.replies.length - 1]?.timestamp > channelService.getDayBeforeMidnightTime && channelService.currentDate < channelService.getLastMidnightTime">
-                            Letzte Antwort vor {{ channelService.currentDate - thread.replies[thread.replies.length -
+                            Last Answer before {{ channelService.currentDate - thread.replies[thread.replies.length -
                             1]?.timestamp |
-                            date:'H'}} Stunden
+                            date:'H'}} Hours
                         </span>
 
                         <!-- shows last answer from last days -->
                         <span
                             *ngIf="thread.replies[thread.replies.length - 1]?.timestamp < channelService.getDayBeforeMidnightTime || thread.replies[thread.replies.length - 1]?.timestamp < channelService.getLastMidnightTime">
-                            Letzte Antwort vor {{ channelService.getLastMidnightTime -
+                            Last Answer before {{ channelService.getLastMidnightTime -
                             thread.replies[thread.replies.length - 1]?.timestamp |
-                            date:'d'}} Tagen
+                            date:'d'}} Days
                         </span>
-                        <span>Thread ansehen</span>
+                        <span>View Thread</span>
                     </div>
                     <mat-icon class="thread-icon">navigate_next</mat-icon>
                 </div>
             </div>
             <div class="options-container">
-                <button matTooltip="Im Thread antworten" [matTooltipPosition]="'above'" (click)="channelService.openThread(i)">
+                <button matTooltip="Answer in Thread" [matTooltipPosition]="'above'" (click)="channelService.openThread(i)">
                     <mat-icon>chat</mat-icon>
                 </button>
                 <!-- <button>

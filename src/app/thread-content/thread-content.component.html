@@ -29,29 +29,29 @@
 
                 <span
                     *ngIf="channelService.currentDate - channelService.threadContent.timestamp < 120000">
-                    vor < 1 Minute
+                    less than a minute ago
                 </span>
 
                 <!-- shows last answer of today in hours-->
                 <span
                     *ngIf="channelService.currentDate - channelService.threadContent.timestamp < 3600000">
-                    vor {{ channelService.currentDate - channelService.threadContent.timestamp |
+                    {{ channelService.currentDate - channelService.threadContent.timestamp |
                     date:'m'}}
-                    Minuten
+                    Minutes ago
                 </span>
 
                 <!-- shows last answer from yesterday with hours -->
                 <span
                     *ngIf="channelService.currentDate - channelService.threadContent.timestamp > 3600000 && channelService.threadContent.timestamp > channelService.getLastMidnightTime">
-                    vor {{ channelService.currentDate - channelService.threadContent.timestamp |
-                    date:'H'}} Stunden
+                    {{ channelService.currentDate - channelService.threadContent.timestamp |
+                    date:'H'}} Hours ago
                 </span>
 
                 <!-- shows last answer from last days -->
                 <span
                     *ngIf="channelService.threadContent.timestamp < channelService.getDayBeforeMidnightTime || channelService.threadContent.timestamp < channelService.getLastMidnightTime">
-                    vor {{ channelService.getLastMidnightTime - channelService.threadContent.timestamp |
-                    date:'d'}} Tagen
+                    {{ channelService.getLastMidnightTime - channelService.threadContent.timestamp |
+                    date:'d'}} Days ago
                 </span>
             </div>
             <!-- <p class="message-text">{{ channelService.threadContent.message }}</p> -->
@@ -62,7 +62,7 @@
 
     <div class="answers-divider">
         <span>{{ channelService.channel.thread[this.channelService.threadContentIndex].replies.length }}
-            Antworten</span>
+            Replies</span>
         <div class="divider-line"></div>
     </div>
 
@@ -85,28 +85,28 @@
 
                 <span
                     *ngIf="channelService.currentDate - replies.timestamp < 120000">
-                    vor < 1 Minute
+                    less than a minute ago
                 </span>
 
                 <!-- shows last answer of today in minutes-->
                 <span
                     *ngIf="channelService.currentDate - replies.timestamp < 3600000">
-                    vor {{ channelService.currentDate - replies.timestamp | date:'m'}}
-                    Minuten
+                    {{ channelService.currentDate - replies.timestamp | date:'m'}}
+                    Minutes ago
                 </span>
 
                 <!-- shows last answer from yesterday with hours -->
                 <span
                     *ngIf="channelService.currentDate - replies.timestamp > 3600000 && replies.timestamp > channelService.getLastMidnightTime">
-                    vor {{ channelService.currentDate - replies.timestamp |
-                    date:'H'}} Stunden
+                    {{ channelService.currentDate - replies.timestamp |
+                    date:'H'}} Hours ago
                 </span>
 
                 <!-- shows last answer from last days -->
                 <span
                     *ngIf="replies.timestamp < channelService.getDayBeforeMidnightTime || replies.timestamp < channelService.getLastMidnightTime">
-                    vor {{ channelService.getLastMidnightTime - replies.timestamp |
-                    date:'d'}} Tagen
+                    {{ channelService.getLastMidnightTime - replies.timestamp |
+                    date:'d'}} Days ago
                 </span>
             </div>
             <!-- <p class="message-text">{{ replies.message }}</p> -->

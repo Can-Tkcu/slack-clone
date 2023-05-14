@@ -9,7 +9,7 @@
             <mat-icon>keyboard_arrow_down</mat-icon>
         </span>
         <mat-menu #channels="matMenu">
-            <button mat-menu-item (click)="openDialog()">Channel erstellen</button>
+            <button mat-menu-item (click)="openDialog()">Create a Channel</button>
         </mat-menu>
     </div>
 
@@ -20,7 +20,7 @@
         </div>
         <div class="channel-sidebar-name no-hover" (click)="openDialog(); channelService.threadOpen = false; responsiveView && sidenav.close()">
             <mat-icon>add_box</mat-icon>
-            <span>Channels hinzufügen</span>
+            <span>Add Channels</span>
         </div>
     </div>
 
