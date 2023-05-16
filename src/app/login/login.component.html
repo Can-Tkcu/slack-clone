@@ -16,10 +16,9 @@
   
   <mat-tab-group>
     <mat-tab label="Log In">
-      <!-- <div class="illu-container">
-        <img src="assets/img/background-black.png" alt="">
-    
-      </div> -->
+      <div class="illu-container">
+        <img src="assets/img/background-white.png" alt="">
+      </div>
       <mat-card class="login-card">
         <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
           <mat-card-header>
@@ -130,6 +129,9 @@
       
     </mat-tab>
     <mat-tab class="mat-tab" label="Sign-Up">
+      <div class="illu-container">
+        <img src="assets/img/background-white.png" alt="">
+      </div>
       <app-register class="register"></app-register>
     </mat-tab>
 

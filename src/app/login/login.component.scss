@@ -12,9 +12,10 @@ mat-toolbar {
 }
 
 .illu-container {
+  position: absolute;
   img {
-    max-height: 600px;
-    max-width: 500px
+    max-height: 1000px;
+    max-width: 1803px;
   }
 }
 
@@ -33,10 +34,10 @@ mat-toolbar {
 }
 
 ::ng-deep .mat-mdc-tab-body {
-  background-image: url(../../assets/img/background-white.png);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  // background-image: url(../../assets/img/background-white.png);
+  // background-size: contain;
+  // background-repeat: no-repeat;
+  // background-position: center;
   height: 100%;
   width: 100%
 }
@@ -103,7 +104,7 @@ mat-icon {
 }
 
 .login-card {
-  max-width: 466px;
+  max-width: 461px;
   max-height: 553px;
   width: 100%;
   height: 100%;
