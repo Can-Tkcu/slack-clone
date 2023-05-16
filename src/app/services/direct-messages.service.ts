@@ -54,9 +54,11 @@ export class DirectMessagesService {
       .subscribe((channels: any) => {
         this.allDmChannels = [];
         channels.forEach((channel) => {
-          if (channel.users.senderID == this.usersService.currentUserDataID)
+          // console.log(channel.users)
+          if (channel.users.senderID.match(this.usersService.currentUserDataID) || channel.users.recipientID == this.usersService.currentUserDataID)
             // console.log(this.allDmChannels.)
             this.allDmChannels.push(channel);
+            // console.log(this.allDmChannels)
             this.sortUsersByName();
         });
       });

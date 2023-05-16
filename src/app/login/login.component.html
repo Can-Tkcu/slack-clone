@@ -13,8 +13,13 @@
 </mat-toolbar>
 
 <div class="card-container">
+  
   <mat-tab-group>
     <mat-tab label="Log In">
+      <!-- <div class="illu-container">
+        <img src="assets/img/background-black.png" alt="">
+    
+      </div> -->
       <mat-card class="login-card">
         <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
           <mat-card-header>
@@ -115,7 +120,7 @@
         <div class="button-container">
           <button
             mat-raised-button
-            class="guest-button"
+            class="guest-button m-40"
             (click)="authService.loginUser('guest@info.com', 'guest1234')"
           >
             Guest Log in

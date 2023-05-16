@@ -1,7 +1,7 @@
 {
   "hosting": {
     "target": "slack-clone",
-    "public": "dist/slack-clone",
+    "public": "dist/chatter",
     "ignore": [
       "**/.*"
     ],
