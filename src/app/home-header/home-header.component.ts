@@ -43,7 +43,7 @@ export class HomeHeaderComponent {
 
   showChannelPlaceholder() {
     if (this.url.includes('channel')) {
-      return 'In #' + this.channelService.channel.name + ' suchen';
+      return 'Seach in #' + this.channelService.channel.name;
     } else if (this.url.includes('threads-list')) {
       return 'Search in Threads';
     } else if (this.url.includes('user-list')) {

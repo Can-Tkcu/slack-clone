@@ -122,9 +122,9 @@ export class TextboxComponent implements OnInit {
 
   showChannelPlaceholder() {
     if (this.chatBox?.nativeElement?.parentElement?.id == 'text-content') {
-      return 'Nachricht an #' + this.channelService.channel.name;
+      return 'Message to #' + this.channelService.channel.name;
     } else {
-      return 'Antworten ...';
+      return 'Answer ...';
     } 
   }
 

@@ -1,6 +1,6 @@
 <mat-toolbar class="header">
   <div class="searchbar">
-    <input *ngIf="!(url == '/home' || url == '/')" type="text" [(ngModel)]="channelService.searchValue"  [placeholder]="checkRoute() ? showChannelPlaceholder() : 'In Direktnachrichten mit ' + (dmService.currentChannelRecipient | getUserNameById | async)?.displayName + ' suchen'" />
+    <input *ngIf="!(url == '/home' || url == '/')" type="text" [(ngModel)]="channelService.searchValue"  [placeholder]="checkRoute() ? showChannelPlaceholder() : 'Search in Directmessges ' + (dmService.currentChannelRecipient | getUserNameById | async)?.displayName" />
     <mat-icon class="margin-right" *ngIf="channelService.searchValue != ''" (click)="clearInput()">delete</mat-icon>
     <mat-icon>search</mat-icon>
   </div>
