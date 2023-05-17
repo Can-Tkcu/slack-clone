@@ -39,7 +39,17 @@ mat-toolbar {
   // background-repeat: no-repeat;
   // background-position: center;
   height: 100%;
-  width: 100%
+  width: 100%; 
+  overflow-y: hidden;
+}
+
+::ng-deep .mat-mdc-tab-body.mat-mdc-tab-body-active {
+  // background-image: url(../../assets/img/background-white.png);
+  // background-size: contain;
+  // background-repeat: no-repeat;
+  // background-position: center;
+  overflow-y: hidden!important;
+  overflow-x: hidden!important;
 }
 
 ::ng-deep .mat-mdc-tab-body-content{
@@ -47,7 +57,8 @@ mat-toolbar {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%
+  width: 100%;
+  overflow: hidden!important;
 }
 
 ::ng-deep .mat-mdc-tab-body-wrapper {
