@@ -34,11 +34,11 @@ export class UserDetailComponent {
     private auth: AuthService,
     private afAuth: AngularFireAuth
   ) {
-    this.userName = this.usersService.currentUserData.displayName;
-    this.userUid = this.usersService.currentUserData.uid;
-    this.userEmail = this.usersService.currentUserData.email;
+    this.userName = this.usersService.currentUserData?.displayName;
+    this.userUid = this.usersService.currentUserData?.uid;
+    this.userEmail = this.usersService.currentUserData?.email;
     this.oldEmail = this.userEmail;
-    this.userStatus = this.usersService.currentUserData.status;
+    this.userStatus = this.usersService.currentUserData?.status;
     if(this.userName == "Guest")
     this.isGuest = true
   }

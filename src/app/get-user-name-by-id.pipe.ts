@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
   name: 'getUserNameById'
 })
 export class GetUserNameByIdPipe implements PipeTransform {
-  constructor(private firestore: AngularFirestore){
+  constructor(public firestore: AngularFirestore){
 
   }
 

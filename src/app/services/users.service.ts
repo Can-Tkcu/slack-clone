@@ -32,7 +32,7 @@ export class UsersService {
 
   constructor(
     private afs: Firestore,
-    private firestore: AngularFirestore,
+    public firestore: AngularFirestore,
     private auth: Auth
   ) {}
 
@@ -49,10 +49,11 @@ export class UsersService {
       }
       this.firestore
         .collection('users')
-        .doc(this.currentUserDataID)
+        .doc(this?.currentUserDataID)
         .valueChanges()
         .pipe(untilDestroyed(this))
         .subscribe((changes: any) => {
+          if(changes)
           this.currentUserData = changes;
         });
     });
@@ -63,7 +64,7 @@ export class UsersService {
    * gets all users of the users collection to display a list to choose from in dialog-create-directmessage and dialog-create-channel
    */
   getAllUsers(): any {
-    const usersCollection = collection(this.afs, 'users');
+    const usersCollection = collection(this?.afs, 'users');
     const users$ = collectionData(usersCollection, { idField: 'uid' });
     users$.pipe(untilDestroyed(this)).subscribe((_users) => {
       this.usersCollListener.next({ users: _users });

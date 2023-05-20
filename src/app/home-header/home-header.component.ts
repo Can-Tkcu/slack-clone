@@ -14,7 +14,7 @@ import { filter } from 'rxjs';
   styleUrls: ['./home-header.component.scss'],
 })
 export class HomeHeaderComponent {
-  url: any;
+  url: string = 'channel';
 
   constructor(
     public afAuth: Auth,

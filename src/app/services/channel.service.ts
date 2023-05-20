@@ -39,16 +39,19 @@ export class ChannelService {
     ) { }
 
   getChannelDetails() {
-    this.firestore
-    .collection('channels')
-    .doc(this.channelId)
-    .valueChanges()
-    .pipe(untilDestroyed(this))
-    .subscribe((channel: any) => {
-      this.channel = channel;
-      this.currentChannelThread = channel.thread;
-      // console.log(channel)
-    });
+      this.firestore
+      .collection('channels')
+      .doc(this?.channelId)
+      .valueChanges()
+      .pipe(untilDestroyed(this))
+      .subscribe((channel: any) => {
+        this.channel = channel;
+        if(channel)
+        this.currentChannelThread = channel.thread;
+        // console.log(channel)
+      });
+    
+    
   }
 
 
@@ -57,6 +60,7 @@ export class ChannelService {
     this.threadOpen = true;
     this.threadContent = this.channel.thread[index];
     this.threadContentIndex = index;
+    this.currentChannelThread = this.currentChannelThread[this.threadContentIndex]
     // console.log(this.threadContent)
     // console.log(this.threadContentIndex)
   }
